@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>전기설비설계 강의자료</title>
+<style>
+  body { font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; font-size: 14px; line-height: 1.7; color: #222; background: #fff; max-width: 960px; margin: 0 auto; padding: 30px 20px; }
+  h1 { font-size: 22px; color: #1a3a5c; border-bottom: 3px solid #2e75b6; padding-bottom: 8px; margin-top: 40px; }
+  h2 { font-size: 17px; color: #1a5276; margin-top: 28px; margin-bottom: 6px; }
+  h3 { font-size: 15px; color: #333; margin-top: 16px; margin-bottom: 4px; }
+  .section-title { font-size: 20px; font-weight: bold; color: #1a3a5c; border-bottom: 2px solid #2e75b6; padding-bottom: 6px; margin-top: 50px; margin-bottom: 16px; }
+  .sub-section { font-weight: bold; color: #1a5276; margin-top: 18px; }
+  .bar { display: inline-block; width: 5px; height: 1em; background: #2e75b6; margin-right: 6px; vertical-align: middle; }
+  .red { color: #c00000; font-weight: bold; }
+  p, li { margin: 4px 0; }
+  ol, ul { padding-left: 24px; margin: 4px 0; }
+  .indent1 { margin-left: 20px; }
+  .indent2 { margin-left: 40px; }
+  .indent3 { margin-left: 60px; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 13px; }
+  th { background: #b8cce4; color: #1a3a5c; border: 1px solid #999; padding: 7px 10px; text-align: center; }
+  td { border: 1px solid #bbb; padding: 6px 10px; text-align: center; vertical-align: middle; }
+  tr:nth-child(even) td { background: #f5f8fc; }
+  .page-divider { border: none; border-top: 1px dashed #ccc; margin: 30px 0; }
+  .note-box { background: #fffbe6; border-left: 4px solid #f0c020; padding: 8px 14px; margin: 10px 0 10px 20px; font-size: 13px; }
+  .answer-box { background: #f0f7ff; border: 1px dashed #2e75b6; padding: 8px 14px; margin: 8px 0; font-size: 13px; }
+  .question-box { background: #f7f7f7; border: 1px solid #bbb; padding: 8px 12px; margin: 8px 0; font-size: 14px; }
+  .q-num { display: inline-block; background: #888; color: #fff; border-radius: 4px; padding: 1px 8px; font-size: 13px; margin-right: 6px; }
+  .q-choices { display: flex; gap: 30px; flex-wrap: wrap; margin: 6px 0 6px 10px; }
+  .q-choices span { min-width: 100px; }
+  .correct { text-decoration: underline; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<!-- ===== 슬라이드 1 ===== -->
+<div class="section-title">2. 전기설비기술기준 판단기준과의 비교</div>
+
+<p><span class="bar"></span> <strong>기술기준과 표준의 비교</strong></p>
+
+<table>
+  <thead>
+    <tr><th>구분</th><th>기술 기준</th><th>표 준</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>목적</td>
+      <td>공중 위생, 안전, 환경 보호, 소비자 보호, 국방 등<br><span class="red">공공의 이익</span>의 추구</td>
+      <td>표준화에 따른 생산·유통 효율성 제고</td>
+    </tr>
+    <tr>
+      <td>방법</td>
+      <td>정부의 주무부서 별로 제정·시행</td>
+      <td>- 국제 표준기관에 의한 공적 표준<br>- 생산자협회, 또는 학술·전문 협회 등 이해관계자의 동의에 의한 사실 표준</td>
+    </tr>
+    <tr>
+      <td>의무</td>
+      <td>강제적</td>
+      <td>대부분 자발적</td>
+    </tr>
+    <tr>
+      <td>행정사항</td>
+      <td>광범위하게 포함</td>
+      <td>거의 포함하지 않음</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 2 ===== -->
+<div class="section-title">1. 전기설비기술기준의 주요 내용</div>
+
+<div class="sub-section">➡ 제2조 안전 원칙</div>
+<ol>
+  <li><span class="red">전기설비는 감전, 화재 그 밖에 사람에게 위해를 주거나 물건에 손상을 줄 우려가 없도록 시설</span>하여야 한다.</li>
+  <li>전기설비는 사용 목적에 적절하고 안전하게 작동하여야 하며, 그 손상으로 인하여 전기 공급에 지장을 주지 않도록 시설하여야 한다.</li>
+  <li>전기설비는 다른 전기설비, 그 밖의 물건의 기능에 전기적 또는 자기적인 장해를 주지 않도록 시설하여야 한다.</li>
+</ol>
+
+<div class="sub-section">➡ 제3조 정의</div>
+<ol>
+  <li>발전소 : 발전기, 원동기, 연료전지, 태양전지, 해양에너지발전설비, 전기저장장치 그 밖의 기계기구를 시설하여 전기를 생산하는 곳을 말한다.</li>
+</ol>
+<p class="indent1">[그림: 조수발전, 풍력발전, 태양광발전, 원자력발전, 바이오매스발전, 파력발전, 수력발전, 지열발전, 화력발전 등의 발전소 유형 도해 및 화력발전소 실사진]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 3 ===== -->
+<div class="section-title">1. 전기설비기술기준의 주요 내용 (계속)</div>
+
+<div class="sub-section">➡ 제3조 정의 (계속)</div>
+<ol start="2">
+  <li>변전소 : 변전소의 밖으로부터 전송 받은 전기를 변전소안에 시설한 변압기, 전동발전기, 회전 변류기, 정류기 그 밖의 기계기구에 의하여 변성하는 곳으로서 변성한 전기를 다시 변전소 밖으로 전송하는 곳을 말한다.<br>
+  （ <strong>50,000 [V] 이상의 전기를 변성하는 곳</strong>）</li>
+</ol>
+<p class="indent1">[그림: 발전·송전·변전·배전 계통도 (열핵발전, 철도변전소, AC-DC 변환소, 빌딩/공장, 소규모 공장 등 연계 다이어그램)]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 4 ===== -->
+<div class="sub-section">➡ 제3조 정의 (계속)</div>
+<ol start="4">
+  <li>급전소 : 전력계통의 운용에 관한 지시 및 급전 조작을 하는 곳을 말한다.</li>
+</ol>
+<p class="indent1">[그림: 전력계통 전송 개요도 (발전소, 송전탑, 변전소, 계통제어센터) 및 급전소 내부 실사진]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 5 ===== -->
+<div class="sub-section">➡ 제3조 정의 (계속)</div>
+<ol start="5">
+  <li>가공입선 : 가공 전선로의 지지물로부터 다른 지지물을 거치지 아니하고 수용장소의 붙임점에 이르는 가공 전선을 말한다.</li>
+</ol>
+<p class="indent1">[그림: 가공입선 전주·건물 연결 예시 사진 2장]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 6 ===== -->
+<div class="sub-section">➡ 제3조 정의 (계속)</div>
+<ol start="6">
+  <li>연접 인입선 : 한 수용장소의 인입선에서 분기하여 지지물을 거치지 아니하고 다른 수용장소의 인입구에 이르는 부분의 전선을 말한다.</li>
+</ol>
+<p class="indent1">[그림: 가공 전선로에서 주건물 및 부속건물로 연접인입선이 연결되는 구성도 및 상세 사진]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 7~8 ===== -->
+<div class="sub-section">➡ 제3조 정의 (계속)</div>
+<ol start="7">
+  <li>지지물 : <span class="red">목주, 철주, 철근콘크리트주</span> 및 <span class="red">철탑</span>과 이와 유사한 시설물로서 전선, 약전류전선 또는 광섬유케이블을 지지하는 것을 주된 목적으로 하는 것을 말한다.</li>
+</ol>
+<p class="indent1">[그림: 전신주 구성요소 다이어그램 (절연애자, 가로대, 피뢰기, 변압기, 1차 전선, 차단기, 서비스 드롭, 통신선, 가이와이어 등) 및 실제 전신주 사진]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 9 ===== -->
+<div class="sub-section">➡ 제11조 특고압을 직접 저압으로 변성하는 변압기의 시설</div>
+<p>특고압을 직접 저압으로 변성하는 변압기는 다음의 장소에 시설할 수 있다.</p>
+<ol>
+  <li>발전소 등 공중(公衆)이 출입하지 않는 장소에 시설하는 경우. ＊ 공중 : 일반인</li>
+  <li>혼촉방지조치가 되어 있는 등 위험의 우려가 없는 경우.</li>
+  <li>특고압측의 권선과 저압측의 권선이 혼촉하였을 경우 자동으로 전로가 차단되는 시설 그 밖의 적절한 안전조치가 되어 있는 경우</li>
+</ol>
+
+<div class="sub-section">➡ 제17조 유도장해방지</div>
+<ol>
+  <li>교류 특고압 가공전선로에서 발생하는 극저주파 전자계는 지표상 1[m] 에서 전계가 <span class="red">3.5 [kV/m]</span> 이하, 자계가 <span class="red">83.3[uT]</span> 이하가 되도록 시설하고, 직류 특고압 가공전선로에서 발생하는 직류 전계는 지표면에서 <span class="red">25 [kV/m]</span> 이하, 직류 자계는 지표면 1 [m] 에서 <span class="red">400,000 [uT]</span> 이하가 되도록 시설하는 등 상시 정전유도 및 전자유도 작용에 의하여 사람에게 위험을 줄 우려가 없도록 시설하여야 한다. 다만, 눈밭·산림 그 밖에 사람의 왕래가 적은 곳에서 사람에게 위험을 줄 우려가 없도록 시설하는 경우에는 그러하지 아니한다.</li>
+  <li>특고압의 가공전선로는 전자유도작용이 약전류 전선로를 통하여 사람에게 위험을 줄 우려가 없도록 시설하여야 한다.</li>
+  <li>전력보안 통신설비는 가공 전선로로부터 정전유도작용 또는 전자유도작용에 의하여 사람에게 위험을 줄 우려가 없도록 시설하여야 한다.</li>
+</ol>
+
+<div class="sub-section">➡ 제20조 절연유</div>
+<ol>
+  <li>사용전압이 100 [kV] 이상의 중성점 직접 접지식 전로에 접속하는 변압기를 설치하는 곳에서는 절연유의 구외 유출 및 지하 침투를 방지하기 위한 설비를 갖추어야 한다.</li>
+  <li>폴리염화비페닐을 함유한 절연유를 사용한 전기기계기구는 전로에 시설하여서는 아니된다. (＊폴리염화비페닐 : 독성물질)</li>
+</ol>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 10 ===== -->
+<div class="sub-section">➡ 제23조 전선로의 전선 및 절연 성능</div>
+<p>발전기, 변압기, 조상기, 계기용 변성기, 모선 및 이를 지지하는 애자는 단락전류에 의하여 생기는 기계적 충격에 견디는 것이어야 한다.</p>
+
+<div class="sub-section">➡ 제27조 전선로의 전선 및 절연성능</div>
+<ol>
+  <li>저압 가공전선 또는 고압 가공전선은 감전의 우려가 없도록 사용전압에 따른 절연성능을 갖는 절연전선 또는 케이블을 사용하여야 한다.</li>
+  <li>지중 전선로는 감전의 우려가 없도록 사용전압에 따른 절연성능을 갖는 케이블을 사용하여야 한다.</li>
+  <li><span class="red">저압 전선로 중 절연부분의 전선과 대지 사이 및 전선의 심선 상호 간의 절연저항은 사용전압에 대한 누설전류가 최대공급 전류의 [ 1/2,000 ]을 넘지 않도록 하여야 한다.</span></li>
+</ol>
+
+<div class="sub-section">➡ 제34조 고압 및 특고압 전로의 피뢰기 시설</div>
+<ol>
+  <li>발전소, 변전소 또는 이에 준하는 장소의 가공전선 인입구 및 인출구</li>
+  <li>가공 전선로에 접속하는 배전용 변압기의 고압측 및 특고압측</li>
+  <li>고압 또는 특고압의 가공전선로로부터 공급을 받는 수용장소의 인입구</li>
+  <li>가공 전선로와 지중 전선로가 접속되는 곳.</li>
+</ol>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 11 ===== -->
+<div class="sub-section">➡ 제36조 특고압 가공전선과 건조물 등의 접근 또는 교차</div>
+<ol>
+  <li>사용 전압이 400 [kV] 이상의 특고압 가공전선과 건조물 사이의 수평거리는 그 건조물의 화재로 인한 그 전선의 손상 등에 의하여 전기사업에 관련된 전기의 원활한 공급에 지장을 줄 우려가 없도록 3 [m] 이상 이격하여야 한다. 다만, 다음의 조건을 모두 충족하는 경우에는 예외로 한다.
+    <ol type="①">
+      <li>가공전선과 건조물 상부와의 수직 거리가 28 [m] 이상일 것.</li>
+      <li>사람이 거주하는 주택 및 다중이용시설이 아닌 건조물로서 내화 구조이고, 그 지붕 재질은 불연재료일 것.</li>
+      <li>폭연성 분진, 가연성 가스, 인화성 물질, 석유류, 화약류 등 위험물질을 다루는 건조물이 아닐 것.</li>
+    </ol>
+  </li>
+</ol>
+
+<div class="sub-section">➡ 제46조 전차선로의 시설</div>
+<ol>
+  <li>직류 전차선로의 사용전압은 저압 또는 고압으로 하여야 한다.</li>
+  <li>교류 전차선로의 공칭전압은 25 [kV] 이하로 하여야 한다.</li>
+  <li>전차선은 전기철도의 전용부지 안에 시설하여야 한다.</li>
+</ol>
+
+<div class="note-box">
+  <span class="red">내화구조 : 불에 타지 않고 잘 견디는 구조</span><br>
+  <span class="red">불연재료 : 불에 타지 않는 성질을 가진 재료</span><br>
+  <span class="red">난연재료 : 불에 잘 타지 않는 성능을 가진 재료</span><br>
+  <span class="red">가연재료 : 불에 타는 성질을 가진 재료</span>
+</div>
+
+<div class="sub-section">➡ 제52조 저압 전로의 절연</div>
+<p>전기사용장소의 사용전압이 저압인 전로의 전선 상호 간 및 전로와 대지 사이의 절연저항은 개폐기 또는 과전류 차단기로 구분할 수 있는 전로마다 다음 표에서 정한 값 이상이어야 한다. 다만, 전선 상호 간의 절연저항은 기계기구를 쉽게 분리가 곤란한 분기회로의 경우 기기 접속 전에 측정할 수 있다.</p>
+<p>또한, 측정 시 영향을 주거나 손상을 받을 수 있는 SPD 또는 기타 기기 등은 측정 전에 분리시켜야 하고, 부득이하게 분리가 어려운 경우에는 시험전압을 250 [V] DC로 낮추어 측정할 수 있지만 절연 저항값은 1[MΩ] 이상이어야 한다.</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 12 ===== -->
+<div class="sub-section">➡ 제52조 저압 전로의 절연 (계속)</div>
+
+<table>
+  <thead>
+    <tr><th>전로의 사용 전압 [V]</th><th>DC 시험 전압 [V]</th><th>절연저항 [MΩ]</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>SELV 및 PELV</td><td>250</td><td>0.5</td></tr>
+    <tr><td>FELV, 500 [V] 이하</td><td>500</td><td>1.0</td></tr>
+    <tr><td>500 [V] 초과</td><td>1,000</td><td>1.0</td></tr>
+  </tbody>
+</table>
+
+<p><span class="red">특별 저압(extra low voltage : 2차 전압이 AC 50 [V], DC 120 [V] 이하)으로 SELV (비접지 회로 구성) 및 PELV (접지회로 구성)은 1차와 2차가 전기적으로 절연된 회로, FELV는 1차와 2차가 전기적으로 절연되지 않은 회로</span></p>
+
+<p>＊ ELV 계통을 사용하는 이유</p>
+<ol>
+  <li>접촉 전압 AC 50V 이하 : 인체 감전으로 부터 안전 전압 확보</li>
+  <li>Energy Saving : 전력 사용량 및 Cable 원자재 비용 절감</li>
+  <li>적용 Application : CCTV, LAN SYSTEM, 신호등과 같은 제어 System 등</li>
+</ol>
+<p class="indent1">[그림: 절연변압기(SELV), 절연변압기(PELV), 단순분리형 변압기(FELV) 회로도]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 13~14 : 주요 문제 01, 02 ===== -->
+<div class="section-title">2. 전기설비기술기준 주요 문제</div>
+
+<div class="question-box">
+  <span class="q-num">☆☆ 01</span><br>
+  전기설비기술기준에서 정하는 안전원칙에 대한 내용으로 틀린 것은 ?
+</div>
+<div class="q-choices">
+  <span>① 전기설비는 감전, 화재 그 밖에 사람에게 위해를 주거나 물건에 손상을 줄 우려가 없도록 시설하여야 한다.</span>
+</div>
+<div class="q-choices">
+  <span>② 전기설비는 다른 전기설비, 그 밖의 물건의 기능에 전기적 또는 자기적인 장해를 주지 않도록 시설하여야 한다.</span>
+</div>
+<div class="q-choices">
+  <span><span class="correct">③ 전기설비는 경쟁과 새로운 기술 및 사업의 도입을 촉진함으로써 전기사업의 건전한 발전을 도모하도록 시설하여야 한다.</span> ✓(오답)</span>
+</div>
+<div class="q-choices">
+  <span>④ 전기 설비는 사용 목적에 적절하고 안전하게 작동하여야 하며, 그 손상으로 인하여 전기공급에 지장을 주지 않도록 시설하여야 한다.</span>
+</div>
+
+<div class="question-box">
+  <span class="q-num">☆☆☆☆ 02</span><br>
+  다음 중 전력 계통의 운용에 관한 지시를 하는 곳은 ?
+</div>
+<div class="q-choices">
+  <span>① 변전소</span>
+  <span>② 개폐소</span>
+  <span><span class="correct">③ 급전소</span> ✓</span>
+  <span>④ 배전소</span>
+</div>
+<div class="answer-box">
+  <strong>해설</strong> "급전소"란 전력계통의 운용에 관한 지시 및 급전조작을 하는 곳이다.
+</div>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 15 : 문제 03 ===== -->
+<div class="question-box">
+  <span class="q-num">☆☆ 03</span><br>
+  개폐소라 함은 발전소 상호 간, 변전소 상호 간 또는 발전소와 변전소 간의 전압이 몇 [V]이상의 송전선로를 연결 또는 차단하기 위한 전기 설비를 말하는가 ?
+</div>
+<div class="q-choices">
+  <span>① 7,000</span>
+  <span>② 11,000</span>
+  <span>③ 23,000</span>
+  <span><span class="correct">④ 50,000</span> ✓</span>
+</div>
+<div class="answer-box">
+  <strong>해설</strong> 개폐소는 ㉠ 발전소 상호간, 변전소 상호간 또는 발전소와 변전소 간의 전압 50,000 [V] 이상의 송전선로를 연결 또는 차단하기 위한 전기설비를 말한다. ㉡ 개폐소 안에 시설한 개폐기 및 기타 장치에 의하여 전로를 개폐하는 곳으로서 발전소, 변전소 및 수용 장소 이외의 곳을 말한다.
+</div>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 16 : 문제 04 ===== -->
+<div class="question-box">
+  <span class="q-num">☆☆☆☆ 04</span><br>
+  한 수용장소의 인입구에서 분기하여 지지물을 거치지 않고 다른 장소의 인입구에 이르는 부분을 무엇이라고 하는가 ?
+</div>
+<div class="q-choices">
+  <span>① 가공 인입선</span>
+  <span>② 인입선</span>
+  <span><span class="correct">③ 연접인입선</span> ✓</span>
+  <span>④ 옥측 배선</span>
+</div>
+<div class="answer-box">
+  <strong>해설</strong><br>
+  ㉠ 가공 인입선이란 가공전선로의 지지물로부터 다른 지지물을 거치지 아니하고 수용장소의 붙임점에 이르는 가공전선을 말한다.<br>
+  ㉡ 인입선이란 가공인입선 및 수용장소의 조영물의 열면 등에 시설하는 전선으로서, 그 수용장소의 인입구에 이르는 부분의 전선을 말한다.<br>
+  ㉢ 연접인입선이란 한 수용장소의 인입선에서 분기하여 지지물을 거치지 아니하고 다른 수용장소의 인입구에 이르는 부분의 전선을 말한다.<br>
+  ㉣ 옥측 배선이란 옥외의 전기사용장소에서 그 전기사용장소에서의 전기사용을 목적으로 조영물에 고정시켜 시설하는 전선을 말한다.
+</div>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 17 : 문제 05 ===== -->
+<div class="question-box">
+  <span class="q-num">☆☆☆ 05</span><br>
+  변전소라 함은 구 내외의 장소로부터 전송되는 전기를 변성하여 이를 구내 이외의 장소에 전송하거나 구내 이외의 장소로부터 전송되는 전압이 몇 [V] 이상의 전기를 변성하기 위하여 시설이 설치된 장소인가?
+</div>
+<div class="q-choices">
+  <span>① 15,000</span>
+  <span>② 20,000</span>
+  <span>③ 25,000</span>
+  <span><span class="correct">④ 50,000</span> ✓</span>
+</div>
+<div class="answer-box">
+  <strong>해설</strong> 전기설비기술기준 제 3조 정의<br>
+  "변전소" 란 변전소의 밖으로부터 전송받은 전기를 변전소 안에 시설한 변압기, 전동발전기, 회전 변류기, 정류기 그 밖의 기계기구에 의하여 변성하는 곳으로서 변성한 전기를 다시 변전소 밖으로 전송하는 것을 말한다. (50,000 V) 이상의 전기를 변성하는 곳)
+</div>
+<p class="indent1">[그림: 발전소 → 변전소 → 송전소 → 1차 변전소 → 2차 변전소 → 배전 변전소 → 가정 (22kV ~ 220V) 계통도]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 18 : 문제 06 ===== -->
+<div class="question-box">
+  <span class="q-num">☆☆☆☆ 06</span><br>
+  조상 설비에 대한 용어의 정의로 옳은 것은 ?
+</div>
+<div class="q-choices">
+  <span>① 전압을 조정하는 설비를 말한다.</span>
+  <span>② 전류를 조정하는 설비를 말한다.</span>
+</div>
+<div class="q-choices">
+  <span>③ 유효전력을 조정하는 전기기계기구를 말한다.</span>
+  <span><span class="correct">④ 무효전력을 조정하는 전기기계기구를 말한다.</span> ✓</span>
+</div>
+<div class="answer-box">
+  <strong>해설</strong> 조상 설비란 송수전단 전압을 일정하게 유지되도록 무효 전력을 조정하는 전기기계기구를 말한다.<br>
+  ＊ 조상 설비의 종류는 : 전력용 콘덴서 (C) – 진상 무효전력으로 리액터의 지상 무효전력을 조정<br>
+  분로 리액터 (L) – 지상 무효전력으로 콘덴서의 진상 무효전력을 조정<br>
+  동기 조상기 (L, C) – 진상, 지상 무효전력을 조정함.
+</div>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 19 : 문제 09 ===== -->
+<div class="question-box">
+  <span class="q-num">☆☆☆☆☆ 09</span><br>
+  사용 전압 100 [kV] 이상의 중성점 직접 접지식 전로에 접속하는 변압기를 설치하는 곳에 반드시 하여야 할 설비는 ?
+</div>
+<div class="q-choices">
+  <span><span class="correct">① 절연유 유출 방지설비</span> ✓</span>
+  <span>② 소음방지설비</span>
+  <span>③ 주파수조정설비</span>
+  <span>④ 절연저항 측정설비</span>
+</div>
+<div class="answer-box">
+  <strong>해설</strong> 사용 전압이 100 [kV] 이상의 중성점 직접 접지식 전로에 접속하는 변압기를 설치하는 곳에는 절연유의 구외 유출 및 지하 침투를 방지하기 위한 설비를 갖추어야 한다.
+</div>
+<p class="indent1">[그림: 변압기 내부 구성도 (보존기, 부싱, CT, 압력해방장치, 냉각기, 냉각팬, 탱크, 방열기, 유펌프 등) 및 실사진]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 20 : 문제 10 ===== -->
+<div class="question-box">
+  <span class="q-num">☆☆☆☆☆ 10</span><br>
+  발전기, 변압기, 조상기, 모선 또는 이를 지지하는 애자는 어느 전류에 의하여 생기는 기계적 충격에 견디는 강도를 가져야 하는가 ?
+</div>
+<div class="q-choices">
+  <span>① 정격 전류</span>
+  <span>② 최대사용전류</span>
+  <span>③ 과부하전류</span>
+  <span><span class="correct">④ 단락전류</span> ✓</span>
+</div>
+<div class="answer-box">
+  <strong>해설</strong> 발전기 등의 기계적 강도 (전기설비기술기준 제 23조)<br>
+  발전기, 변압기, 조상기, 계기용 변성기, 모선 및 이를 지지하는 애자는 단락전류에 의하여 생기는 기계적 충격에 견디는 것이어야 한다.<br><br>
+  1. 정격 전류 : 정격 전압이 공급되었을 때 (전기기계 기구) 정격 출력으로 동작하는 전류값<br>
+  2. 정격 전압 : 규정된 주위온도 또는 단자온도에서 연속하여 인가할 수 있는 직류 전압 또는 교류 전압의 최대치<br>
+  3. 허용 전류 : 전선이나 케이블에 흘릴 수 있는 전류의 최대 값 (허용전류 ＞ 차단기용량 ＞ 부하전류 )<br>
+  4. 과부하 전류 : 기기에 대하여 정격전류, 전선에 대하여 허용 전류를 어느정도 초과하여 계속되는 시간을 합하여 생각했을 때 기기 또는 전선의 손상 방지로 부터 보호하기 위하여 자동 차단이 필요한 전류<br>
+  5. 단락전류 : 전로의 선간 임피던스가 적은 상태(<span class="red">0에 가까워짐</span>)로 접촉되었을 경우에 그 부분을 통하여 흐르는 큰 전류
+</div>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 21 ===== -->
+<div class="section-title">1. 공통 사항</div>
+
+<div class="sub-section">➡ 일반사항 [KEC 110]</div>
+<p><span class="bar"></span> <strong>통칙 [KEC 111] – 적용범위 [KEC 111.1]</strong></p>
+<ol>
+  <li>이 규정은 인측의 감전에 대한 보호와 전기설비 계통, 시설물, 발전용 수력설비, 발전용 화력설비, 발전설비 용접 등의 안전에 필요한 성능과 기술적인 요구사항에 대하여 적용한다.</li>
+  <li>이 규정에서 적용하는 전압의 구분은 다음과 같다.
+    <ol type="①">
+      <li><span class="red">저압 : 교류는 1 [kV] 이하, 직류는 1.5 [kV] 이하의 것</span></li>
+      <li><span class="red">고압 : 교류는 1 [kV]를, 직류는 1.5 [kV] 를 초과하고 7 [kV] 이하의 것</span></li>
+      <li><span class="red">특고압 : 7 [kV]를 초과하는 것.</span></li>
+    </ol>
+  </li>
+</ol>
+
+<p><span class="bar"></span> <strong>용어의 정의 [KEC 112]</strong></p>
+<ol>
+  <li>가공 인입선 : 가공전선로의 지지물로부터 다른 지지물을 거치지 아니하고 수용장소의 붙임점에 이르는 가공전선</li>
+  <li>계통 연계 : 둘 이상의 전력 계통 사이에 전력이 상호 융통될 수 있도록 선로를 통하여 연결하는 것으로 전력 계통 상호간을 송전선, 변압기 또는 직류-교류변환설비 등에 연결하는 것.</li>
+</ol>
+<p class="indent1">[그림: 계통 연계 전력망 구성도 및 태양광 계통연계 개요도]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 22 ===== -->
+<div class="section-title">2. 전기설비기술기준 판단기준과의 비교</div>
+
+<div class="sub-section">➡ 종별 접지설계 방식의 폐지 [KEC 140]</div>
+<p><span class="bar"></span> 접지 대상에 따라 일괄 적용한 종별 전비 (1종, 2종, 3종, 특3종) 폐지</p>
+<p><span class="bar"></span> 국제 표준의 접지 설계 방식 도입을 통해 현장 특화된 접지 시스템으로 구분하여 설정</p>
+<ol>
+  <li>계통 접지 : 전력계통 이상에 대비하여 대지와 계통의 접속</li>
+  <li>보호 접지 : 감전보호를 목적으로 기기의 한점 이상을 접지</li>
+  <li>피뢰시스템 접지 : 뇌격 전류를 안전하게 대지로 방류를 목표로 하는 접지</li>
+</ol>
+<p><span class="bar"></span> 접지 설계 방식의 국내 수용성 향상을 위한 접지 시스템의 시설의 종류 설정</p>
+<ol>
+  <li>단독 접지 : (특)고압 계통의 접지극과 저압 계통의 접지극을 독립적으로 시설하는 접지 방식</li>
+  <li>공통 접지 : 공통 접지는 (특)고압 접지 계통과 저압 접지 계통을 등전위로 형성하여 공통으로 접지하는 방식</li>
+  <li>통합 접지 : 계통 접지, 통신 접지, 피뢰 접지의 접지극을 통합하여 접지하는 방식</li>
+</ol>
+<p class="indent1">[그림: 단독접지, 공통접지, 통합접지 회로 다이어그램]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 23 ===== -->
+<div class="sub-section">➡ 일반사항 [KEC 110]</div>
+<p><span class="bar"></span> <strong>용어의 정의 [KEC 112]</strong></p>
+<ol start="3">
+  <li>계통외 도전부 : 전기설비의 일부는 아니지만 지면에 전위 등을 전해줄 위험이 있는 도전성 부분</li>
+</ol>
+<p class="indent1">[그림: 계통외 도전부 예시 (금속 수도관, 가스관 등) 회로도]</p>
+<ol start="4">
+  <li>계통 접지 : 전력계통에서 돌발적으로 발생하는 이상현상에 대비하여 대지와 계통을 연결하는 것으로 <span class="red">중성점을 대지에 접속하는 것.</span></li>
+</ol>
+<p class="indent1">[그림: 피뢰기, MOF, 배전반 계통 접지 다이어그램 및 중성점 접지 사진]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 24 ===== -->
+<p><span class="bar"></span> <strong>용어의 정의 [KEC 112] 계속</strong></p>
+<ol start="9">
+  <li>노출도전부 : 충전부는 아니지만 고장 시에 충전될 위험이 있고, 사람이 쉽게 접촉할 수 있는 기기의 도전성 부분</li>
+  <li>뇌전자기임펄스 (LEMP) : 서지 및 방사상 전자계를 발생시키는 저항성, 유도성 및 용량성 결합을 통한 뇌전류에 의한 모든 전자기 영향을 나타냄</li>
+  <li>단독 운전 : 전력계통의 일부가 전력계통의 전원과 전기적으로 분리된 상태에서 <span class="red">분산형 전원에 의해서만 가압되는 상태</span></li>
+  <li>단순 병렬운전 : 자가용 발전설비 또는 소용량 일반용 발전설비를 배전계통에 연계하여 운전하되, <span class="red">생산한 전력의 전부를 자체적으로 소비하기 위한 것</span>으로서 생산한 전력이 연계 계통으로 송전되지 않는 병렬 형태</li>
+</ol>
+<p class="indent1">[그림: 단독운전(Islanding) 및 단순 병렬운전 구성도]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 25~26 ===== -->
+<p><span class="bar"></span> <strong>용어의 정의 [KEC 112] 계속</strong></p>
+<ol start="13">
+  <li><span class="red">등전위본딩 : 등전위를 형성하기 위해 도전부 상호 간을 전기적으로 연결하는 것.</span></li>
+</ol>
+<p class="indent1">[그림: 등전위본딩 개념도 (전력선, 물, 가스 배관, SPD 연결) 및 실제 본딩 공사 사진]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 27 ===== -->
+<ol start="14">
+  <li>리플 프리전류 : 교류를 직류로 변환할 때 리플 성분의 실효값이 10 [%] 이하로 포함된 직류</li>
+</ol>
+<p class="indent1">[그림: 브리지 정류 회로도, 리플 전압 파형 그래프, 실효값 설명 (실효값 0.707Vp, 평균값 0.637Vp)]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 28 ===== -->
+<ol start="15">
+  <li>보호등전위본딩 : 감전에 대한 보호 등과 같은 안전을 목적으로 하는 등전위본딩</li>
+  <li>보호본딩도체 : 등전위본딩을 확실하게 하기 위한 보호도체</li>
+  <li>보호접지 : 고장 시 감전에 대한 보호를 목적으로 기기의 한 점 또는 여러 점을 접지하는 것.</li>
+  <li>등전위본딩망 : 구조물의 모든 도전부와 충전도체를 제외한 내부설비를 접지극에 상호 접속하는 망.</li>
+  <li>분산형전원 : 중앙 급전 전원과 구분되는 것으로서 <span class="red">전력 소비지역 부근에 분산하여 배치 가능한 전원</span></li>
+  <li>서지보호장치 (SPD) : 과도 과전압을 제한하고 서지 전류를 분류시키기 위한 장치</li>
+</ol>
+<p class="indent1">[그림: 분산형 발전 (중앙발전과 비교 도해) 및 SPD 서지 보호 회로도]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 29 ===== -->
+<ol start="21">
+  <li>수뢰부시스템 : 낙뢰를 포착할 목적으로 <span class="red">피뢰침, 망상도체, 피뢰선</span> 등과 같은 금속물체를 이용한 외부 피뢰시스템의 일부</li>
+</ol>
+<p class="indent1">[그림: 건물 낙뢰 피뢰시스템 구성도, 수뢰부 시스템 형태 사진(피뢰침, 피뢰망 등)]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 30~31 ===== -->
+<ol start="22">
+  <li>스트레스전압 : 지락 고장 중에 접지부분 또는 기기나 장치의 외함과 기기나 장치의 다른 부분 사이에 나타나는 전압</li>
+  <li>외부 피뢰시스템 : <span class="red">수뢰부 시스템, 인하도선 시스템, 접지극 시스템으로</span> 구성된 피뢰시스템의 일종을 나타냄.</li>
+  <li>인하도선 시스템 : 뇌전류를 수뢰시스템에서 접지극으로 흘리기 위한 외부 피뢰시스템의 일부</li>
+</ol>
+<p class="indent1">[그림: 피뢰침(LIGHTNING ROD), 인하도선(Wire), 접지극(Ground Rod) 구성도 및 접지극 시공 사진]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 32 ===== -->
+<ol start="27">
+  <li>제1차 접근 상태 (3 m 이상) : 가공전선이 다른 시설물과 접근하는 경우에 가공전선이 다른 시설물의 위쪽 또는 옆쪽에서 수평거리로 가공 전선로의 지지물의 지표상의 높이에 상당하는 거리 안에 시설됨으로써 가공 전선로의 전선을 절단, 지지물의 도괴(넘어지거나 무너짐) 등의 경우에 그 전선이 다른 시설물에 접촉할 우려가 있는 상태</li>
+  <li>제 2차 접근상태 : 가공전선이 다른 시설물과 접근하는 경우에 그 가공전선이 다른 시설물의 위쪽 또는 옆쪽에서 수평거리로 <span class="red">3 [m] 미만인</span> 곳에 시설되는 상태</li>
+</ol>
+<p class="indent1">[그림: 1차·2차 접근상태 이격거리 다이어그램 (3m, 6m, 10m 등)]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 33 ===== -->
+<ol start="34">
+  <li>충전부 : 통상적인 <span class="red">운전상태에서 전압이 걸리도록 되어 있는 도체 또는 도전부</span> (중성선을 포함하나 PEN 도체, PEM 도체, PEL 도체는 포함하지 않음)<br>
+  ＊ PEN (Protective earthing conductor and a neutral conductor) : 교류 회로에서 중성전 겸용 보호 도체,<br>
+  PEM (Protective earthing conductor and a mid-point conductor) : 직류회로에서 중간선 겸용 보호 도체<br>
+  PEL (Protective earthing conductor and a line conductor) : 직류회로에서 선도체 겸용 보호 도체
+  </li>
+</ol>
+<p class="indent1">[그림: TN-C 접지 방식 회로도 및 직류 계통 회로도]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 34 ===== -->
+<div class="sub-section">➡ 전선 [KEC 120]</div>
+<p><span class="bar"></span> <strong>전선의 선정 및 식별 [KEC 121]</strong></p>
+<ol>
+  <li>전선의 색상은 다음 표에 따른다.</li>
+</ol>
+
+<table>
+  <thead>
+    <tr><th>전선 구분</th><th>KEC</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>상선 [L1]</td><td><span class="red">갈색</span></td></tr>
+    <tr><td>상선 [L2]</td><td><span class="red">흑색</span></td></tr>
+    <tr><td>상선 [L3]</td><td><span class="red">회색</span></td></tr>
+    <tr><td>중성선 [N]</td><td><span class="red">청색</span></td></tr>
+    <tr><td><span class="red">접지/보호도체 [PE]</span></td><td><span class="red">녹황 교차</span></td></tr>
+  </tbody>
+</table>
+
+<ol start="2">
+  <li>색상 식별이 종단 및 연결 지점에서만 이루어지는 나도체 등은 전선 종단부에 색상이 반영구적으로 유지될 수 있는 도색, 밴드, 색 테이프 등의 방법으로 표시해야 한다.</li>
+</ol>
+<p class="indent1">[그림: 다색 전선 단면, 압착단자, 색상 테이프 사진]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 35 ===== -->
+<p><span class="bar"></span> <strong>전선의 접속 [KEC 123]</strong></p>
+<p>전선을 접속하는 경우에는 전선의 전기저항을 증가시키지 아니하도록 접속하여야 하며, 또한 다음에 따라야 한다.</p>
+<ol>
+  <li>나전선 상호 또는 나전선과 절연전선 또는 캡타이어 케이블과 접속하는 경우에는 다음에 의할 것.
+    <ol type="①">
+      <li><span class="red">전선의 세기를 20 [%] 이상 감소시키지 아니할 것.</span></li>
+      <li>접속부분은 접속관 기타의 기구를 사용할 것.</li>
+    </ol>
+  </li>
+  <li>절연전선 상호·절연전선과 코드, 캡타이어 케이블과 접속하는 경우에는 접속되는 절연전선의 절연물과 동등 이상의 절연 성능이 있는 접속부분을 그 부분의 절연전선의 절연물과 동등 이상의 절연 성능이 있는 것으로 충분히 피복할 것.</li>
+  <li>코드 이상, 캡타이어 케이블 상호 또는 이들 상호를 접속하는 경우에는 코드 접속기·접속함 기타의 기구를 사용할 것. (다만, 공칭단면적이 10 [㎟] 이상인 캡타이어 케이블 상호를 접속하는 경우에는 접속부분을 (1)과 (2)에 의해 시설할 것.)</li>
+  <li>도체의 알루미늄을 사용하는 전선과 동을 사용하는 전선을 접속하는 등 전기화학적 성질이 다른 도체를 접속하는 경우에는 접속 부분에 전기적 부식이 생기지 않도록 할 것.</li>
+  <li>두개 이상의 전선을 병렬로 사용하는 경우에는 다음에 의하여 시설할 것.
+    <ol type="①">
+      <li>병렬로 사용하는 각 전선의 굵기는 <span class="red">동선 50 [㎟]</span> 이상 또는 <span class="red">알루미늄 70 [㎟]</span> 이상으로 하고, 전선은 같은 도체, 같은 재료 같은 굵기의 것을 사용할 것.</li>
+      <li>같은 극의 각 전선은 동일한 터미널러그에 완전히 접속할 것.</li>
+      <li>같은 극인 각 전선의 터미널러그는 동일한 도체에 2개 이상의 리벳 또는 2개 이상의 나사로 접속할 것.</li>
+      <li><span class="red">④ 병렬로 사용하는 전선에서는 각각에 퓨즈를 설치하지 말 것.</span></li>
+      <li><span class="red">⑤ 교류 회로에서 병렬로 사용하는 전선은 금속관 안에 전자적 불평형이 생기지 않도록 시설할 것.</span></li>
+    </ol>
+  </li>
+</ol>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 36 ===== -->
+<p><span class="bar"></span> <strong>전선의 접속 [KEC 123]</strong></p>
+<p>1. 단선의 직선 접속</p>
+<div class="indent1">
+  <p><span class="red">③ 트위스트 접속 : 6 [㎟] 이하의 가는 단선 접속</span><br>
+  피복을 벗긴 부분을 서로 맞대어 2~3회 꼰 다음 전선의 끝을 각각 상대편 전선에 5~6회 감아 접속</p>
+  <p>[그림: 트위스트 접속 방법 (10mm, 2회, 5회 등 치수 명시)]</p>
+
+  <p><span class="red">② 브리타니아 접속 : 10 [㎟] 이상의 굵은 단선 접속</span><br>
+  단선을 직접 서로 꼬아 접속하는 형태가 아닌 별도로 조이트선과 첨선을 이용하여 접속<br>
+  조인트선과 첨선은 주로 1.0 mm ~ 1.2 mm 나동선을 사용함.<br>
+  [그림: 브리타니아 접속 방법 (150D 이상, 5회 등)]</p>
+</div>
+
+<p>2. 트위스트 분기 접속<br>
+분기 접속은 본선에서 선을 분기할 때 사용<br>
+6 [㎟] 이하의 가는 단선에 적용<br>
+[그림: 트위스트 분기 접속 방법]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 37 ===== -->
+<p>3. 쥐꼬리 접속 (종단 접속)<br>
+박스 안에서 동일 굵기의 가는 단선 <span class="red">(1.5 [㎟] ~ 4.0 [㎟])</span>을 2, 3가닥 모아 접속할 때 이용<br>
+접속 방법 : 접속부에 테이프를 감거나 박스용 커넥터로 접속<br>
+[그림: 쥐꼬리 접속 방법 (5mm, 4회, 2~3회 등)]</p>
+
+<p>4. 링 슬리브 (Ring Sleeve) 접속<br>
+접속하려는 심선을 2~3가닥 모아 2~3회 꼰 후 알루미늄 구리용 링 슬리브를 씌우고 압착기로 압착<br>
+링 슬리브는 금속이므로 비닐캡으로 절연 필요<br>
+[그림: 링 슬리브 압착 방법]</p>
+
+<p>5. 기타 접속 방법<br>
+와이어 커넥터 : 테이프 감기 생략<br>
+[그림: 와이어 커넥터 사진]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 38 ===== -->
+<p><span class="bar"></span> <strong>전로의 절연저항 및 절연내력 [KEC 132]</strong></p>
+<ol>
+  <li>사용전압이 저압인 전로의 절연성능은 기술기준 제52조를 충족하여야 한다.</li>
+  <li>저압 전로에서 정전이 어려운 경우 등 절연저항 측정이 곤란한 경우 저항성분의 누설전류가 <span class="red">1 [mA] 이하이면 절연성능이 적합한 것으로 판단한다.</span></li>
+  <li><span class="red">고압 및 특고압의 전로는 시험전압을 전로와 대지사이 (다심 케이블은 심선 상호 간 및 심선과 대지 사이)에 연속하여 10분간 가하여 절연 내력을 시험하였을 때 이에 견디어야 한다.</span></li>
+  <li>전선에 케이블을 사용하는 교류 전로로서 다음 표에서 정한 시험전압의 2배의 직류 전압을 전로와 대지 사이 (다심케이블은 심선 상호 간 및 심선과 대지 사이)에 연속하여 10분간 가하여 절연내력을 시험하였을 때에 견디는 것에 대하여는 그러하지 아니한다.</li>
+</ol>
+
+<table>
+  <thead>
+    <tr><th>전로의 종류</th><th>시험 전압</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1. 최대 사용 전압 7 kV 이하의 전로</td><td>최대사용전압의 1.5배의 전압</td></tr>
+    <tr><td>2. 최대 사용 전압 7 kV 초과 25 kV 이하인 중성점 접지식 전로 (중성선을 가지는 것으로서 그 중성선을 다중접지하는 경우)</td><td>최대사용전압의 0.92배의 전압</td></tr>
+    <tr><td>3. 최대 사용 전압 7 kV 초과 60 kV 이하인 전로 (2란을 제외한다)</td><td>최대사용전압의 1.25배의 전압 (10.5kV 미만의 경우 10.5kV)</td></tr>
+    <tr><td>4. 최대 사용 전압 60 kV 초과 중성점 비접지식 전로(전위 변성기의 접지 포함)</td><td>최대사용전압의 1.25배의 전압</td></tr>
+    <tr><td>5. 최대 사용 전압 60 kV 초과 중성점 접지식 전로 (전위 변성기의 접지하는 것 및 6란과 7란의 것을 제외한다)</td><td>최대사용전압의 1.1배의 전압 (75kV 미만의 경우 75kV)</td></tr>
+    <tr><td>6. 최대 사용 전압 60 kV 초과 중성점 직접 접지식 전로 (7란의 것을 제외한다)</td><td>최대사용전압의 0.72배의 전압</td></tr>
+    <tr><td>7. 최대 사용 전압 170 kV 초과 중성점 직접 접지식 전로로서 그 중성점이 직접 접지되어 있는 발전소 또는 변전소 혹은 이에 준하는 장소에 시설하는 것.</td><td>최대사용전압의 0.64배의 전압</td></tr>
+    <tr><td>8. 최대 사용 전압 60 kV 초과하는 정류기에 접속되고 있는 전로</td><td>교류측 및 직류 고압측에 접속되고 있는 전로는 교류측 최대사용전압의 1.1배 직류전압</td></tr>
+  </tbody>
+</table>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 39 ===== -->
+<p><span class="bar"></span> <strong>회전기 및 정류기의 절연 내력 [KEC 133]</strong></p>
+<p>회전기 및 정류기는 다음 표에서 정한 시험 방법으로 절연 내력을 시험하였을 때 이에 견디어야 한다. 다만 회전 변류기 이외의 교류 회전기는 다음 표에서 정한 시험 전압의 1.6배의 직류 전압으로 절연 내력을 시험하였을 때 이에 견디는 것을 시설하는 경우에는 그러하지 아니한다.</p>
+
+<table>
+  <thead>
+    <tr><th colspan="2">전로의 종류</th><th>시험 전압</th><th>시험 방법</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3">회전기</td>
+      <td>발전기, 전동기, 조상기, 기타 회전기 (회전, 변류기를 제외한다)</td>
+      <td>최대사용전압 7kV 이하<br>최대사용전압 7kV 초과</td>
+      <td>최대사용전압의 1.5배의 전압 (500V 미만으로 되는 경우에는 500V)<br>최대사용전압의 1.25배의 전압 (10.5kV 미만으로 되는 경우에는 10.5kV)</td>
+    </tr>
+    <tr>
+      <td>회전 변류기</td>
+      <td colspan="2">직류측의 최대사용전압의 1배의 교류 전압 (500V 미만으로 되는 경우에는 500V)</td>
+    </tr>
+    <tr>
+      <td colspan="3" style="font-size:12px">권선과 대지 사이에 연속하여 10분간 가한다.</td>
+    </tr>
+    <tr>
+      <td rowspan="2">정류기</td>
+      <td>최대사용전압 60 kV 이하</td>
+      <td>직류측의 최대사용전압의 1배의 교류전압 (500V 미만으로 되는 경우에는 500V)</td>
+      <td>충전부분과 외함 간에 연속으로 10분간 가한다.</td>
+    </tr>
+    <tr>
+      <td>최대사용전압 60 kV 초과</td>
+      <td>교류측의 최대사용전압의 1.1배의 교류전압 또는 직류측의 최대사용전압의 1.1배의 직류전압</td>
+      <td>교류측 및 직류 고전압측 단자와 대지 사이에 연속하여 10분간 가한다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><span class="bar"></span> <strong>연료전지 및 태양전지 모듈의 절연 내력 [KEC 134]</strong></p>
+<p>연료전지 및 태양전지 모듈은 최대사용전압의 <span class="red">1.5배의 직류 전압 또는 1배의 교류 전압</span> (500V 미만으로 되는 경우에는 500V)을 충전부분과 대지 사이에 연속하여 10분간 가하여 절연 내력을 시험하였을 때에 이에 견디는 것이어야 한다.</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 40 ===== -->
+<div class="sub-section">➡ 접지시스템 [KEC 140]</div>
+<p><span class="bar"></span> <strong>접지시스템의 구분 및 종류 [KEC 141]</strong></p>
+<ol>
+  <li>접지 시스템의 구분<br>
+    <span class="red">① 계통 접지</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">② 보호 접지</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">③ 피뢰시스템 접지</span>
+  </li>
+  <li>접지 시스템의 종류<br>
+    <span class="red">① 단독 접지</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">② 공통 접지</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">③ 통합 접지</span>
+  </li>
+</ol>
+
+<div class="note-box">
+  <strong>접지 저항 값</strong><br>
+  - 부식, 건조, 동결 등 대지 환경의 변화에 충족<br>
+  - 인체 감전보호를 위한 값과 전기설비의 기계적인 요구에 의한 값을 만족
+</div>
+
+<p><span class="bar"></span> <strong>접지시스템의 시설 [KEC 142]</strong></p>
+<ol>
+  <li>접지시스템의 구성요소 및 요구 사항 [KEC 142.1]
+    <ol type="①">
+      <li>접지시스템의 구성 요소
+        <ol type="㉠">
+          <li>접지 시스템 : <span class="red">접지극, 접지도체, 보호도체</span> 및 기타 설비로 구성하다.</li>
+          <li>접지극 : 접지도체를 사용하여 주접지 단자에 연결하여 시설한다.</li>
+        </ol>
+      </li>
+      <li>접지시스템의 요구사항
+        <ol type="㉠">
+          <li>지락 전류와 보호 도체 전류를 대지에 전달할 것. 다만 열적, 기계적, 전기·기계적 응력 및 이러한 전류로 인한 감전 위험이 없어야 한다.</li>
+          <li>접지 저항값은 인체 감전보호를 위한 값과 전기설비의 기계적 요구에 의한 값을 만족하여야 한다.</li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li>접지극의 시설 및 접지저항 [KEC 142.2]
+    <ol type="①">
+      <li>접지극은 다음의 방법 중 하나 또는 복합하여 시설하여야 한다.<br>
+      ㉠ 콘크리트에 매입된 기초 접지극 &nbsp; ㉡ 토양에 매설된 기초 접지극 &nbsp; ㉢ 토양에 수직 또는 수평으로 직접 매설된 금속전극 (봉, 전선, 테이프, 배관, 판 등) &nbsp; ㉣ 케이블의 금속 외장 및 그 밖에 금속 피복 &nbsp; ㉤ 지중 금속구조물 (배관 등) &nbsp; ㉥ 대지에 매설된 철근콘크리트의 용접된 금속 보강재
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 41 ===== -->
+<ol type="㉡" start="2">
+  <li>큰 고장전류가 접지 도체를 통하여 흐르지 않을 경우 접지도체의 최소단면적은 다음과 같다.<br>
+  - 구리는 6 [㎟] 이상 &nbsp;&nbsp; - 철제는 50 [㎟] 이상</li>
+  <li>접지 도체에 피뢰시스템이 접속되는 경우, 접지 도체의 단면적은 구리 16 [㎟] 또는 철 50 [㎟] 이상으로 하여야 한다.</li>
+</ol>
+<p><span class="red">② 접지 도체는 지하 0.75 [m] 부터 지표상 2 [m] 까지 부분은 합성수지관 또는 몰드로 덮어야 한다.</span><br>
+(두께 2 [mm] 미만의 합성 수지제 전선관 및 가연성 콤바인 덕트관은 제외)</p>
+<ol type="③">
+  <li>특고압·고압 전기설비 및 변압기 중성점 접지시스템의 경우 접지도체가 사람의, 접촉할 우려가 있는 곳에 시설되는 고정설비인 경우에는 다음에 따라야 한다.
+    <ol type="㉠">
+      <li>접지도체는 절연 전선 (옥외용 비닐절연전선은 제외) 또는 케이블 (통신용 케이블은 제외)을 사용하여야 한다.</li>
+      <li>접지도체를 철주, 기타의 금속체를 따라서 시설하는 경우 이외의 경우에는 접지도체의 지표상 0.6[m]를 초과하는 부분에 대해서는 절연전선을 사용하지 않을 수 있다.</li>
+    </ol>
+  </li>
+  <li>접지도체의 굵기는 고장 시 흐르는 전류를 안전하게 통할 수 있는 것으로 다음에 의한다.</li>
+</ol>
+
+<table>
+  <thead>
+    <tr><th>구 분</th><th>접지 도체의 단면적</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>특고압·고압 전기설비용</td><td>6 [㎟] 이상</td></tr>
+    <tr><td>중성점 접지용</td><td>16 [㎟] 이상</td></tr>
+    <tr><td>7 [kV] 이하의 전로<br>사용 전압이 25 [kV] 이하인 특고압 가공전선로<br>(중성선 다중접지식으로 전로에 지락이 생겼을 때 2초 이내에 차단)</td><td>6 [㎟] 이상</td></tr>
+  </tbody>
+</table>
+
+<p class="indent1">[그림: 접지도체 지하 매설 및 합성수지관 보호 상세 도면, 접지 시공 현장 사진]</p>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 43 ===== -->
+<p><span class="bar"></span> <strong>기계기구의 절대 및 외함의 접지 [KEC 142.7]</strong></p>
+<ol>
+  <li>전로에 시설하는 기계기구의 절대 및 금속제 외함 (외함이 없는 변압기 또는 계기용 변성기는 철심)에는 접지공사를 하여야 한다.</li>
+  <li>다음의 어느 하나에 해당하는 경우에는 접지 공사를 생략할 수 있다.
+    <ol type="①">
+      <li><span class="red">사용 전압이 직류 300 [V] 또는 교류 대지 전압이 150 [V] 이하인 기계기구를 건조한 곳에 시설하는 경우</span></li>
+      <li>저압용의 기계기구를 건조한 목재의 마루, 기타 이와 유사한 절연성 물건 위에서 취급하도록 시설하는 경우</li>
+      <li>저압용이나 고압용의 기계기구, 특고압 전선로에 접속하는 배전용 변압기나 이에 접속하는 전선에 시설하는 기계기구 또는 특고압 가공전선로의 전로에 시설하는 기계기구를 사람이 쉽게 접촉할 우려가 없도록 목주, 기타 이와 유사한 것의 위에 시설하는 경우</li>
+      <li>절대 또는 외함의 주위에 적당한 절연대를 설치하는 경우</li>
+      <li>외함이 없는 계기용 변성기가 고무·합성수지, 기타의 절연물로 피복한 것일 경우</li>
+      <li>전기용품 및 생활용품 안전관리법의 적용을 받는 이중절연구조로 되어 있는 기계기구를 시설하는 경우</li>
+      <li>저압 기계기구에 공급하는 전로의 전원측에 절연변압기 (2차 전압이 300 V 이하이며, 정격 용량이 3 [kVA] 이하인 것에 한다.)를 시설하고 또한 그 절연변압기의 부하측에 전로를 접지하지 않은 경우</li>
+      <li>물기가 있는 장소 이외의 장소에 시설하는 저압용의 개별 기계기구에 전기를 공급하는 전로에 "전기용품 및 생활용품 안전관리법" 의 적용을 받아 <span class="red">인체 감전보호용 누전 차단기 (정격감도전류가 30 [mA] 이하, 동작 시간이 0.03초 이하의 전류 동작형에 한한다.)를 시설하는 경우.</span></li>
+      <li>외함을 충전하여 사용하는 기계기구에 사람이 접촉할 우려가 없도록 시설하거나 절연대를 시설하는 경우.</li>
+    </ol>
+  </li>
+</ol>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 44 ===== -->
+<p>2. 등전위본딩 시설 [KEC 143.2]</p>
+<p>
+교류 계통 : R ≤ 50V / Iₐ [Ω]<br>
+직류 계통 : R ≤ 120V / Iₐ [Ω]<br>
+여기서, Iₐ : 보호장치의 동작 전류 [A] (누전 차단기의 경우 정격 감도전류, 과전류보호장치의 경우 5초 이내 동작전류)
+</p>
+
+<ol type="③">
+  <li>비접지국부등전위본딩[KEC14.2.3]<br>
+  ㉡ 절연성 바닥으로 된 비접지 장소에서 다음의 경우 <span class="red">국부등전위본딩</span>을 하여야 한다.<br>
+  <span class="red">- 전기설비 상호 간이 2.5 [m] 이내인 경우</span><br>
+  - 전기설비와 이를 지지하는 금속제 사이<br>
+  ㉢전기설비 또는 계통외도전부를 통해 대지에 접촉하지 않아야 한다.
+  </li>
+</ol>
+
+<p>3. 등전위본딩 도체 [KEC 143.3]</p>
+<ol type="①">
+  <li>보호등전위본딩 도체 [KEC 143.3.1]<br>
+  ㉡ 주접지단자에 접속하기 위한 등전위본딩 도체는 설비 내에 있는 <span class="red">가장 큰 보호 접지도체 단면적의 1/2 이상의</span> 단면적을 가져야 하고 다음의 단면적 이상이어야 한다.
+  </li>
+</ol>
+
+<table>
+  <thead>
+    <tr><th>구분</th><th>큰 전류가 흐르지 않는 경우</th><th>피뢰 설비가 설치된 경우</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>구리</td><td>6 [㎟]</td><td>16 [㎟]</td></tr>
+    <tr><td>알루미늄 (Al)</td><td>16 [㎟]</td><td>16 [㎟]</td></tr>
+    <tr><td>강철</td><td>50 [㎟]</td><td>50 [㎟]</td></tr>
+  </tbody>
+</table>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 45 ===== -->
+<div class="sub-section">➡ 피뢰시스템 [KEC 150]</div>
+<p><span class="bar"></span> <strong>피뢰시스템의 적용 범위 및 구성 [KEC 151]</strong></p>
+<ol>
+  <li>적용 범위
+    <ol type="①">
+      <li>전기전자설비가 설치된 건축물·구조물로서 낙뢰로 부터 보호가 필요한 것 또는 <strong>지상으로부터 높이가 20 [m] 이상인 것.</strong></li>
+      <li>전기설비 및 전자설비 중 낙뢰로 부터 보호가 필요한 설비</li>
+    </ol>
+  </li>
+  <li>피뢰시스템의 구성
+    <ol type="①">
+      <li><span class="red">직격뢰로 부터 대상물을 보호하기 위한 외부 피뢰 시스템</span></li>
+      <li><span class="red">간접뢰 및 유도뢰로 부터 대상물을 보호하기 위한 내부 피뢰시스템</span></li>
+    </ol>
+  </li>
+  <li>피뢰시스템 등급 선정 [ KEC 151.3]
+    <ol type="①">
+      <li>피뢰시스템 등급에 따라 필요한 곳에서 피뢰시스템을 시설</li>
+      <li>피뢰시스템 등급은 대상물의 특성에 피뢰 레벨을 선정 (위험물의 제조소·저장소 및 처리장의 피뢰시스템은 Ⅱ 등급 이상)</li>
+    </ol>
+  </li>
+</ol>
+
+<table>
+  <thead>
+    <tr><th>보호레벨</th><th>보호 효율</th><th>최소 뇌격전류[kA]</th><th>뇌격거리 [m]</th><th>최대 뇌격 전류[kA]</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Ⅰ</td><td>0.98</td><td>2.9</td><td>20</td><td>200</td></tr>
+    <tr><td>Ⅱ</td><td>0.95</td><td>5.4</td><td>30</td><td>150</td></tr>
+    <tr><td>Ⅲ</td><td>0.90</td><td>10.1</td><td>45</td><td>100</td></tr>
+    <tr><td>Ⅳ</td><td>0.80</td><td>15.7</td><td>60</td><td>100</td></tr>
+  </tbody>
+</table>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 46~47 ===== -->
+<p><span class="bar"></span> <strong>내부 피뢰시스템 [KEC 153]</strong></p>
+<p>4. 피뢰등전위본딩 [KEC 153.2]</p>
+<ol type="②">
+  <li>금속제 설비의 등전위본딩 [KEC 153.2.2].
+    <ol type="㉠">
+      <li>건축물·구조물과 접속된 외부 피뢰시스템의 경우, <span class="red">등전위본딩은 지표면 부근에서 시행</span>하여야 한다.</li>
+      <li>건축물·구조물과 접속된 외부 피뢰시스템의 경우, 피뢰 등전위본딩은 다음에 따른다.<br>
+      - 기초부분 또는 지표면 부근 위치에서 하여야 하며, <span class="red">등전위본딩 도체는 등전위본딩바에 접속하고, 등전위본딩 바는 접지시스템에 접속</span>하여야 한다. 또한 쉽게 점검할 수 있도록 하여야 한다.<br>
+      - 전기적 절연 요구 조건에 따른 안전이격거리를 확보할 수 없는 경우에는 피뢰시스템과 건축물·구조물 또는 내부 설비의 도전성 부분은 등전위본딩 하여야 하며, 직접 접속하거나 충전부인 경우는 서지보호장치를 경유하여 접속하여야 한다. 다만, 서지보호장치를 사용하는 경우 보호레벨은 보호구간 기기의 임펄스 내전압보다 작아야 한다.
+      </li>
+    </ol>
+    <p><span class="red">㉢ 건축물·구조물에는 지하 0.5 [m]와 높이 20 [m]마다 환상 도체를 설치</span>한다.<br>
+    다만, 절근 콘크리트, 철골구조물의 구조체에 인하도선을 등전위본딩하는 경우 환상 도체를 설치하지 않아도 된다.</p>
+  </li>
+  <li>인입설비의 등전위본딩 [KEC 153.2.3]
+    <ol type="㉠">
+      <li>건축물·구조물의 외부에서 내부로 인입되는 설비의 도전부에 대한 등전위본딩은 다음에 의한다.<br>
+      - 인입구 부근에서 등전위본딩한다.<br>
+      - 전원선은 서지보호장치를 사용하여 등전위본딩을 한다.<br>
+      - 통신 및 제어선은 내부와의 위험한 전위차 발생을 방지하기 위해 직접 또는 서지보호장치를 통해 등전위본딩한다.
+      </li>
+      <li>가스관 또는 수도관의 연결부가 절연체인 경우, 해당 설비 공급사업자의 동의를 받아 적절한 공법 (절연방전결, 등을 사용)으로 등전위본딩하여야 한다.</li>
+    </ol>
+  </li>
+  <li>등전위본딩 바 [KEC 153.2.4]
+    <ol type="㉠">
+      <li>설치위치는 짧은 도전성 경로로 접지시스템에 접속할 수 있는 위치이어야 한다.</li>
+      <li>접지시스템(환상 접지전극, 기초 접지전극, 구조물의 접지보강재 등)에 짧은 경로로 접속하여야 한다.</li>
+      <li>외부 도전성 부분, 전원선과 통신선의 인입점이 다른 경우 여러 개의 등전위본딩 바를 설치할 수 있다.</li>
+    </ol>
+  </li>
+</ol>
+
+<hr class="page-divider">
+
+<!-- ===== 슬라이드 48 : 마지막 ===== -->
+<div style="text-align:center; margin-top: 60px; font-size: 28px; font-style: italic; color: #555;">
+  Thank you
+</div>
+
+</body>
+</html>

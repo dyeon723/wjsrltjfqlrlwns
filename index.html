@@ -1,0 +1,2535 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>저압전기설비 기출문제 (총 49문제)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:#eef2f7;color:#1a202c;padding:24px 16px;min-height:100vh}
+.container{max-width:800px;margin:0 auto}
+header{text-align:center;margin-bottom:28px}
+header h1{font-size:1.5rem;font-weight:800;color:#1e3a5f;margin-bottom:6px}
+header p{font-size:0.88rem;color:#64748b;margin-bottom:10px}
+.top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:10px;flex-wrap:wrap}
+.count-badge{background:#1e3a5f;color:#fff;font-size:0.82rem;font-weight:700;padding:6px 14px;border-radius:20px}
+.btn-all{background:#fff;color:#1e3a5f;border:2px solid #1e3a5f;border-radius:8px;padding:6px 16px;font-size:0.82rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+.btn-all:hover{background:#1e3a5f;color:#fff}
+.search-wrap{width:100%;margin-bottom:16px}
+.search-wrap input{width:100%;padding:10px 16px;border:1.5px solid #cbd5e1;border-radius:10px;font-size:0.9rem;font-family:inherit;outline:none;transition:border .2s}
+.search-wrap input:focus{border-color:#3b82f6}
+.card{background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.07);margin-bottom:18px;overflow:hidden;border:1px solid #e2e8f0;transition:box-shadow .2s}
+.card:hover{box-shadow:0 4px 18px rgba(0,0,0,.1)}
+.card.hidden{display:none}
+.card-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 12px;background:#f8fafc;border-bottom:1px solid #f1f5f9}
+.card-num{font-size:0.8rem;font-weight:800;color:#1565c0;background:#dbeafe;padding:3px 12px;border-radius:12px;letter-spacing:.03em}
+.stars{font-size:0.82rem;letter-spacing:-1px;color:#d1a600}
+.card-body{padding:18px 20px}
+.question-text{font-size:0.96rem;font-weight:600;line-height:1.8;color:#1a202c;margin-bottom:16px}
+.choices{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+.choice{display:flex;align-items:flex-start;gap:10px;padding:9px 14px;border-radius:8px;background:#f8fafc;border:1.5px solid #e2e8f0;font-size:0.91rem;line-height:1.6;transition:all .2s;cursor:pointer;user-select:none}
+.choice:hover:not(.answered){background:#eff6ff;border-color:#93c5fd}
+.choice.correct{background:#f0fdf4;border-color:#16a34a;color:#14532d;font-weight:700}
+.choice.wrong{background:#fef2f2;border-color:#ef4444;color:#991b1b;font-weight:700}
+.choice.reveal-correct{background:#f0fdf4;border-color:#16a34a;color:#14532d;font-weight:700}
+.choice.answered{cursor:default}
+.choice.correct .choice-num{color:#16a34a}
+.choice.wrong .choice-num{color:#ef4444}
+.choice.reveal-correct .choice-num{color:#16a34a}
+.choice-num{font-weight:800;min-width:18px;color:#64748b;flex-shrink:0}
+.result-msg{font-size:0.85rem;font-weight:700;margin-top:10px;margin-bottom:4px;padding:6px 12px;border-radius:7px;display:none}
+.result-msg.ok{background:#dcfce7;color:#15803d;display:block}
+.result-msg.ng{background:#fee2e2;color:#b91c1c;display:block}
+.score-board{background:#1e3a5f;color:#fff;border-radius:12px;padding:14px 20px;margin-bottom:20px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.score-board span{font-size:0.9rem;font-weight:700}
+.score-board .s-val{font-size:1.3rem;font-weight:900;color:#60a5fa}
+.btn-toggle{display:inline-flex;align-items:center;gap:7px;background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:0.87rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit}
+.btn-toggle:hover{background:#1565c0;transform:translateY(-1px)}
+.btn-toggle.open{background:#475569}
+.answer-section{display:none;margin-top:16px;border-top:1px dashed #e2e8f0;padding-top:16px;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.answer-badge{display:inline-flex;align-items:center;background:#dcfce7;color:#15803d;font-size:0.9rem;font-weight:800;padding:6px 16px;border-radius:8px;margin-bottom:12px}
+.explain-label{font-size:0.75rem;font-weight:800;color:#94a3b8;letter-spacing:.1em;margin-bottom:6px;text-transform:uppercase}
+.explain-box{background:#f8fafc;border-left:3px solid #3b82f6;border-radius:0 8px 8px 0;padding:12px 16px;font-size:0.87rem;line-height:1.9;color:#334155;white-space:pre-wrap;word-break:keep-all}
+.no-result{text-align:center;padding:48px;color:#94a3b8;font-size:0.95rem;display:none}
+.progress-bar{background:#e2e8f0;border-radius:6px;height:5px;margin-bottom:24px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#1565c0,#60a5fa);border-radius:6px;transition:width .5s ease}
+@media(max-width:480px){body{padding:16px 10px}.card-body{padding:14px 14px}.explain-box{font-size:.82rem}}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>⚡ 저압전기설비 기출문제</h1>
+    <p>KEC 한국전기설비규정 기준 · 총 49문제</p>
+  </header>
+  <div class="top-bar">
+    <span class="count-badge" id="count-badge">📋 전체 49문제</span>
+    <button class="btn-all" onclick="toggleAll()">전체 펼치기 / 접기</button>
+  </div>
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="🔍 문제 검색 (키워드, KEC 조항 번호 등)" oninput="filterCards()" />
+  </div>
+  <div class="score-board"><span>✅ 정답 <span class="s-val" id="s-correct">0</span></span><span>❌ 오답 <span class="s-val" id="s-wrong">0</span></span><span>📋 남은 문제 <span class="s-val" id="s-left">49</span></span></div>
+  <div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+  <div id="cards">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 1</span>
+      <span class="stars" title="5점">★★★★★☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">저압전로의 보호도체 및 중성선의 접속방식에 따른 접지계통의 분류가 아닌 것은?</div>
+      <div class="choices" id="choices-001">
+        <div class="choice" id="c-001-0" onclick="pick('001',0,this)">
+          <span class="choice-num">①</span>
+          <span>IT 계통</span>
+        </div>
+        <div class="choice" id="c-001-1" onclick="pick('001',1,this)">
+          <span class="choice-num">②</span>
+          <span>TN 계통</span>
+        </div>
+        <div class="choice" id="c-001-2" onclick="pick('001',2,this)">
+          <span class="choice-num">③</span>
+          <span>TT 계통</span>
+        </div>
+        <div class="choice" id="c-001-3" onclick="pick('001',3,this)">
+          <span class="choice-num">④</span>
+          <span>TC 계통</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('001',3,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-001">
+        <div class="answer-badge">✅ 정답: ④ TC 계통</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">접지계통 [KEC 211.2.7]
+
+• IT 계통방식
+
+• TT 계통방식
+
+• TN-C-S 계통방식</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 3</span>
+      <span class="stars" title="5점">★★★★★☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">계통의 일부분에서 PEN 도체를 사용하거나, 중성선(N)과 별도로 보호도체(PE)를 사용하는 방식의 접지계통은?</div>
+      <div class="choices" id="choices-003">
+        <div class="choice" id="c-003-0" onclick="pick('003',0,this)">
+          <span class="choice-num">①</span>
+          <span>TN-S</span>
+        </div>
+        <div class="choice" id="c-003-1" onclick="pick('003',1,this)">
+          <span class="choice-num">②</span>
+          <span>TN-C-S</span>
+        </div>
+        <div class="choice" id="c-003-2" onclick="pick('003',2,this)">
+          <span class="choice-num">③</span>
+          <span>TN-S-C</span>
+        </div>
+        <div class="choice" id="c-003-3" onclick="pick('003',3,this)">
+          <span class="choice-num">④</span>
+          <span>TT</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('003',1,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-003">
+        <div class="answer-badge">✅ 정답: ② TN-C-S</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">TN-C-S 계통: 계통의 일부분에서 PEN 도체를 사용하거나, 중성선(N)과 별도로 보호도체(PE)를 사용하는 방식</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 6</span>
+      <span class="stars" title="4점">★★★★☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">금속제 외함을 가진 저압의 기계기구로서 사람이 쉽게 접촉할 우려가 있는 곳에 시설하는 것에 전기를 공급하는 전로에 지락이 생겼을 때 자동적으로 차단하는 장치를 설치하여야 한다. 사용 전압이 몇 [V]를 초과하는 기계기구의 경우인가?</div>
+      <div class="choices" id="choices-006">
+        <div class="choice" id="c-006-0" onclick="pick('006',0,this)">
+          <span class="choice-num">①</span>
+          <span>25</span>
+        </div>
+        <div class="choice" id="c-006-1" onclick="pick('006',1,this)">
+          <span class="choice-num">②</span>
+          <span>30</span>
+        </div>
+        <div class="choice" id="c-006-2" onclick="pick('006',2,this)">
+          <span class="choice-num">③</span>
+          <span>50</span>
+        </div>
+        <div class="choice" id="c-006-3" onclick="pick('006',3,this)">
+          <span class="choice-num">④</span>
+          <span>60</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('006',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-006">
+        <div class="answer-badge">✅ 정답: ③ 50</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">누전 차단기의 시설 [KEC 211.2.4]
+
+전원의 자동차단에 의한 저압전로의 보호대책으로 누전 차단기를 설치해야 할 대상은 다음과 같다.
+
+금속제 외함을 가지는 사용전압 50[V]를 초과하는 저압의 기계기구로서 사람이 쉽게 접촉할 우려가 있는 곳에 시설하는 것에 전기를 공급하는 전로.
+
+다만, 다음의 어느 하나에 해당하는 경우에는 적용하지 않는다.
+
+- 기계기구를 발전소·변전소·개폐소 또는 이에 준하는 곳에 시설하는 경우
+
+- 기계기구를 건조한 곳에 시설하는 경우
+
+- 대지전압이 150 [V] 이하인 기계기구를 물기가 있는 곳 이외의 곳에 시설하는 경우
+
+- 이중절연구조의 기계기구를 시설하는 경우
+
+- 그 전로의 전원측에 절연변압기(2차 전압이 300 [V] 이하인 경우)를 시설하고 또한 그 절연변압기의 부하측의 전로에 접지하지 아니하는 경우
+
+- 기계기구가 고무·합성수지 기타 절연물로 피복된 경우
+
+- 기계기구가 유도전동기의 2차측 전로에 접속되는 것일 경우</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 9</span>
+      <span class="stars" title="2점">★★☆☆☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">IT 계통에서 지락 사고와 같은 1차 고장에 대해서 이를 감시하고 차단할 수 있는 보호장치를 설치하여야 한다. 이때 감시 및 보호장치로 잘못된 것은?</div>
+      <div class="choices" id="choices-009">
+        <div class="choice" id="c-009-0" onclick="pick('009',0,this)">
+          <span class="choice-num">①</span>
+          <span>절연감시장치</span>
+        </div>
+        <div class="choice" id="c-009-1" onclick="pick('009',1,this)">
+          <span class="choice-num">②</span>
+          <span>누전차단기</span>
+        </div>
+        <div class="choice" id="c-009-2" onclick="pick('009',2,this)">
+          <span class="choice-num">③</span>
+          <span>과전류보호장치</span>
+        </div>
+        <div class="choice" id="c-009-3" onclick="pick('009',3,this)">
+          <span class="choice-num">④</span>
+          <span>퓨즈</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('009',3,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-009">
+        <div class="answer-badge">✅ 정답: ④ 퓨즈</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">IT 계통 [KEC 211.2.7]
+
+① 절연감시장치 (음향 및 시각신호를 갖추어야 할 것.)
+
+⑤ 누설전류감시장치
+
+⑥ 절연고장점 검출장치
+
+② 과전류보호장치
+
+③ 누전차단기</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 12</span>
+      <span class="stars" title="3점">★★★☆☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">비도전성 장소에서 계통외도전부의 누설전류는 통상적인 사용상태에서 몇 [mA]를 초과하지 말아야 하는가?</div>
+      <div class="choices" id="choices-012">
+        <div class="choice" id="c-012-0" onclick="pick('012',0,this)">
+          <span class="choice-num">①</span>
+          <span>0.1</span>
+        </div>
+        <div class="choice" id="c-012-1" onclick="pick('012',1,this)">
+          <span class="choice-num">②</span>
+          <span>0.5</span>
+        </div>
+        <div class="choice" id="c-012-2" onclick="pick('012',2,this)">
+          <span class="choice-num">③</span>
+          <span>1</span>
+        </div>
+        <div class="choice" id="c-012-3" onclick="pick('012',3,this)">
+          <span class="choice-num">④</span>
+          <span>2</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('012',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-012">
+        <div class="answer-badge">✅ 정답: ③ 1</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">비도전선 장소의 보호대책 [KEC 211.9.1]
+
+계통외도전부의 절연 또는 절연 배치, 절연은 충분한 기계적 강도와 2 [kV] 이상의 시험전압에 건딜 수 있어야 하며, 누설전류는 통상적인 사용상태에서 1 [mA]를 초과하지 말아야 한다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 13</span>
+      <span class="stars" title="5점">★★★★★☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">비도전성 장소에서 노출도전부, 계통외도전부 전부 및 노출도전부 사이의 상대적 간격은 몇 [m] 이상으로 하여야 하는가?</div>
+      <div class="choices" id="choices-013">
+        <div class="choice" id="c-013-0" onclick="pick('013',0,this)">
+          <span class="choice-num">①</span>
+          <span>1</span>
+        </div>
+        <div class="choice" id="c-013-1" onclick="pick('013',1,this)">
+          <span class="choice-num">②</span>
+          <span>1.5</span>
+        </div>
+        <div class="choice" id="c-013-2" onclick="pick('013',2,this)">
+          <span class="choice-num">③</span>
+          <span>2</span>
+        </div>
+        <div class="choice" id="c-013-3" onclick="pick('013',3,this)">
+          <span class="choice-num">④</span>
+          <span>2.5</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('013',3,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-013">
+        <div class="answer-badge">✅ 정답: ④ 2.5</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">비도전선 장소의 보호대책 [KEC 211.9.1]
+
+노출 도전부, 계통외도전부 및 노출도전부 사이의 상대적 간격은 두 부분 사이의 거리가 2.5 [m] 이상으로 한다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 14</span>
+      <span class="stars" title="4점">★★★★☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">과전류차단기로 전압전로에 사용하는 산업용 배선차단기의 부동작전류와 동작전류로 적합한 것은?</div>
+      <div class="choices" id="choices-014">
+        <div class="choice" id="c-014-0" onclick="pick('014',0,this)">
+          <span class="choice-num">①</span>
+          <span>1.0배, 1.2배</span>
+        </div>
+        <div class="choice" id="c-014-1" onclick="pick('014',1,this)">
+          <span class="choice-num">②</span>
+          <span>1.05배, 1.3배</span>
+        </div>
+        <div class="choice" id="c-014-2" onclick="pick('014',2,this)">
+          <span class="choice-num">③</span>
+          <span>1.25배, 1.6배</span>
+        </div>
+        <div class="choice" id="c-014-3" onclick="pick('014',3,this)">
+          <span class="choice-num">④</span>
+          <span>1.3배, 1.8배</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('014',1,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-014">
+        <div class="answer-badge">✅ 정답: ② 1.05배, 1.3배</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">보호 장치의 특성 [KEC 212.3.4]
+
+과전류 트립 동작 시간 및 특성 (산업용 배선 차단기)
+
+정격 전류의 구분 / 시간 / 부동작전류 / 동작전류
+
+63 [A] 이하 / 60분 / 1.05배 / 1.3배
+
+63 [A] 초과 / 120분 / 1.05배 / 1.3배</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 15</span>
+      <span class="stars" title="4점">★★★★☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">과부하에 대해 케이블 및 전선을 보호하는 장치의 동작전류 I₂ (보호장치가 규약시간 이내에 유효하게 동작하는 것을 보장하는 전류)는 케이블의 허용 전류의 몇 배 이내에서 동작해야 하는가?</div>
+      <div class="choices" id="choices-015">
+        <div class="choice" id="c-015-0" onclick="pick('015',0,this)">
+          <span class="choice-num">①</span>
+          <span>1.1</span>
+        </div>
+        <div class="choice" id="c-015-1" onclick="pick('015',1,this)">
+          <span class="choice-num">②</span>
+          <span>1.13</span>
+        </div>
+        <div class="choice" id="c-015-2" onclick="pick('015',2,this)">
+          <span class="choice-num">③</span>
+          <span>1.45</span>
+        </div>
+        <div class="choice" id="c-015-3" onclick="pick('015',3,this)">
+          <span class="choice-num">④</span>
+          <span>1.6</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('015',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-015">
+        <div class="answer-badge">✅ 정답: ③ 1.45</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">과부하전류에 대한 보호 [KEC 212.4]
+
+과부하에 대해 케이블(전선)을 보호하는 장치의 동작특성은 다음의 조건을 충족해야 한다.
+
+IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
+
+여기서, IB: 회로의 설계 전류 / Iz: 케이블의 허용전류 / In: 보호 장치의 정격 전류 / I₂: 보호장치가 규약시간 이내에 유효하게 동작하는 것을 보장하는 전류</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 16</span>
+      <span class="stars" title="5점">★★★★★☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">저압 옥내간선에서 분기하여 전기사용기계기구에 이르는 저압 옥내전로에서 저압 옥내간선과의 분기점에서 전선의 길이가 몇 [m] 이하인 곳에 개폐기 및 과전류 차단기를 설치하여야 하는가?</div>
+      <div class="choices" id="choices-016">
+        <div class="choice" id="c-016-0" onclick="pick('016',0,this)">
+          <span class="choice-num">①</span>
+          <span>2</span>
+        </div>
+        <div class="choice" id="c-016-1" onclick="pick('016',1,this)">
+          <span class="choice-num">②</span>
+          <span>3</span>
+        </div>
+        <div class="choice" id="c-016-2" onclick="pick('016',2,this)">
+          <span class="choice-num">③</span>
+          <span>5</span>
+        </div>
+        <div class="choice" id="c-016-3" onclick="pick('016',3,this)">
+          <span class="choice-num">④</span>
+          <span>6</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('016',1,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-016">
+        <div class="answer-badge">✅ 정답: ② 3</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">과부하보호장치의 설치 위치 [KEC 212.4.2]
+
+분기회로의 보호장치는 분기회로의 분기점으로부터 3 [m] 까지 이동하여 설치할 수 있다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 18</span>
+      <span class="stars" title="6점">★★★★★★☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">옥내에 시설하는 전동기에 과부하 보호장치의 시설을 생략할 수 없는 경우는?</div>
+      <div class="choices" id="choices-018">
+        <div class="choice" id="c-018-0" onclick="pick('018',0,this)">
+          <span class="choice-num">①</span>
+          <span>전동기가 단상의 것으로 전원측 전로에 시설하는 과전류차단기의 정격전류가 16 [A] 이하인 경우</span>
+        </div>
+        <div class="choice" id="c-018-1" onclick="pick('018',1,this)">
+          <span class="choice-num">②</span>
+          <span>전동기가 단상의 것으로 전원측 전로에 시설하는 배선용 차단기의 정격전류가 20 [A] 이하인 경우</span>
+        </div>
+        <div class="choice" id="c-018-2" onclick="pick('018',2,this)">
+          <span class="choice-num">③</span>
+          <span>타인이 출입할 수 없고 전동기 운전 중 취급자가 상시 감시할 수 있는 위치에 시설하는 경우</span>
+        </div>
+        <div class="choice" id="c-018-3" onclick="pick('018',3,this)">
+          <span class="choice-num">④</span>
+          <span>전동기의 정격 출력이 0.75 [kW]인 전동기</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('018',3,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-018">
+        <div class="answer-badge">✅ 정답: ④ 전동기의 정격 출력이 0.75 [kW]인 전동기</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">저압전로 중의 전동기 보호용 과전류보호장치의 시설 [KEC 212.6.3]
+
+③ 옥내에 시설하는 전동기 (정격출력이 0.2[kW] 이하인 것을 제외)에는 전동기가 손상될 우려가 있는 과전류가 생겼을 때에 자동적으로 이를 저지하거나 이를 경보하는 장치를 하여야 한다.
+
+다만, 다음의 어느 하나에 해당하는 경우에는 그러하지 아니한다.
+
+⑤ 전동기를 운전 중 상시 취급자가 감시할 수 있는 위치에 시설하는 경우
+
+⑥ 전동기의 구조나 부하의 성질로 보아 전동기가 손상될 수 있는 과전류가 생길 우려가 없는 경우.
+
+⑥ 단상 전동기로서 그 전원측 전로에 시설하는 과전류차단기의 정격 전류가 16 [A] (배선 차단기는 20 [A]) 이하인 경우
+
+② 전동기의 정격 출력이 0.2 [kW] 이하인 경우</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 20</span>
+      <span class="stars" title="5점">★★★★★☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">옥내에 시설하는 전동기에는 과부하보호장치를 시설하여야 하는데 단상 전동기인 경우에 전원측 전로에 시설하는 과전류차단기의 정격전류가 몇 [A] 이하이면 과부하보호장치를 시설하지 않아도 되는가?</div>
+      <div class="choices" id="choices-020">
+        <div class="choice" id="c-020-0" onclick="pick('020',0,this)">
+          <span class="choice-num">①</span>
+          <span>10</span>
+        </div>
+        <div class="choice" id="c-020-1" onclick="pick('020',1,this)">
+          <span class="choice-num">②</span>
+          <span>16</span>
+        </div>
+        <div class="choice" id="c-020-2" onclick="pick('020',2,this)">
+          <span class="choice-num">③</span>
+          <span>30</span>
+        </div>
+        <div class="choice" id="c-020-3" onclick="pick('020',3,this)">
+          <span class="choice-num">④</span>
+          <span>50</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('020',1,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-020">
+        <div class="answer-badge">✅ 정답: ② 16</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">저압전로 중의 전동기 보호용 과전류보호장치의 시설 [KEC 212.6.3]
+
+③ 옥내에 시설하는 전동기 (정격출력이 0.2[kW] 이하인 것을 제외)에는 전동기가 손상될 우려가 있는 과전류가 생겼을 때에 자동적으로 이를 저지하거나 이를 경보하는 장치를 하여야 한다.
+
+다만, 다음의 어느 하나에 해당하는 경우에는 그러하지 아니한다.
+
+⑤ 전동기를 운전 중 상시 취급자가 감시할 수 있는 위치에 시설하는 경우
+
+⑥ 전동기의 구조나 부하의 성질로 보아 전동기가 손상될 수 있는 과전류가 생길 우려가 없는 경우.
+
+⑥ 단상 전동기로서 그 전원측 전로에 시설하는 과전류차단기의 정격 전류가 16 [A] (배선 차단기는 20 [A]) 이하인 경우
+
+② 전동기의 정격 출력이 0.2 [kW] 이하인 경우</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 23</span>
+      <span class="stars" title="2점">★★☆☆☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">저압 가공인입선이 그림과 같이 차량의 통행이 많은 도로를 횡단하고 있다. 노면상의 높이 (h)는 최소한 몇 [m] 이상으로 하여야 하는가?</div>
+      <div class="choices" id="choices-023">
+        <div class="choice" id="c-023-0" onclick="pick('023',0,this)">
+          <span class="choice-num">①</span>
+          <span>6</span>
+        </div>
+        <div class="choice" id="c-023-1" onclick="pick('023',1,this)">
+          <span class="choice-num">②</span>
+          <span>5.5</span>
+        </div>
+        <div class="choice" id="c-023-2" onclick="pick('023',2,this)">
+          <span class="choice-num">③</span>
+          <span>5</span>
+        </div>
+        <div class="choice" id="c-023-3" onclick="pick('023',3,this)">
+          <span class="choice-num">④</span>
+          <span>4</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('023',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-023">
+        <div class="answer-badge">✅ 정답: ③ 5</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">저압 인입선의 시설 [KEC 221.1.1]
+
+- 전선의 높이는 다음에 의할 것.
+
+▷ 도로를 횡단하는 경우 노면상 5 [m] (교통에 지장이 없을 경우 3 [m]) 이상
+
+▷ 철도 또는 궤도를 횡단하는 경우에는 레일면상 6.5 [m]
+
+▷ 횡단보도교 위에 시설하는 경우 노면상 3 [m]
+
+▷ 기타 상황에서는 지표상 4 [m] (교통에 지장이 없는 경우 2.5 [m]) 이상</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 24</span>
+      <span class="stars" title="4점">★★★★☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">저압 연접 인입선은 인입선에서 분기하는 점으로부터 몇 [m]를 초과하는 지역에 미치지 않도록 시설해야 하는가?</div>
+      <div class="choices" id="choices-024">
+        <div class="choice" id="c-024-0" onclick="pick('024',0,this)">
+          <span class="choice-num">①</span>
+          <span>60</span>
+        </div>
+        <div class="choice" id="c-024-1" onclick="pick('024',1,this)">
+          <span class="choice-num">②</span>
+          <span>80</span>
+        </div>
+        <div class="choice" id="c-024-2" onclick="pick('024',2,this)">
+          <span class="choice-num">③</span>
+          <span>100</span>
+        </div>
+        <div class="choice" id="c-024-3" onclick="pick('024',3,this)">
+          <span class="choice-num">④</span>
+          <span>120</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('024',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-024">
+        <div class="answer-badge">✅ 정답: ③ 100</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">저압 인입선의 시설 [KEC 221.1.1]
+
+② 연접 인입선의 시설 [KEC 221.1.2]
+
+저압 연접 (이웃 연결) 인입선은 다음에 따라 시설하여야 한다.
+
+⑤ 인입선에서 분기하는 점으로 부터 100 [m]를 초과하는 지역에 미치지 아니할 것. 전주
+
+⑥ 폭 5 [m]를 초과하는 도로를 횡단하지 아니할 것.
+
+⑦ 옥내를 통과하지 아니할 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 29</span>
+      <span class="stars" title="4점">★★★★☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">사용 전압이 400 [V] 이하인 저압 가공전선은 케이블이나 절연전선인 경우를 제외하고 인장강도가 3.43 [kN] 이상인 것 또는 지름 몇 [mm] 이상의 경동선이어야 하는가?</div>
+      <div class="choices" id="choices-029">
+        <div class="choice" id="c-029-0" onclick="pick('029',0,this)">
+          <span class="choice-num">①</span>
+          <span>1.2</span>
+        </div>
+        <div class="choice" id="c-029-1" onclick="pick('029',1,this)">
+          <span class="choice-num">②</span>
+          <span>2.6</span>
+        </div>
+        <div class="choice" id="c-029-2" onclick="pick('029',2,this)">
+          <span class="choice-num">③</span>
+          <span>3.2</span>
+        </div>
+        <div class="choice" id="c-029-3" onclick="pick('029',3,this)">
+          <span class="choice-num">④</span>
+          <span>4.0</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('029',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-029">
+        <div class="answer-badge">✅ 정답: ③ 3.2</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">저압 가공전선의 굵기 및 종류 [KEC 222.5]
+
+1. 저압 가공전선의 종류 및 굵기 [KEC 222.5]
+
+① 저압 가공전선에 사용되는 전선은 다음과 같다.
+
+⑤ 나전선 (중성선 또는 다중접지된 접지측 전선만을 사용) / ⑦ 절연전선 / ⑥ 다심형 전선 / ② 케이블
+
+② 저압 가공전선의 굵기는 다음과 같다.
+
+⑤ 사용전압이 400 [V] 이하인 저압 가공전선이상의 경동선
+
+- 인장강도 3.43 [kN] 이상 또는 지름 3.2 [mm] - 절연전선인 경우 인장강도 2.3 [kN] 이상 또는 지름 2.6 [mm] 이상의 경동선
+
+⑦ 사용전압이 400 [V] 초과인 저압 가공전선
+
+- 시가지 : 인장강도 8.01[kN] 이상 또는 지름 5 [mm] 이상의 경동선
+
+- 시가지 외 : 인장강도 5.26 [kN] 이상 또는 지름 4 [mm] 이상의 경동선
+
+③ 사용 전압이 400 [V] 초과인 저압 가공전선에는 인입용 비닐절연전선을 사용할 수 있다</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 30</span>
+      <span class="stars" title="4점">★★★★☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">시가지에서 400 [V] 이하의 저압 가공전선로에 사용하는 절연전선의 지름은 최소 몇 [mm] 이상의 것이어야 하는가?</div>
+      <div class="choices" id="choices-030">
+        <div class="choice" id="c-030-0" onclick="pick('030',0,this)">
+          <span class="choice-num">①</span>
+          <span>2.0</span>
+        </div>
+        <div class="choice" id="c-030-1" onclick="pick('030',1,this)">
+          <span class="choice-num">②</span>
+          <span>2.6</span>
+        </div>
+        <div class="choice" id="c-030-2" onclick="pick('030',2,this)">
+          <span class="choice-num">③</span>
+          <span>3.2</span>
+        </div>
+        <div class="choice" id="c-030-3" onclick="pick('030',3,this)">
+          <span class="choice-num">④</span>
+          <span>5.0</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('030',1,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-030">
+        <div class="answer-badge">✅ 정답: ② 2.6</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">저압 가공전선의 굵기 및 종류 [KEC 222.5]
+
+1. 저압 가공전선의 종류 및 굵기 [KEC 222.5]
+
+① 저압 가공전선에 사용되는 전선은 다음과 같다.
+
+⑤ 나전선 (중성선 또는 다중접지된 접지측 전선만을 사용) / ⑦ 절연전선 / ⑥ 다심형 전선 / ② 케이블
+
+② 저압 가공전선의 굵기는 다음과 같다.
+
+⑤ 사용전압이 400 [V] 이하인 저압 가공전선이상의 경동선
+
+- 인장강도 3.43 [kN] 이상 또는 지름 3.2 [mm] - 절연전선인 경우 인장강도 2.3 [kN] 이상 또는 지름 2.6 [mm] 이상의 경동선</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 32</span>
+      <span class="stars" title="4점">★★★★☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">저압 가공전선 또는 고압 가공전선이 도로를 횡단할 때 지표상 높이는 몇 [m] 이상으로 하여야 하는가? 단, 농로 기타 교통이 번잡하지 않은 도로 및 횡단보도교는 제외한다.</div>
+      <div class="choices" id="choices-032">
+        <div class="choice" id="c-032-0" onclick="pick('032',0,this)">
+          <span class="choice-num">①</span>
+          <span>4</span>
+        </div>
+        <div class="choice" id="c-032-1" onclick="pick('032',1,this)">
+          <span class="choice-num">②</span>
+          <span>5</span>
+        </div>
+        <div class="choice" id="c-032-2" onclick="pick('032',2,this)">
+          <span class="choice-num">③</span>
+          <span>6</span>
+        </div>
+        <div class="choice" id="c-032-3" onclick="pick('032',3,this)">
+          <span class="choice-num">④</span>
+          <span>7</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('032',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-032">
+        <div class="answer-badge">✅ 정답: ③ 6</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">고압 가공전선의 높이 [KEC 332.5]
+
+- 고압 가공전선의 높이는 다음에 따라야 한다.
+
+가. 도로를 횡단하는 경우 지표상 6 [m]
+
+나. 철도 또는 궤도를 횡단하는 경우에는 레일면상 6.5 [m]
+
+다. 횡단보도교 위에 시설하는 경우 노면상 3.5 [m]
+
+라. 가~다 까지 이외의 경우에는 지표상 5 [m]
+
+저압 가공전선의 높이 [KEC 222.7]
+
+▷ 도로를 횡단하는 경우 노면상 5[m] (교통에 지장이 없을 경우 3[m]) 이상
+
+▷ 철도 또는 궤도를 횡단하는 경우에는 레일면상 6.5 [m]
+
+▷ 횡단보도교 위에 시설하는 경우 노면상 3 [m]
+
+▷ 기타 상황에서는 지표상 4 [m] (교통에 지장이 없는 경우 2.5 [m]) 이상</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 41</span>
+      <span class="stars" title="1점">★☆☆☆☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">저압 가공전선과 식물이 상호 접촉되지 않도록 이격시키는 기준으로 옳은 것은?</div>
+      <div class="choices" id="choices-041">
+        <div class="choice" id="c-041-0" onclick="pick('041',0,this)">
+          <span class="choice-num">①</span>
+          <span>이격 거리는 최소 50 [cm] 이상 떨어져 시설하여야 한다.</span>
+        </div>
+        <div class="choice" id="c-041-1" onclick="pick('041',1,this)">
+          <span class="choice-num">②</span>
+          <span>상시 불고 있는 바람 등에 의하여 접촉하지 않도록 시설하여야 한다.</span>
+        </div>
+        <div class="choice" id="c-041-2" onclick="pick('041',2,this)">
+          <span class="choice-num">③</span>
+          <span>저압 가공전선은 반드시 방호구에 넣어 시설하여야 한다.</span>
+        </div>
+        <div class="choice" id="c-041-3" onclick="pick('041',3,this)">
+          <span class="choice-num">④</span>
+          <span>트리와이어 (treewire)를 사용하여 시설하여야 한다.</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('041',1,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-041">
+        <div class="answer-badge">✅ 정답: ② 상시 불고 있는 바람 등에 의하여 접촉하지 않도록 시설하여야 한다.</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">저압 가공전선과 식물의 이격 거리 [KEC 222.19]
+
+① 저압 가공전선은 상시 부는 바람 등에 의하여 식물에 접촉하지 않도록 시설하여야 한다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 42</span>
+      <span class="stars" title="4점">★★★★☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">농사용 저압 가공전선로의 최대 경간은 몇 [m] 인가?</div>
+      <div class="choices" id="choices-042">
+        <div class="choice" id="c-042-0" onclick="pick('042',0,this)">
+          <span class="choice-num">①</span>
+          <span>30</span>
+        </div>
+        <div class="choice" id="c-042-1" onclick="pick('042',1,this)">
+          <span class="choice-num">②</span>
+          <span>60</span>
+        </div>
+        <div class="choice" id="c-042-2" onclick="pick('042',2,this)">
+          <span class="choice-num">③</span>
+          <span>50</span>
+        </div>
+        <div class="choice" id="c-042-3" onclick="pick('042',3,this)">
+          <span class="choice-num">④</span>
+          <span>100</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="0" onclick="toggle('042',0,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-042">
+        <div class="answer-badge">✅ 정답: ① 30</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">농사용 저압 가공전선로의 시설 [KEC 222.22]
+
+농사용 전등·전동기 등에 공급하는 저압 가공전선로는 다음에 따라 시설한다.
+
+① 사용 전압은 저압일 것.
+
+② 저압 가공전선은 인장강도 1.38 [kN] 이상의 것 또는 지름 2 [mm] 이상의 경동선일 것.
+
+③ 저압 가공전선의 지표상 높이는 3.5 [m] 이상일 것. (사람의 출입이 없을 경우 3 [m] 이상)
+
+④ 목주의 굵기는 말구지름 0.09 [m] 이상일 것.
+
+⑤ 전선로의 지지점 간 거리는 30 [m] 이하일 것.
+
+⑥ 다른 전선로에 접속하는 곳 가까이에 그 저압 가공 전선로 전용의 개폐기 및 과전류 차단기를 각 극 (과전류차단기는 중성극을 제외한다)에 시설할 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 44</span>
+      <span class="stars" title="5점">★★★★★☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">방직공장의 구내 도로에 220 [V] 조명등용 가공전선로를 시설하고자 한다. 전선로의 경간은 몇 [m] 이하이어야 하는가?</div>
+      <div class="choices" id="choices-044">
+        <div class="choice" id="c-044-0" onclick="pick('044',0,this)">
+          <span class="choice-num">①</span>
+          <span>20</span>
+        </div>
+        <div class="choice" id="c-044-1" onclick="pick('044',1,this)">
+          <span class="choice-num">②</span>
+          <span>30</span>
+        </div>
+        <div class="choice" id="c-044-2" onclick="pick('044',2,this)">
+          <span class="choice-num">③</span>
+          <span>40</span>
+        </div>
+        <div class="choice" id="c-044-3" onclick="pick('044',3,this)">
+          <span class="choice-num">④</span>
+          <span>50</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('044',1,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-044">
+        <div class="answer-badge">✅ 정답: ② 30</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">구내에 시설하는 저압 가공전선로 [KEC 222.23]
+
+구내에만 시설하는 사용전압 400 V 이하 저압 가공전선로 전선이 건조물 위에 시설 시, 도로(폭 5 m 초과)·횡단보도교·철도·궤도·삭도, 가공 약전류전선 등, 안테나·다른 가공 전선/전차선과 교차 시설 시 이들과 수평거리로 그 저압 가공전선로 지지물 높이의 거리 내 접근하지 않을 시만, 다음에 따라 시설 시 222.5 (저압 가공전선의 굵기 및 종류) 및 222.18(저압 가공전선과 다른 시설물의 접근 또는 교차)의 1~3 적용 제외 허용
+
+① 전선은 지름 2 [mm] 이상의 경동선의 절연전선 (단, 경간이 10 [m] 이하인 경우 4 [㎜] 이상의 연동선의 절연전선을 사용)
+
+② 전선로의 경간은 30 [m] 이하일 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 47</span>
+      <span class="stars" title="4점">★★★★☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">저압 옥내배선의 사용전압이 220 [V]인 전광표시장치, 기타 이와 유사한 장치 또는 제어회로 등을 금속관공사에 의하여 시공하였다. 여기에 사용되는 배선은 지름 몇 [㎜] 이상의 연동선을 사용하여야 하는가?</div>
+      <div class="choices" id="choices-047">
+        <div class="choice" id="c-047-0" onclick="pick('047',0,this)">
+          <span class="choice-num">①</span>
+          <span>1.5</span>
+        </div>
+        <div class="choice" id="c-047-1" onclick="pick('047',1,this)">
+          <span class="choice-num">②</span>
+          <span>2.0</span>
+        </div>
+        <div class="choice" id="c-047-2" onclick="pick('047',2,this)">
+          <span class="choice-num">③</span>
+          <span>5.0</span>
+        </div>
+        <div class="choice" id="c-047-3" onclick="pick('047',3,this)">
+          <span class="choice-num">④</span>
+          <span>5.5</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="0" onclick="toggle('047',0,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-047">
+        <div class="answer-badge">✅ 정답: ① 1.5</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">저압 옥내배선의 사용전선 및 중성선의 굵기 [KEC 231.3]
+
+1. 저압 옥내배선의 사용전선 [KEC 231.3.1]
+
+① 단면적 2.5 [㎜] 이상의 연동선 또는 이와 동등 이상의 강도 및 굵기의 것.
+
+② 옥내배선의 사용 전압 400 [V] 이하인 경우로 다음 중 하나에 해당하는 경우 ①을 적용하지 않는다.
+
+⑤ 전광표시장치, 출퇴근 표시등, 제어 회로 등에 사용하는 배선의 경우
+
+- 단면적 1.5 [㎜] 이상의 연동선
+
+- 합성수지관배선, 금속관배선, 금속몰드배선, 플로어덕트배선, 셀룰러덕트배선에 의하여 시설하는 경우.
+
+⑦ 전광표시장치, 출퇴표시등, 제어 회로 등의 배선
+
+- 단면적 0.75 [㎜] 이상인 다심케이블 또는 다심캡타이어케이블
+
+- 과전류가 생겼을 때에 자동적으로 전로에서 차단하는 장치를 시설
+
+⑤ 단면적 0.75 [㎜] 이상인 코드 또는 캡타이어케이블을 사용하는 경우
+
+② 리프트케이블을 사용하는 경우</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 50</span>
+      <span class="stars" title="6점">★★★★★★☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">옥내에 시설하는 저압 전선으로 나전선을 절대로 사용할 수 없는 것은?</div>
+      <div class="choices" id="choices-050">
+        <div class="choice" id="c-050-0" onclick="pick('050',0,this)">
+          <span class="choice-num">①</span>
+          <span>애자사용공사의 전기로용 전선</span>
+        </div>
+        <div class="choice" id="c-050-1" onclick="pick('050',1,this)">
+          <span class="choice-num">②</span>
+          <span>유희용 전차에 전기공급을 위한 접촉 전선</span>
+        </div>
+        <div class="choice" id="c-050-2" onclick="pick('050',2,this)">
+          <span class="choice-num">③</span>
+          <span>제분 공장의 전선</span>
+        </div>
+        <div class="choice" id="c-050-3" onclick="pick('050',3,this)">
+          <span class="choice-num">④</span>
+          <span>애자사용공사의 전선피복절연물의 부식하는 장소에 시설하는 전선</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('050',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-050">
+        <div class="answer-badge">✅ 정답: ③ 제분 공장의 전선</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">나전선의 사용제한 [KEC 231.4]
+
+옥내에 시설하는 저압 전선에는 다음 사항 외에는 나전선을 사용할 수 없다.
+
+① 애자 사용배선에 의하여 전개된 곳에 다음의 전선을 시설하는 경우
+
+⑤ 전기로용 전선 ⑦ 전선의 피복 절연물이 부식하는 장소에 시설하는 전선
+
+⑥ 취급자 이외의 자가 출입할 수 없도록 설비한 장소에 시설하는 전선
+
+② 버스덕트배선에 의하여 시설하는 경우 ③ 라이팅덕트배선에 의하여 시설하는 경우
+
+④ 저압 접촉전선 및 유희용 전차</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 53</span>
+      <span class="stars" title="6점">★★★★★★☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">백열전등 또는 방전등에 전기를 공급하는 옥내전로의 대지전압은 몇 [V] 이하이어야 하는가</div>
+      <div class="choices" id="choices-053">
+        <div class="choice" id="c-053-0" onclick="pick('053',0,this)">
+          <span class="choice-num">①</span>
+          <span>100</span>
+        </div>
+        <div class="choice" id="c-053-1" onclick="pick('053',1,this)">
+          <span class="choice-num">②</span>
+          <span>150</span>
+        </div>
+        <div class="choice" id="c-053-2" onclick="pick('053',2,this)">
+          <span class="choice-num">③</span>
+          <span>200</span>
+        </div>
+        <div class="choice" id="c-053-3" onclick="pick('053',3,this)">
+          <span class="choice-num">④</span>
+          <span>300</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('053',3,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-053">
+        <div class="answer-badge">✅ 정답: ④ 300</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">옥내 전로의 대지전압 제한 [KEC 231.6]
+
+1. 백열등 또는 방전등에 전기를 공급하는 옥내의 전로의 대지 전압은 300 [V] 이하여야 하며, 다음에 따라 시설하여야 한다.
+
+(예외, 대지전압 150 [V] 이하의 전로인 경우)
+
+① 백열전등 또는 방전등 및 이에 부속하는 전선은 사람이 접촉할 우려가 없도록 시설할 것.
+
+② 백열전등 또는 방전등용 안정기는 저압 옥내배선과 직접 접촉하여 시설할 것.
+
+③ 백열전등의 전구 소켓은 키나 그 밖의 점멸기구가 없는 것이이야 한다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 56</span>
+      <span class="stars" title="5점">★★★★★☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">수용가설비에서 저압으로 수전하는 조명설비의 전압 강하는 몇 [%] 이하이여야 하는가?</div>
+      <div class="choices" id="choices-056">
+        <div class="choice" id="c-056-0" onclick="pick('056',0,this)">
+          <span class="choice-num">①</span>
+          <span>1</span>
+        </div>
+        <div class="choice" id="c-056-1" onclick="pick('056',1,this)">
+          <span class="choice-num">②</span>
+          <span>3</span>
+        </div>
+        <div class="choice" id="c-056-2" onclick="pick('056',2,this)">
+          <span class="choice-num">③</span>
+          <span>6</span>
+        </div>
+        <div class="choice" id="c-056-3" onclick="pick('056',3,this)">
+          <span class="choice-num">④</span>
+          <span>8</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('056',1,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-056">
+        <div class="answer-badge">✅ 정답: ② 3</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">수용가 설비에서의 전압 강하 [KEC 232.3.9]
+
+⑤ 다른 조건을 고려하지 않는다면 수용가 설비의 인입구로부터 기기까지의 전압 강하는 다음 표의 값 이하이이어야 한다.
+
+[수용가설비의 전압강하]
+
+설비의 유형 / 조명 [%] / 기타 [%]
+
+저압으로 수전하는 경우 / 3 / 5
+
+고압 이상으로 수전하는 경우 / 6 / 8
+
+* 사용자의 배선설비가 100 [m]를 넘는 부분의 전압강하는 미터 당 0.005% 증가할 수 있으나 이러한 증가분은 0.5%를 넘지 않을 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 57</span>
+      <span class="stars" title="6점">★★★★★★☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">저압 옥내배선을 합성수지관공사에 의하여 시설하는 경우 사용할 수 있는 연선 (동선)의 지름은 최대 몇 [㎜] 인가?</div>
+      <div class="choices" id="choices-057">
+        <div class="choice" id="c-057-0" onclick="pick('057',0,this)">
+          <span class="choice-num">①</span>
+          <span>2.5</span>
+        </div>
+        <div class="choice" id="c-057-1" onclick="pick('057',1,this)">
+          <span class="choice-num">②</span>
+          <span>6</span>
+        </div>
+        <div class="choice" id="c-057-2" onclick="pick('057',2,this)">
+          <span class="choice-num">③</span>
+          <span>10</span>
+        </div>
+        <div class="choice" id="c-057-3" onclick="pick('057',3,this)">
+          <span class="choice-num">④</span>
+          <span>16</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('057',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-057">
+        <div class="answer-badge">✅ 정답: ③ 10</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">합성수지관공사 [KEC 232.11]
+
+① 시설 조건
+
+⑤ 전선은 절연전선 (옥외용 비닐절연전선은 제외) 일 것.
+
+⑦ 전선은 연선일 것. 다만, 다음의 것은 적용하지 않는다.
+
+- 짧고 가는 합성수지관에 넣은 것.
+
+- 단면적 10 [㎜] (알루미늄은 단면적 16 [㎜]) 이하일 것.
+
+⑥ 전선은 합성수지관 안에서 접속점이 없도록 할 것.
+
+⑦ 중량물의 압력 또는 기계적 충격을 받을 우려가 없도록 시설할 것.
+
+⑦ 합성수지관의 지지점 간의 거리는 1.5 [m] 이하일 것.
+
+⑦ 관 상호 간 및 박스와는 관을 삽입하는 깊이를 관의 바깥지름의 1.2배 (접착제를 사용 시 0.8배)로 할 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 62</span>
+      <span class="stars" title="6점">★★★★★★☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">금속관공사를 콘크리트에 매설하여 시행하는 경우 관의 두께는 몇 [mm] 이상이어야 하는가?</div>
+      <div class="choices" id="choices-062">
+        <div class="choice" id="c-062-0" onclick="pick('062',0,this)">
+          <span class="choice-num">①</span>
+          <span>1.0</span>
+        </div>
+        <div class="choice" id="c-062-1" onclick="pick('062',1,this)">
+          <span class="choice-num">②</span>
+          <span>1.2</span>
+        </div>
+        <div class="choice" id="c-062-2" onclick="pick('062',2,this)">
+          <span class="choice-num">③</span>
+          <span>1.4</span>
+        </div>
+        <div class="choice" id="c-062-3" onclick="pick('062',3,this)">
+          <span class="choice-num">④</span>
+          <span>1.6</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('062',1,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-062">
+        <div class="answer-badge">✅ 정답: ② 1.2</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">금속관공사 [KEC 232.12]
+
+① 시설 조건
+
+⑤ 전선은 절연전선 (옥외용 비닐절연전선은 제외) 일 것.
+
+⑦ 전선은 연선일 것. 다만, 다음의 것은 적용하지 않는다.
+
+- 짧고 가는 금속관에 넣은 것.
+
+- 단면적 10 [㎜] (알루미늄은 단면적 16 [㎜]) 이하일 것.
+
+② 금속관 및 부속품의 선정
+
+⑥ 관의 두께는 다음에 의할 것.
+
+- 콘크리트에 매설하는 것은 1.2 [mm] 이상
+
+- 콘크리트에 매설하지 않는 경우 1 [mm] 이상 (이음매가 없는 길이 4 [m] 이하인 것을 건조하고 전개된 곳에 시설하는 경우에는 0.5 [mm] 이상)
+
+⑥ 관의 끝부분 및 안쪽 면은 전선의 피복을 손상하지 아니하도록 매끈한 것일 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 63</span>
+      <span class="stars" title="5점">★★★★★☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">옥내 배선의 사용 전압은 220 [V] 인 경우에 이를 금속관공사에 의하여 시설하려고 한다. 다음 중 옥내배선의 시설로서 옳은 것은?</div>
+      <div class="choices" id="choices-063">
+        <div class="choice" id="c-063-0" onclick="pick('063',0,this)">
+          <span class="choice-num">①</span>
+          <span>전선으로는 단면적 6 [㎜]의 연선이이어야 한다.</span>
+        </div>
+        <div class="choice" id="c-063-1" onclick="pick('063',1,this)">
+          <span class="choice-num">②</span>
+          <span>전선은 옥외용 비닐절연전선을 사용하였다.</span>
+        </div>
+        <div class="choice" id="c-063-2" onclick="pick('063',2,this)">
+          <span class="choice-num">③</span>
+          <span>콘크리트에 매설하는 전선관의 두께는 1.0 [mm]를 사용하였다.</span>
+        </div>
+        <div class="choice" id="c-063-3" onclick="pick('063',3,this)">
+          <span class="choice-num">④</span>
+          <span>전선은 금속관 안에서 접속점이 없도록 하였다.</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('063',3,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-063">
+        <div class="answer-badge">✅ 정답: ④ 전선은 금속관 안에서 접속점이 없도록 하였다.</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">금속관공사 [KEC 232.12]
+
+① 시설 조건
+
+⑤ 전선은 절연전선 (옥외용 비닐절연전선은 제외) 일 것.
+
+⑦ 전선은 연선일 것. 다만, 다음의 것은 적용하지 않는다.
+
+- 짧고 가는 금속관에 넣은 것. - 단면적 10 [㎜] (알루미늄은 단면적 16 [㎜]) 이하일 것.
+
+⑦ 전선은 금속관 안에서 접속점이 없도록 할 것.
+
+② 금속관 및 부속품의 선정
+
+⑥ 관의 두께는 다음에 의할 것.
+
+- 콘크리트에 매설하는 것은 1.2 [mm] 이상
+
+- 콘크리트에 매설하지 않는 경우 1 [mm] 이상 (이음매가 없는 길이 4 [m] 이하인 것을 건조하고 전개된 곳에 시설하는 경우에는 0.5 [mm] 이상)
+
+⑦ 관의 끝부분 및 안쪽 면은 전선의 피복을 손상하지 아니하도록 매끈한 것일 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 65</span>
+      <span class="stars" title="2점">★★☆☆☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">금속관공사에서 절연 부싱을 사용하는 가장 주된 목적은?</div>
+      <div class="choices" id="choices-065">
+        <div class="choice" id="c-065-0" onclick="pick('065',0,this)">
+          <span class="choice-num">①</span>
+          <span>관의 끝이 터지는 것을 방지.</span>
+        </div>
+        <div class="choice" id="c-065-1" onclick="pick('065',1,this)">
+          <span class="choice-num">②</span>
+          <span>관의 단구에서 조영재의 접촉 방지.</span>
+        </div>
+        <div class="choice" id="c-065-2" onclick="pick('065',2,this)">
+          <span class="choice-num">③</span>
+          <span>관 내 해충 및 이물질 출입 방지.</span>
+        </div>
+        <div class="choice" id="c-065-3" onclick="pick('065',3,this)">
+          <span class="choice-num">④</span>
+          <span>관의 단구에서 전선 피복의 손상 방지</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('065',3,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-065">
+        <div class="answer-badge">✅ 정답: ④ 관의 단구에서 전선 피복의 손상 방지</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">금속관공사 [KEC 232.12]
+
+③ 금속관 및 부속품의 시설
+
+⑤ 관 상호 간 및 관과 박스 기타의 부속품과는 전기적으로 완전하게 접속할 것.
+
+⑦ 관의 끝부분에는 전선의 피복을 손상하지 아니하도록 부싱을 사용할 것. 다만 금속관공사로부터 애자사용공사로 옮기는경우 그 부분의 관의 끝 부분에서 절연부싱 또는 이와 유사한 것을 사용할 것.
+
+⑦ 습기 또는 물기가 있는 장소에 시설하는 경우에는 방습장치를 할 것.
+
+⑦ 금속관에는 접지공사를 할 것.
+
+⑦ 400 [V] 이하로서 다음의 경우 접지공사가 생략 가능하다.
+
+- 관의 길이가 4 [m] 이하인 것을 건조한 장소에 시설하는 경우
+
+- 옥내배선의 사용전압이 직류 300 [V] 또는 교류 대지전압 150 [V] 이하로서 그 전선을 넣는 관의 깊이가 8 [m] 이하인 것을 사람이 쉽게 접촉할 우려가 없도록 시설하는 경우 또는 건조한 장소에 시설하는 경우</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 69</span>
+      <span class="stars" title="5점">★★★★★☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">저압 옥내배선을 가요전선관공사에 의해 시공하고자 한다. 이 가요전선관에 설치할 전선의 단면적은 몇 [㎜] 이어야 하는가?</div>
+      <div class="choices" id="choices-069">
+        <div class="choice" id="c-069-0" onclick="pick('069',0,this)">
+          <span class="choice-num">①</span>
+          <span>2</span>
+        </div>
+        <div class="choice" id="c-069-1" onclick="pick('069',1,this)">
+          <span class="choice-num">②</span>
+          <span>4</span>
+        </div>
+        <div class="choice" id="c-069-2" onclick="pick('069',2,this)">
+          <span class="choice-num">③</span>
+          <span>6</span>
+        </div>
+        <div class="choice" id="c-069-3" onclick="pick('069',3,this)">
+          <span class="choice-num">④</span>
+          <span>10</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('069',3,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-069">
+        <div class="answer-badge">✅ 정답: ④ 10</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">금속제 가요전선관공사 [KEC 232.13]
+
+① 시설 조건
+
+⑤ 전선은 절연전선 (옥외용 비닐절연전선은 제외) 일 것.
+
+⑦ 전선은 연선일 것. 다만, 단면적 10 [㎜] (알루미늄은 단면적 16 [㎜]) 이하에는 적용하지 않는다.
+
+⑦ 가요전선관 안에는 전선에 접속점이 없도록 할 것.
+
+② 가요전선관은 2종 금속제 가요 전선관일 것.
+
+⑥ 전개된 장소 또는 점검할 수 있는 은폐된 장소로 400 [V] 초과인 전동기에 접속하는 부분에는 1종 가요전선관을 사용
+
+⑦ 습기 또는 물기가 많은 장소에는 비닐 피복 1종 가요전선관을 사용</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 72</span>
+      <span class="stars" title="6점">★★★★★★☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">저압 옥내배선의 간선 및 분기회로의 전선을 금속덕트공사로 하는 경우 덕트에 넣는 절연전선의 단면적의 합계는 덕트 내부 단면적의 몇 [%] 이하로 하여야 하는가?</div>
+      <div class="choices" id="choices-072">
+        <div class="choice" id="c-072-0" onclick="pick('072',0,this)">
+          <span class="choice-num">①</span>
+          <span>20</span>
+        </div>
+        <div class="choice" id="c-072-1" onclick="pick('072',1,this)">
+          <span class="choice-num">②</span>
+          <span>30</span>
+        </div>
+        <div class="choice" id="c-072-2" onclick="pick('072',2,this)">
+          <span class="choice-num">③</span>
+          <span>40</span>
+        </div>
+        <div class="choice" id="c-072-3" onclick="pick('072',3,this)">
+          <span class="choice-num">④</span>
+          <span>50</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="0" onclick="toggle('072',0,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-072">
+        <div class="answer-badge">✅ 정답: ① 20</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">금속덕트공사 [KEC 232.31]
+
+① 시설조건
+
+⑥ 전선은 절연전선 (옥외용 비닐절연전선은 제외한다) 일 것.
+
+⑦ 금속덕트에 넣은 전선 및 배선의 단면적 (절연피복의 단면적을 포함)의 합계
+
+- 전선의 경우 덕트 내부 단면적의 20 [%] 이하일 것.
+
+- 전광표시장치, 출퇴표시등, 제어회로 등의 배선만을 넣은 경우 덕트 내부 단면적의 50 [%] 이하일 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 73</span>
+      <span class="stars" title="5점">★★★★★☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">제어회로용 절연전선을 금속덕트공사에 의하여 시설하고자 한다. 금속덕트공사에 넣는 전선의 단면적은 덕트 내부 단면적의 몇 [%]까지 넣을 수 있는가?</div>
+      <div class="choices" id="choices-073">
+        <div class="choice" id="c-073-0" onclick="pick('073',0,this)">
+          <span class="choice-num">①</span>
+          <span>20</span>
+        </div>
+        <div class="choice" id="c-073-1" onclick="pick('073',1,this)">
+          <span class="choice-num">②</span>
+          <span>30</span>
+        </div>
+        <div class="choice" id="c-073-2" onclick="pick('073',2,this)">
+          <span class="choice-num">③</span>
+          <span>40</span>
+        </div>
+        <div class="choice" id="c-073-3" onclick="pick('073',3,this)">
+          <span class="choice-num">④</span>
+          <span>50</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('073',3,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-073">
+        <div class="answer-badge">✅ 정답: ④ 50</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">금속덕트공사 [KEC 232.31]
+
+① 시설조건
+
+⑥ 전선은 절연전선 (옥외용 비닐절연전선은 제외한다) 일 것.
+
+⑦ 금속덕트에 넣은 전선 및 배선의 단면적 (절연피복의 단면적을 포함)의 합계
+
+- 전선의 경우 덕트 내부 단면적의 20 [%] 이하일 것.
+
+- 전광표시장치, 출퇴표시등, 제어회로 등의 배선만을 넣은 경우 덕트 내부 단면적의 50 [%] 이하일 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 74</span>
+      <span class="stars" title="4점">★★★★☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">금속덕트공사에 의한 저압 옥내배선공사 중 시설 기준에 적합하지 않은 것은?</div>
+      <div class="choices" id="choices-074">
+        <div class="choice" id="c-074-0" onclick="pick('074',0,this)">
+          <span class="choice-num">①</span>
+          <span>금속덕트에 넣은 전선의 단면적의 합계가 내부 단면적의 20 [%] 이하가 되게 하였다.</span>
+        </div>
+        <div class="choice" id="c-074-1" onclick="pick('074',1,this)">
+          <span class="choice-num">②</span>
+          <span>덕트 상호 및 덕트와 금속관과는 전기적으로 완전하게 접속하였다.</span>
+        </div>
+        <div class="choice" id="c-074-2" onclick="pick('074',2,this)">
+          <span class="choice-num">③</span>
+          <span>덕트를 조영재에 붙이는 경우 덕트의 지지점 간의 거리를 4 [m] 이하로 견고하게 붙였다.</span>
+        </div>
+        <div class="choice" id="c-074-3" onclick="pick('074',3,this)">
+          <span class="choice-num">④</span>
+          <span>저압 옥내배선의 사용전압이 400 [V] 미만인 경우에 덕트에는 제3종 접지공사를 한다.</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('074',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-074">
+        <div class="answer-badge">✅ 정답: ③ 덕트를 조영재에 붙이는 경우 덕트의 지지점 간의 거리를 4 [m] 이하로 견고하게 붙였다.</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">금속덕트공사 [KEC 232.31]
+
+① 시설조건
+
+⑦ 금속덕트에 넣은 전선 및 배선의 단면적 (절연피복의 단면적을 포함)의 합계
+
+- 전선의 경우 덕트 내부 단면적의 20 [%] 이하일 것.
+
+- 전광표시장치, 출퇴표시등, 제어회로 등의 배선만을 넣은 경우 덕트 내부 단면적의 50 [%] 이하일 것.
+
+⑦ 금속덕트 안에는 전선의 접속점이 없도록 할 것. (예외, 전선이 분기할 때 그 접속점을 쉽게 점검할 수 있는 경우)
+
+⑦ 폭이 40 [mm] 이상, 두께가 12 [mm] 이상인 철판 또는 동등 이상의 기계적 강도를 가지는 금속제의 것으로 견고하게 제작한 것일 것.
+
+⑦ 안쪽 면은 전선의 피복을 손상시키는 돌기가 없는 것일 것.
+
+⑦ 덕트의 지지점 간의 거리를 3 [m] 이하로 할 것.
+
+(취급자 이외의 자가 출입할 수 없는 곳에서 수직으로 시설할 경우 6 [m] 이하</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 80</span>
+      <span class="stars" title="5점">★★★★★☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">애자사용공사에 의한 저압 옥내배선 시 전선 상호 간의 간격은 몇 [m] 이상이어야 하는가?</div>
+      <div class="choices" id="choices-080">
+        <div class="choice" id="c-080-0" onclick="pick('080',0,this)">
+          <span class="choice-num">①</span>
+          <span>0.02</span>
+        </div>
+        <div class="choice" id="c-080-1" onclick="pick('080',1,this)">
+          <span class="choice-num">②</span>
+          <span>0.04</span>
+        </div>
+        <div class="choice" id="c-080-2" onclick="pick('080',2,this)">
+          <span class="choice-num">③</span>
+          <span>0.06</span>
+        </div>
+        <div class="choice" id="c-080-3" onclick="pick('080',3,this)">
+          <span class="choice-num">④</span>
+          <span>0.08</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('080',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-080">
+        <div class="answer-badge">✅ 정답: ③ 0.06</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">애자공사 [KEC 232.56]
+
+1. 시설 조건
+
+① 전선은 다음의 경우 이외에는 절연전선 (옥외용 및 인입용 비닐절연전선 제외)일 것.
+
+⑥ 전기로용 전선 ⑦ 전선의 피복 절연물이 부식하는 장소에 시설하는 전선
+
+⑥ 취급자 이외의 자가 출입할 수 없도록 설비한 장소에 시설하는 전선
+
+② 전선 상호 간의 간격은 0.06 [m] 이상일 것.
+
+③ 전선과 조영재 사이의 이격 거리
+
+⑥ 사용 전압이 400 [V] 이하인 경우에는 25 [mm] 이상
+
+⑦ 400 [V] 초과인 경우에는 45 [mm] 이상일 것. (건조한 장소에 시설하는 경우에는 25 [mm])</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 93</span>
+      <span class="stars" title="6점">★★★★★★☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">샤워시설이 있는 욕실 등 인체가 물에 젖어 있는 상태에서 전기를 사용하는 장소에 콘센트를 시설할 경우 인체감전보호용 누전 차단기의 감도전류는 몇 [mA] 이하인가?</div>
+      <div class="choices" id="choices-093">
+        <div class="choice" id="c-093-0" onclick="pick('093',0,this)">
+          <span class="choice-num">①</span>
+          <span>5</span>
+        </div>
+        <div class="choice" id="c-093-1" onclick="pick('093',1,this)">
+          <span class="choice-num">②</span>
+          <span>10</span>
+        </div>
+        <div class="choice" id="c-093-2" onclick="pick('093',2,this)">
+          <span class="choice-num">③</span>
+          <span>15</span>
+        </div>
+        <div class="choice" id="c-093-3" onclick="pick('093',3,this)">
+          <span class="choice-num">④</span>
+          <span>30</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('093',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-093">
+        <div class="answer-badge">✅ 정답: ③ 15</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">콘센트의 시설 [KEC 234.5]
+
+1. 노출형 콘센트는 기둥과 같은 내구성이 있는 조영재에 견고하게 부착할 것.
+
+2. 욕조나 샤워시설이 있는 욕실 또는 화장실 등 인체가 물에 젖어있는 상태에서 전기를 사용하는 장소에 콘센트를 시설하는 경우.
+
+① 인체감전보호 누전차단기 (정격감도전류 15[mA] 이하, 동작시간 0.03초 이하의 전류동작형의 것에 한한다.)
+
+또는 절연변압기 (정격용량 3 [kVA] 이하인 것에 한한다.)로 보호된 전로에 접속하거나, 인체감전보호용 누전차단기가 부착된 콘센트를 시설하여야 한다.
+
+② 콘센트는 접지극이 있는 방적형 콘센트를 사용하고 접지를 할 것.
+
+3. 습기가 많은 장소 또는 수분이 있는 장소에 시설하는 콘센트 및 기계기구용 콘센트는 접지용 단자가 있는 것을 사용하여 접지하고 방습장치를 시설할 것.
+
+4. 주택의 옥내 전로에는 접지극이 있는 콘센트를 사용하여 접지할 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 96</span>
+      <span class="stars" title="7점">★★★★★★★</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">일반주택 및 아파트 각 호실의 현관등으로 백열전등을 설치할 때에는 타임 스위치를 설치하여 몇 분 이내에 소등되는 것이어야 하는가?</div>
+      <div class="choices" id="choices-096">
+        <div class="choice" id="c-096-0" onclick="pick('096',0,this)">
+          <span class="choice-num">①</span>
+          <span>1</span>
+        </div>
+        <div class="choice" id="c-096-1" onclick="pick('096',1,this)">
+          <span class="choice-num">②</span>
+          <span>3</span>
+        </div>
+        <div class="choice" id="c-096-2" onclick="pick('096',2,this)">
+          <span class="choice-num">③</span>
+          <span>5</span>
+        </div>
+        <div class="choice" id="c-096-3" onclick="pick('096',3,this)">
+          <span class="choice-num">④</span>
+          <span>7</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('096',1,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-096">
+        <div class="answer-badge">✅ 정답: ② 3</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">점멸기의 시설 [KEC 234.6]
+
+1. 점멸기는 전로의 비접지측에 시설하고 분기 개폐기에 배선용 차단기를 사용하는 경우는 이것을 점멸기로 대응할 수 있음.
+
+2. 노출형의 점멸기는 기둥 등의 내구성이 있는 조영재에 견고하게 설치할 것.
+
+3. 욕실 내는 점멸기를 시설하지 말 것.
+
+4. 가정용 전동은 매 등기구마다 점멸이 가능하도록 할 것 (예외, 장식용 동기구 및 발코니 동기구)
+
+5. 공장·사무실·학교·상점 및 기타 이와 유사한 장소의 옥내에 시설하는 전체 조명용 전동은 부분조명이 가능하도록 시설할 것.
+
+6. 다음이 경우에는 센서등 (타임스위치 포함)을 시설할 것.
+
+① 관광숙박업 또는 숙박업에 이용되는 객실의 입구등은 1분 이내에 소등되는 것.
+
+② 일반주택 및 아파트 각 호실의 현관등은 3분 이내에 소등되는 것.
+
+7. 가로등, 보안등 또는 옥외에 시설하는 공중전화기를 위한 조명등용 분기회로에는 주광 센서를 설치하여 주광에 의하여 자동 점멸하도록 시설할 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 97</span>
+      <span class="stars" title="6점">★★★★★★☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">호텔 또는여관의 각 객실의 입구등은 몇분 이내에 소등되는 타임스위치를 시설하여야 하는가?</div>
+      <div class="choices" id="choices-097">
+        <div class="choice" id="c-097-0" onclick="pick('097',0,this)">
+          <span class="choice-num">①</span>
+          <span>1</span>
+        </div>
+        <div class="choice" id="c-097-1" onclick="pick('097',1,this)">
+          <span class="choice-num">②</span>
+          <span>2</span>
+        </div>
+        <div class="choice" id="c-097-2" onclick="pick('097',2,this)">
+          <span class="choice-num">③</span>
+          <span>3</span>
+        </div>
+        <div class="choice" id="c-097-3" onclick="pick('097',3,this)">
+          <span class="choice-num">④</span>
+          <span>5</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="0" onclick="toggle('097',0,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-097">
+        <div class="answer-badge">✅ 정답: ① 1</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">점멸기의 시설 [KEC 234.6]
+
+1. 점멸기는 전로의 비접지측에 시설하고 분기 개폐기에 배선용 차단기를 사용하는 경우는 이것을 점멸기로 대응할 수 있음.
+
+2. 노출형의 점멸기는 기둥 등의 내구성이 있는 조영재에 견고하게 설치할 것.
+
+3. 욕실 내는 점멸기를 시설하지 말 것.
+
+4. 가정용 전동은 매 등기구마다 점멸이 가능하도록 할 것 (예외, 장식용 동기구 및 발코니 동기구)
+
+5. 공장·사무실·학교·상점 및 기타 이와 유사한 장소의 옥내에 시설하는 전체 조명용 전동은 부분조명이 가능하도록 시설할 것.
+
+6. 다음이 경우에는 센서등 (타임스위치 포함)을 시설할 것.
+
+① 관광숙박업 또는 숙박업에 이용되는 객실의 입구등은 1분 이내에 소등되는 것.
+
+② 일반주택 및 아파트 각 호실의 현관등은 3분 이내에 소등되는 것.
+
+7. 가로등, 보안등 또는 옥외에 시설하는 공중전화기를 위한 조명등용 분기회로에는 주광 센서를 설치하여 주광에 의하여 자동 점멸하도록 시설할 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 101</span>
+      <span class="stars" title="3점">★★★☆☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">다음은 수영장용 수중조명설비 부하용 변압기에 대한 것이다 옳지 않은 것은?</div>
+      <div class="choices" id="choices-101">
+        <div class="choice" id="c-101-0" onclick="pick('101',0,this)">
+          <span class="choice-num">①</span>
+          <span>2차측 전로의 사용전압이 150 [V] 이하인 절연변압기를 반드시 사용하여야 한다.</span>
+        </div>
+        <div class="choice" id="c-101-1" onclick="pick('101',1,this)">
+          <span class="choice-num">②</span>
+          <span>2차측 전로의 사용전압이 150 [V]인 절연변압기는 1차와 2차 권선 사이에 금속제 혼촉 방지판이 있어야 한다.</span>
+        </div>
+        <div class="choice" id="c-101-2" onclick="pick('101',2,this)">
+          <span class="choice-num">③</span>
+          <span>절연 변압기의 2차측 전로에는 반드시 제 3종 접지를 하여야 하며, 그 저항값은 5 [Ω] 이하가 되도록 하여야 한다.</span>
+        </div>
+        <div class="choice" id="c-101-3" onclick="pick('101',3,this)">
+          <span class="choice-num">④</span>
+          <span>절연 변압기의 2차측 전로의 사용전압이 30 [V]가 넘는 경우에는 그 전로에 지락이 생긴 경우 자동적으로 전로를 차단하는 장치가 있어야 한다.</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('101',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-101">
+        <div class="answer-badge">✅ 정답: ③ 절연 변압기의 2차측 전로에는 반드시 제 3종 접지를 하여야 하며, 그 저항값은 5 [Ω] 이하가 되도록 하여야 한다.</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">수중조명등 [KEC 234.14]
+
+1. 수중조명등에 전기를 공급하기 위해서는 1차측 및 2차측 전로의 사용전압이 각각 400 [V] 이하 및 150 [V] 이하인 절연 변압기를 사용할 것.
+
+2. 절연변압기는 교류 5 [kV]의 시험전압으로 하나의 권선과 다른 권선, 철심 및 외함 사이에 계속적으로 1분간 가하여 절연 내력을 시험할 경우 견디어야 할 것.
+
+3. 절연변압기의 2차측 전로는 접지하지 아니할 것.
+
+4. 수중조명등의 절연변압기의 그 2차측 전로의 사용전압이 30 [V] 이하인 경우는 1차 권선과 2차 권선 사이에 금속제의 혼촉방지판을 설치하고 접지공사를 하여야 할 것.
+
+5. 절연변압기의 2차측 전로에는 개폐기 및 과전류차단기를 각 극에 시설할 것.
+
+6. 절연변압기의 2차측 전로의 사용전압이 30 [V]를 초과하는 경우에는 그 전로에 지락이 생겼을 때에 자동적으로 전로를 차단하는 정격감도전류 30 [mA] 이하의 누전 차단기를 시설할 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 103</span>
+      <span class="stars" title="6점">★★★★★★☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">교통신호등 회로의 사용전압은 몇 [V] 이하이어야 하는가?</div>
+      <div class="choices" id="choices-103">
+        <div class="choice" id="c-103-0" onclick="pick('103',0,this)">
+          <span class="choice-num">①</span>
+          <span>100.</span>
+        </div>
+        <div class="choice" id="c-103-1" onclick="pick('103',1,this)">
+          <span class="choice-num">②</span>
+          <span>200.</span>
+        </div>
+        <div class="choice" id="c-103-2" onclick="pick('103',2,this)">
+          <span class="choice-num">③</span>
+          <span>300.</span>
+        </div>
+        <div class="choice" id="c-103-3" onclick="pick('103',3,this)">
+          <span class="choice-num">④</span>
+          <span>400.</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('103',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-103">
+        <div class="answer-badge">✅ 정답: ③ 300.</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">교통신호등 [KEC 234.15]
+
+교통 신호등 제어장치의 2차측 배선의 최대사용전압은 300[V] 이하로 할 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 104</span>
+      <span class="stars" title="6점">★★★★★★☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">전기부식방지시설을 할 때 전기부식방지용 전원장치로부터 양극 및 피방식체까지의 전로에 사용되는 전압은 직류 몇 [V] 이하이어야 하는가?</div>
+      <div class="choices" id="choices-104">
+        <div class="choice" id="c-104-0" onclick="pick('104',0,this)">
+          <span class="choice-num">①</span>
+          <span>20.</span>
+        </div>
+        <div class="choice" id="c-104-1" onclick="pick('104',1,this)">
+          <span class="choice-num">②</span>
+          <span>40.</span>
+        </div>
+        <div class="choice" id="c-104-2" onclick="pick('104',2,this)">
+          <span class="choice-num">③</span>
+          <span>60.</span>
+        </div>
+        <div class="choice" id="c-104-3" onclick="pick('104',3,this)">
+          <span class="choice-num">④</span>
+          <span>80.</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('104',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-104">
+        <div class="answer-badge">✅ 정답: ③ 60.</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">전기부식방지시설 [KEC 234.16]
+
+② 전기부식방지 회로의 전압 및 회로
+
+⑥ 전기부식방지 회로 (전기 부식 방지용 전원 장치로 부터 양극 및 피방식체까지의 전로)의 사용전압은 직류 60 [V] 이하일 것.
+
+⑦ 양극은 지중에 매설하거나 수중에 쉽게 접촉할 우려가 없는 곳에 시설할 것.
+
+⑦ 지중에 매설하는 양극의 매설 깊이는 0.75 [m] 이상일 것.
+
+⑦ 수중에 시설하는 양극과 그 주위 1 [m] 이내의 거리에 있는 임의점 사이의 전위차는 10 [V]를 넘지 아니할 것.
+
+⑦ 2차측 배선의 전선은 케이블인 경우 이외에는 지름 2 [mm]의 경동선 또는 옥외용 비닐절연전선 이상의 절연효력이 있는 것일 것.
+
+⑦ 지표 또는 수중에서 1 [m] 간격의 임의의 2점간의 전위차가 5 [V] 를 넘지 아니할 것.
+
+④ 전기부식방지 회로의 전선과 저압 가공전선 사이의 이격 거리는 0.3 [m] 이상일 것.
+
+⑤ 전기부식방지 회로의 전선은 공칭단면적 4.0 [㎜]의 연동선일 것 (양극에 부속하는 전선은 2.5 [㎜] 이상의 연동선)</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 110</span>
+      <span class="stars" title="6점">★★★★★★☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">전기울타리의 시설에 관한 다음 사항 중 틀린 것은?</div>
+      <div class="choices" id="choices-110">
+        <div class="choice" id="c-110-0" onclick="pick('110',0,this)">
+          <span class="choice-num">①</span>
+          <span>전원장치에 전기를 공급하는 전로의 사용 전압은 600 [V] 이다</span>
+        </div>
+        <div class="choice" id="c-110-1" onclick="pick('110',1,this)">
+          <span class="choice-num">②</span>
+          <span>사람이 쉽게 출입하지 아니하는 곳에 시설할 것.</span>
+        </div>
+        <div class="choice" id="c-110-2" onclick="pick('110',2,this)">
+          <span class="choice-num">③</span>
+          <span>전선은 인장강도 1.38 [kN] 이상이 것 또는 지름 2 [mm] 이상의 경동선일 것.</span>
+        </div>
+        <div class="choice" id="c-110-3" onclick="pick('110',3,this)">
+          <span class="choice-num">④</span>
+          <span>전선과 수목 사이의 이격거리는 30 [cm] 이상일 것.</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="0" onclick="toggle('110',0,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-110">
+        <div class="answer-badge">✅ 정답: ① 전원장치에 전기를 공급하는 전로의 사용 전압은 600 [V] 이다</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">전기울타리 [KEC 241.1]
+
+① 사람이 쉽게 출입하지 아니하는 곳에 시설할 것.
+
+② 시설한 곳에는 사람이 보기 쉽도록 적당한 간격으로 위험표시를 할 것.
+
+③ 전선은 인장강도 1.38 [kN] 이상의 것 또는 지름 2 [mm] 이상의 경동선일 것.
+
+④ 전선과 기둥 사이의 이격 거리는 25 [mm] 이상일 것.
+
+⑤ 전선과 다른 시설물 또는 수목 사이의 이격 거리는 0.3 [m] 이상일 것.
+
+⑥ 전기울타리에 전기를 공급하는 전로에는 쉽게 개폐할 수 있는 곳에 전용 개폐기를 시설하여야 한다.
+
+⑦ 전기울타리용 전로의 사용전압은 250 [V] 이하이어야 한다.
+
+⑧ 전기울타리의 접지전극과 다른 접지계통의 접지전극의, 거리는 2 [m] 이상이이어야 한다.
+
+⑨ 기공전선로의 아래를 통과하는 전기울타리의 금속부분은 교차지점의 양쪽으로부터 5 [m] 이상의 간격을 두고 접지를 할 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 111</span>
+      <span class="stars" title="4점">★★★★☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">욕탕의 양단에 판상의 전극을 설치하고 그 전극 상호 간에 교류 전압을 가하는 전기욕기의 전원변압기 2차 전압은 몇 [V] 이하인 것을 사용하여야 하는가?</div>
+      <div class="choices" id="choices-111">
+        <div class="choice" id="c-111-0" onclick="pick('111',0,this)">
+          <span class="choice-num">①</span>
+          <span>5</span>
+        </div>
+        <div class="choice" id="c-111-1" onclick="pick('111',1,this)">
+          <span class="choice-num">②</span>
+          <span>10</span>
+        </div>
+        <div class="choice" id="c-111-2" onclick="pick('111',2,this)">
+          <span class="choice-num">③</span>
+          <span>12</span>
+        </div>
+        <div class="choice" id="c-111-3" onclick="pick('111',3,this)">
+          <span class="choice-num">④</span>
+          <span>15</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('111',1,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-111">
+        <div class="answer-badge">✅ 정답: ② 10</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">전기욕기 [KEC 241.2]
+
+전기욕기에 전기를 공급하기 위한 전기욕기용 전원장치 (내장되어 있는 전원변압기의 2차측 전로의 사용전압이 10 [V] 이하인 것에 한한다)는 안전기준에 적합하여야 한다.
+
+① 전원장치의 금속제 외함 및 전선을 넣는 금속관에는 접지공사를 할 것.
+
+② 욕기 내의 전극 간의 거리는 1 [m] 이상일 것.
+
+③ 전기욕기용 전원장치로부터 욕기 안의 전극까지의 배선은 공칭단면적 2.5 [㎜] 이상의 연동선과 동등 이상의 세기 및 굵기의 절연전선 (옥외용 비닐절연전선을 제외) 또는 케이블 공칭단면적이 1.5 [㎜] 이상의 캡타이어 케이블을 사용하고 합성수지관배선, 금속관배선 또는 케이블배선에 의하여 시설하거나 또는 공칭단면적이 1.5 [㎜] 이상의 캡타이어 코드를 합성수지관 (두께 2 [mm] 미만의 합성수지제 전선관 및 난연성이 없는 콤바인덕트관을 제외) 또는 금속관에 넣고 관을 조영재에 견고하게 붙일 것. 다만, 전기욕기용 전원장치로 부터 욕탕에 이르는 배선을 건조하고 전개된 장소에 시설하는 경우에는 그러하지 아니한다.
+
+④ 전기욕기용 전원장치로부터 욕기 안의 전극까지의 전선 상호 간 및 전선과 대지 사이의 절연저항값은 0.1 [MΩ] 이상</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 114</span>
+      <span class="stars" title="4점">★★★★☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">전기온상 등의 발열선의 온도는 몇 [℃]를 넘지 아니하도록 시설하여야 하는가?</div>
+      <div class="choices" id="choices-114">
+        <div class="choice" id="c-114-0" onclick="pick('114',0,this)">
+          <span class="choice-num">①</span>
+          <span>70</span>
+        </div>
+        <div class="choice" id="c-114-1" onclick="pick('114',1,this)">
+          <span class="choice-num">②</span>
+          <span>80</span>
+        </div>
+        <div class="choice" id="c-114-2" onclick="pick('114',2,this)">
+          <span class="choice-num">③</span>
+          <span>90</span>
+        </div>
+        <div class="choice" id="c-114-3" onclick="pick('114',3,this)">
+          <span class="choice-num">④</span>
+          <span>100</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('114',1,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-114">
+        <div class="answer-badge">✅ 정답: ② 80</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">전기온상 등 [KEC 241.5]
+
+① 전기온상에 전기를 공급하는 전로의 대지전압은 300 [V] 이하일 것.
+
+② 발열선 및 발열선에 직접 접속하는 전선은 전기 온상선일 것.
+
+③ 발열선은 그 온도가 80 [℃]를 넘지 아니하도록 시설할 것.
+
+④ 발열선이나 발열선에 직접 접속하는 전선의 피복에 사용하는 금속제 또는 방호장치의 금속제 부분에는 접지공사를 할 것.
+
+⑤ 발열선이나 발열선에 직접 접속하는 전선의 피복에 사용하는 금속제 또는 방호장치의 금속제 부분에는 접지공사를 할 것.
+
+⑥ 발열선과 조영재 사이의 이격 거리는 0.025 [m] 이상으로 할 것.
+
+⑦ 발열선의 지지점 간의 거리는 1 [m] 이하일 것. (발열선 상호 간의 간격이 0.06 [m] 이상인 경우에는 2 [m] 이하)</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 120</span>
+      <span class="stars" title="5점">★★★★★☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">가변형 (이동형)의 용접전극을 사용하는 아크용접장치를 시설할 때 용접변압기의 1차측 전로의 대지전압은 몇 [V] 이하이어야 하는가?</div>
+      <div class="choices" id="choices-120">
+        <div class="choice" id="c-120-0" onclick="pick('120',0,this)">
+          <span class="choice-num">①</span>
+          <span>200</span>
+        </div>
+        <div class="choice" id="c-120-1" onclick="pick('120',1,this)">
+          <span class="choice-num">②</span>
+          <span>250</span>
+        </div>
+        <div class="choice" id="c-120-2" onclick="pick('120',2,this)">
+          <span class="choice-num">③</span>
+          <span>300</span>
+        </div>
+        <div class="choice" id="c-120-3" onclick="pick('120',3,this)">
+          <span class="choice-num">④</span>
+          <span>600</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('120',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-120">
+        <div class="answer-badge">✅ 정답: ③ 300</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">아크 용접기 [KEC 241.10]
+
+① 용접변압기는 절연변압기일 것.
+
+② 용접변압기의 1차측 전로의 대지전압은 300 [V] 이하일 것.
+
+③ 용접변압기의 1차측 전로에는 용접변압기에 가까운 곳에 쉽게 개폐할 수 있는 개폐기를 시설할 것.
+
+④ 피용접재 또는 이와 전기적으로 접속되는 용접 변압기에 가까운 곳에 쉽게 개폐할 수 있는 개폐기를 시설할 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 124</span>
+      <span class="stars" title="2점">★★☆☆☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">전자개폐기의 조작회로 또는 초인벨, 경보벨 등에 접속하는 전로로서, 최대사용전압이 몇 [V] 이하인 것을 소세력회로라 하는가?</div>
+      <div class="choices" id="choices-124">
+        <div class="choice" id="c-124-0" onclick="pick('124',0,this)">
+          <span class="choice-num">①</span>
+          <span>60</span>
+        </div>
+        <div class="choice" id="c-124-1" onclick="pick('124',1,this)">
+          <span class="choice-num">②</span>
+          <span>80</span>
+        </div>
+        <div class="choice" id="c-124-2" onclick="pick('124',2,this)">
+          <span class="choice-num">③</span>
+          <span>100</span>
+        </div>
+        <div class="choice" id="c-124-3" onclick="pick('124',3,this)">
+          <span class="choice-num">④</span>
+          <span>150</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="0" onclick="toggle('124',0,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-124">
+        <div class="answer-badge">✅ 정답: ① 60</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">소세력 회로 [KEC 241.14]
+
+전자개폐기의 조작회로 또는 초인벨·경보벨 등에 접속하는 전로로서 최대사용전압이 60 [V] 이하인 것은 다음에 따라 시설하여야 한다.
+
+① 소세력 회로에 전기를 공급하기 위한 변압기는 절연변압기일 것.
+
+② 절연변압기의 사용전압은 대지전압 300 [V] 이하로 할 것.
+
+③ 소세력 회로의 전선은 1 [㎜] 이상이 연동선일 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 125</span>
+      <span class="stars" title="6점">★★★★★★☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">소맥분, 전분, 유황 등의 가연성 분진이 존재하는 공장에 전기설비가 발화원이 되어 폭발할 우려가 있는 곳의 저압 옥내배선에 적합하지 못한 공사는? (단, 각종 전선관공사 시 관의 두께는 모두 기준에 적합한 것을 사용한다.)</div>
+      <div class="choices" id="choices-125">
+        <div class="choice" id="c-125-0" onclick="pick('125',0,this)">
+          <span class="choice-num">①</span>
+          <span>합성수지관공사</span>
+        </div>
+        <div class="choice" id="c-125-1" onclick="pick('125',1,this)">
+          <span class="choice-num">②</span>
+          <span>가요전선관공사</span>
+        </div>
+        <div class="choice" id="c-125-2" onclick="pick('125',2,this)">
+          <span class="choice-num">③</span>
+          <span>금속관공사</span>
+        </div>
+        <div class="choice" id="c-125-3" onclick="pick('125',3,this)">
+          <span class="choice-num">④</span>
+          <span>케이블공사</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('125',1,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-125">
+        <div class="answer-badge">✅ 정답: ② 가요전선관공사</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">분진 위험 장소 [KEC 242.2]
+
+① 폭연성 분진 또는 화약류의 분말이 있는 장소 (마그네슘, 알루미늄 등)
+
+⑥ 금속관배선, 케이블배선공사를 할 것. (캡타이어케이블을 사용하는 것을 제외한다)
+
+⑦ 0.6 / 1 [kV] EP 고무절연 클로로프렌 캡타이어 케이블
+
+⑦ 전기기계기구는 분진방폭 특수 방진구조로 되어 있을 것.
+
+② 가연성 분진이 있는 장소 (소맥분, 전분, 유황 등)
+
+⑦ 합성수지관배선, 금속관배선, 케이블배선 공사를 할 것.
+
+⑦ 0.6 / 1 [kV] EP 고무절연 클로로프렌 캡타이어 케이블, 0.6 / 1 [kV] 비닐절연 비닐캡타이어케이블
+
+⑦ 전기기계기구는 분진방폭형 보통방진구조로 되어 있을 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 128</span>
+      <span class="stars" title="6점">★★★★★★☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">석유류를 저장하는 장소의 저압 전등배선에서 사용할 수 없는 공사방법은?</div>
+      <div class="choices" id="choices-128">
+        <div class="choice" id="c-128-0" onclick="pick('128',0,this)">
+          <span class="choice-num">①</span>
+          <span>합성수지관공사</span>
+        </div>
+        <div class="choice" id="c-128-1" onclick="pick('128',1,this)">
+          <span class="choice-num">②</span>
+          <span>케이블공사</span>
+        </div>
+        <div class="choice" id="c-128-2" onclick="pick('128',2,this)">
+          <span class="choice-num">③</span>
+          <span>금속관공사</span>
+        </div>
+        <div class="choice" id="c-128-3" onclick="pick('128',3,this)">
+          <span class="choice-num">④</span>
+          <span>애자사용공사</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('128',3,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-128">
+        <div class="answer-badge">✅ 정답: ④ 애자사용공사</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">위험물 등이 존재하는 장소 [KEC 242.4]
+
+셀룰로이드·성냥·석유류 기타 타기 쉬운 위험물질을 제조하거나 저장하는 곳에 시설하는 저압 옥내 전기설비는 다음의 공사로 시설하여야 한다.
+
+- 금속관공사, 케이블공사, 합성수지관공사</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 130</span>
+      <span class="stars" title="5점">★★★★★☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">흥행장의 저압 전기설비공사로 무대, 무대 마루 밑, 오케스트라박스, 영사실, 기타 사람이나 무대 도구가 접촉할 우려가 있는 곳에 시설하는 저압 옥내배선, 전구선 또는 이동전선은 사용저압이 몇 [V] 이하이어야 하는가?</div>
+      <div class="choices" id="choices-130">
+        <div class="choice" id="c-130-0" onclick="pick('130',0,this)">
+          <span class="choice-num">①</span>
+          <span>100</span>
+        </div>
+        <div class="choice" id="c-130-1" onclick="pick('130',1,this)">
+          <span class="choice-num">②</span>
+          <span>200</span>
+        </div>
+        <div class="choice" id="c-130-2" onclick="pick('130',2,this)">
+          <span class="choice-num">③</span>
+          <span>300</span>
+        </div>
+        <div class="choice" id="c-130-3" onclick="pick('130',3,this)">
+          <span class="choice-num">④</span>
+          <span>400</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('130',3,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-130">
+        <div class="answer-badge">✅ 정답: ④ 400</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">전시회, 쇼 및 공연장의 전기설비 [KEC 242.6]
+
+무대·무대마루 밑·오케스트라 박스·영사실 기타 사람이나 무대 도구가 접촉할 우려가 있는 곳에 시설하는 저압 옥내 배선, 전구선 또는 이동 전선은 사용전압이 400 [V] 이하이어야 한다.
+
+전시회, 쇼 및 공연장 기타 이동과 유사한 장소에 시설하는 저압전기설비에 적용할 것.
+
+① 이동전선
+
+⑥ 이동전선은 0.6/1 [kV] EP 고무절연 클로로프렌 캡타이어케이블 또는 0.6/1 [kV] 비닐절연 비닐캡타이어케이블일 것.
+
+⑦ 보더라이트에 부속된 이동전선은 0.6 / 1 [kV] EP 고무절연 클로로프렌 캡타이어 케이블을 사용할 것.
+
+② 무대·무대마루 밑·오케스트라 박스 및 영사실의 전로에는 전용 개폐기 및 과전류 차단기를 시설할 것.
+
+③ 비상조명을 제외한 조명용 분기회로 및 정격 32 [A] 이하의 콘센트용 분기회로는 정격감도전류 30 [mA] 이하의 누전 차단기로 보호할 것.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 133</span>
+      <span class="stars" title="3점">★★★☆☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">의료 장소별 계통 접지에서 그룹 2에 해당하는 장소에 적용하는 접지방식은? (단, 이동식 X-레이, 5 [kVA] 이상의 대형기기, 일반 의료용 전기기기는 제외)</div>
+      <div class="choices" id="choices-133">
+        <div class="choice" id="c-133-0" onclick="pick('133',0,this)">
+          <span class="choice-num">①</span>
+          <span>TN</span>
+        </div>
+        <div class="choice" id="c-133-1" onclick="pick('133',1,this)">
+          <span class="choice-num">②</span>
+          <span>TT</span>
+        </div>
+        <div class="choice" id="c-133-2" onclick="pick('133',2,this)">
+          <span class="choice-num">③</span>
+          <span>IT</span>
+        </div>
+        <div class="choice" id="c-133-3" onclick="pick('133',3,this)">
+          <span class="choice-num">④</span>
+          <span>TC</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('133',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-133">
+        <div class="answer-badge">✅ 정답: ③ IT</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">의료 장소 [KEC 242.10]
+
+의료 장소별 계통 접지 [KEC 242.10.2]
+
+의료 장소별로 다음과 같이 계통 접지를 한다.
+
+⑥ 그룹 0 : TT 계통 또는 TN 계통
+
+⑦ 그룹 1 : TT 계통 또는 TN 계통
+
+⑦ 그룹 2 : 의료 IT 계통 (이동식 X-레이, 5[kVA] 이상의 대형 기기, 일반 의료용 전기기기에는 TT 계통 또는 TN 계통 적용이 가능하다)
+
+의료 그룹 구분은 다음과 같다.
+
+⑥ 그룹 0 : 일반병원실, 진찰실, 검사실, 처지실, 재활치료실 등 장착부를 사용하지 않는 의료 장소
+
+⑦ 그룹 1 : 분만실, MRI 실, X선 검사실, 회복실, 구급처지실, 인공투석실, 내시경실 등 장착부를 환자의 신체 외부 또는 심장 부위를 제외한 환자의 신체 내부에 삽입시켜 사용하는 의료 장소
+
+⑦ 그룹 2 : 관상동맥질환 처지실 (심장카테터실), 심혈관조영실, 중환자실(집중치료실), 마취실, 수술실, 회복실 등 장착부를 환자의 심장 부위에 삽입 또는 접촉시켜 사용하는 의료 장소</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 135</span>
+      <span class="stars" title="4점">★★★★☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">그룹 1 또는 그룹 2의 의료 장소 (수술등, 내시경, 수술실 테이블, 기타 필수 조명 등)에 상용전원 공급이 중단될 경우 몇 초 이내로 비상전원을 공급하여야 하는가?</div>
+      <div class="choices" id="choices-135">
+        <div class="choice" id="c-135-0" onclick="pick('135',0,this)">
+          <span class="choice-num">①</span>
+          <span>0.1</span>
+        </div>
+        <div class="choice" id="c-135-1" onclick="pick('135',1,this)">
+          <span class="choice-num">②</span>
+          <span>0.5</span>
+        </div>
+        <div class="choice" id="c-135-2" onclick="pick('135',2,this)">
+          <span class="choice-num">③</span>
+          <span>15</span>
+        </div>
+        <div class="choice" id="c-135-3" onclick="pick('135',3,this)">
+          <span class="choice-num">④</span>
+          <span>30</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('135',1,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-135">
+        <div class="answer-badge">✅ 정답: ② 0.5</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">의료 장소 [KEC 242.10]
+
+⑦ 의료 장소 내의 비상전원 : 상용전원 공급이 중단될 경우 의료행위에 중대한 지장을 초래할 우려가 있는 전기설비 및 의료용 전기기기에는 비상전원을 공급하여야 한다.
+
+⑦ 절환 시간 0.5초 이내에 비상 전원을 공급하는 장치 또는 기기
+
+- 0.5초 이내에 전력 공급이 필요한 생명유지장치
+
+- 그룹 1 또는 그룹 2의 의료장소의 수술 등, 내시경, 수술실 테이블, 기타 필수 조명
+
+⑦ 절환 시간 15초를 이내에 비상전원을 공급하는 장치 또는 기기
+
+- 15초 이내에 전력 공급이 필요한 생명 유지 장치
+
+- 그룹 2의 의료장소에 최소 50 [%]의 조명, 그룹 1의 의료 장소에 최소 1개의 조명
+
+⑦ 절환 시간 15초를 초과하여 비상전원을 공급하는 장치 또는 기기
+
+- 병원 기능을 유지하기 위한 기본작업에 필요한 조명, - 그 밖의 병원 기능을 유지하기 위하여 중요한 기기 또는 설비</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">문제 137</span>
+      <span class="stars" title="1점">★☆☆☆☆☆☆</span>
+    </div>
+    <div class="card-body">
+      <div class="question-text">저압 옥내 직류전기설비에서 축전지실의 경우 몇 [V]를 초과하는 축전지는 비접지측 도체에 쉽게 차단할 수 있는 곳에 개폐기를 시설하여야 하는가?</div>
+      <div class="choices" id="choices-137">
+        <div class="choice" id="c-137-0" onclick="pick('137',0,this)">
+          <span class="choice-num">①</span>
+          <span>10</span>
+        </div>
+        <div class="choice" id="c-137-1" onclick="pick('137',1,this)">
+          <span class="choice-num">②</span>
+          <span>20</span>
+        </div>
+        <div class="choice" id="c-137-2" onclick="pick('137',2,this)">
+          <span class="choice-num">③</span>
+          <span>30</span>
+        </div>
+        <div class="choice" id="c-137-3" onclick="pick('137',3,this)">
+          <span class="choice-num">④</span>
+          <span>40</span>
+        </div>
+      </div>
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('137',2,this)">
+        <span class="btn-icon">👁</span> 정답 · 해설 보기
+      </button>
+      <div class="answer-section" id="ans-137">
+        <div class="answer-badge">✅ 정답: ③ 30</div>
+        <div class="explain-label">해 설</div>
+        <div class="explain-box">축전지실 등의 시설 [KEC 243.1.7]
+
+1. 30 [V]를 초과하는 축전지는 비접지측 도체에 쉽게 차단할 수 있는 곳에 개폐기를 시설하여야 한다.
+
+2. 옥내전로에 연계되는 축전지는 비접지측 도체에 과전류보호장치를 시설하여야 한다.
+
+3. 축전지실 등은 폭발성의 가스가 축적되지 않도록 환기장치 등을 시설하여야 한다.</div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="no-result" id="no-result">검색 결과가 없습니다.</div>
+</div>
+<script>
+let openCount = 0;
+const total = 49;
+let sCorrect = 0, sWrong = 0, sAnswered = 0;
+
+function pick(qid, clickedIdx, el) {
+  const choicesWrap = document.getElementById('choices-' + qid);
+  const choices = choicesWrap.querySelectorAll('.choice');
+  // 이미 답한 문제면 무시
+  if (choicesWrap.dataset.answered) return;
+  choicesWrap.dataset.answered = '1';
+
+  // 정답 인덱스는 btn-toggle의 data-ans에서 읽기
+  const btn = choicesWrap.closest('.card-body').querySelector('.btn-toggle');
+  const ansIdx = parseInt(btn.getAttribute('data-ans'));
+
+  choices.forEach((c, i) => {
+    c.classList.add('answered');
+    if (i === ansIdx) {
+      c.classList.add(clickedIdx === ansIdx ? 'correct' : 'reveal-correct');
+    }
+  });
+
+  const msg = choicesWrap.closest('.card-body').querySelector('.result-msg');
+  if (clickedIdx === ansIdx) {
+    choices[clickedIdx].classList.add('correct');
+    msg.textContent = '🎉 정답입니다!';
+    msg.className = 'result-msg ok';
+    sCorrect++;
+    document.getElementById('s-correct').textContent = sCorrect;
+  } else {
+    choices[clickedIdx].classList.add('wrong');
+    msg.textContent = '❌ 오답! 초록색이 정답입니다.';
+    msg.className = 'result-msg ng';
+    sWrong++;
+    document.getElementById('s-wrong').textContent = sWrong;
+  }
+  sAnswered++;
+  const leftVal = total - sAnswered;
+  document.getElementById('s-left').textContent = leftVal < 0 ? 0 : leftVal;
+  document.getElementById('prog').style.width = (sAnswered / total * 100) + '%';
+}
+
+function toggle(num, ansIdx, btn) {
+  const sec = document.getElementById('ans-' + num);
+  const choices = document.getElementById('choices-' + num).querySelectorAll('.choice');
+  const isOpen = sec.style.display === 'block';
+  if (!isOpen) {
+    sec.style.display = 'block';
+    btn.classList.add('open');
+    btn.innerHTML = '<span class="btn-icon">🙈</span> 해설 숨기기';
+    if (ansIdx >= 0) choices[ansIdx].classList.add('correct');
+    openCount++;
+  } else {
+    sec.style.display = 'none';
+    btn.classList.remove('open');
+    btn.innerHTML = '<span class="btn-icon">👁</span> 정답 · 해설 보기';
+    choices.forEach(c => c.classList.remove('correct'));
+    openCount = Math.max(0, openCount - 1);
+  }
+}
+
+let allOpen = false;
+function toggleAll() {
+  const cards = document.querySelectorAll('.card:not(.hidden)');
+  allOpen = !allOpen;
+  openCount = 0;
+  cards.forEach(card => {
+    const btn = card.querySelector('.btn-toggle');
+    const sec = card.querySelector('.answer-section');
+    const choices = card.querySelectorAll('.choice');
+    if (allOpen) {
+      sec.style.display = 'block';
+      btn.classList.add('open');
+      btn.innerHTML = '<span class="btn-icon">🙈</span> 해설 숨기기';
+      const badge = sec.querySelector('.answer-badge');
+      const markers = ['①','②','③','④'];
+      const correctChoice = Array.from(choices).find((_,i) => badge && badge.textContent.includes(markers[i]));
+      if (correctChoice) correctChoice.classList.add('correct');
+      openCount++;
+    } else {
+      sec.style.display = 'none';
+      btn.classList.remove('open');
+      btn.innerHTML = '<span class="btn-icon">👁</span> 정답 · 해설 보기';
+      choices.forEach(c => c.classList.remove('correct'));
+    }
+  });
+  document.getElementById('prog').style.width = allOpen ? '100%' : '0%';
+}
+
+function filterCards() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  const cards = document.querySelectorAll('.card');
+  let vis = 0;
+  cards.forEach(card => {
+    const txt = card.textContent.toLowerCase();
+    if (!q || txt.includes(q)) { card.classList.remove('hidden'); vis++; }
+    else card.classList.add('hidden');
+  });
+  document.getElementById('count-badge').textContent = q ? `🔍 ${vis}문제 검색됨` : '📋 전체 49문제';
+  document.getElementById('no-result').style.display = vis === 0 ? 'block' : 'none';
+}
+</script>
+</body>
+</html>

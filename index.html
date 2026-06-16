@@ -27,10 +27,22 @@ header p{font-size:0.88rem;color:#64748b;margin-bottom:10px}
 .card-body{padding:18px 20px}
 .question-text{font-size:0.96rem;font-weight:600;line-height:1.8;color:#1a202c;margin-bottom:16px}
 .choices{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
-.choice{display:flex;align-items:flex-start;gap:10px;padding:9px 14px;border-radius:8px;background:#f8fafc;border:1.5px solid #e2e8f0;font-size:0.91rem;line-height:1.6;transition:all .2s}
+.choice{display:flex;align-items:flex-start;gap:10px;padding:9px 14px;border-radius:8px;background:#f8fafc;border:1.5px solid #e2e8f0;font-size:0.91rem;line-height:1.6;transition:all .2s;cursor:pointer;user-select:none}
+.choice:hover:not(.answered){background:#eff6ff;border-color:#93c5fd}
 .choice.correct{background:#f0fdf4;border-color:#16a34a;color:#14532d;font-weight:700}
-.choice-num{font-weight:800;min-width:18px;color:#64748b;flex-shrink:0}
+.choice.wrong{background:#fef2f2;border-color:#ef4444;color:#991b1b;font-weight:700}
+.choice.reveal-correct{background:#f0fdf4;border-color:#16a34a;color:#14532d;font-weight:700}
+.choice.answered{cursor:default}
 .choice.correct .choice-num{color:#16a34a}
+.choice.wrong .choice-num{color:#ef4444}
+.choice.reveal-correct .choice-num{color:#16a34a}
+.choice-num{font-weight:800;min-width:18px;color:#64748b;flex-shrink:0}
+.result-msg{font-size:0.85rem;font-weight:700;margin-top:10px;margin-bottom:4px;padding:6px 12px;border-radius:7px;display:none}
+.result-msg.ok{background:#dcfce7;color:#15803d;display:block}
+.result-msg.ng{background:#fee2e2;color:#b91c1c;display:block}
+.score-board{background:#1e3a5f;color:#fff;border-radius:12px;padding:14px 20px;margin-bottom:20px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.score-board span{font-size:0.9rem;font-weight:700}
+.score-board .s-val{font-size:1.3rem;font-weight:900;color:#60a5fa}
 .btn-toggle{display:inline-flex;align-items:center;gap:7px;background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:0.87rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit}
 .btn-toggle:hover{background:#1565c0;transform:translateY(-1px)}
 .btn-toggle.open{background:#475569}
@@ -59,6 +71,7 @@ header p{font-size:0.88rem;color:#64748b;margin-bottom:10px}
   <div class="search-wrap">
     <input type="text" id="search" placeholder="🔍 문제 검색 (키워드, KEC 조항 번호 등)" oninput="filterCards()" />
   </div>
+  <div class="score-board"><span>✅ 정답 <span class="s-val" id="s-correct">0</span></span><span>❌ 오답 <span class="s-val" id="s-wrong">0</span></span><span>📋 남은 문제 <span class="s-val" id="s-left">49</span></span></div>
   <div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
   <div id="cards">
   <div class="card">
@@ -69,24 +82,25 @@ header p{font-size:0.88rem;color:#64748b;margin-bottom:10px}
     <div class="card-body">
       <div class="question-text">저압전로의 보호도체 및 중성선의 접속방식에 따른 접지계통의 분류가 아닌 것은?</div>
       <div class="choices" id="choices-001">
-        <div class="choice" id="c-001-0">
+        <div class="choice" id="c-001-0" onclick="pick('001',0,this)">
           <span class="choice-num">①</span>
           <span>IT 계통</span>
         </div>
-        <div class="choice" id="c-001-1">
+        <div class="choice" id="c-001-1" onclick="pick('001',1,this)">
           <span class="choice-num">②</span>
           <span>TN 계통</span>
         </div>
-        <div class="choice" id="c-001-2">
+        <div class="choice" id="c-001-2" onclick="pick('001',2,this)">
           <span class="choice-num">③</span>
           <span>TT 계통</span>
         </div>
-        <div class="choice" id="c-001-3">
+        <div class="choice" id="c-001-3" onclick="pick('001',3,this)">
           <span class="choice-num">④</span>
           <span>TC 계통</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('001',3,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('001',3,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-001">
@@ -110,24 +124,25 @@ header p{font-size:0.88rem;color:#64748b;margin-bottom:10px}
     <div class="card-body">
       <div class="question-text">계통의 일부분에서 PEN 도체를 사용하거나, 중성선(N)과 별도로 보호도체(PE)를 사용하는 방식의 접지계통은?</div>
       <div class="choices" id="choices-003">
-        <div class="choice" id="c-003-0">
+        <div class="choice" id="c-003-0" onclick="pick('003',0,this)">
           <span class="choice-num">①</span>
           <span>TN-S</span>
         </div>
-        <div class="choice" id="c-003-1">
+        <div class="choice" id="c-003-1" onclick="pick('003',1,this)">
           <span class="choice-num">②</span>
           <span>TN-C-S</span>
         </div>
-        <div class="choice" id="c-003-2">
+        <div class="choice" id="c-003-2" onclick="pick('003',2,this)">
           <span class="choice-num">③</span>
           <span>TN-S-C</span>
         </div>
-        <div class="choice" id="c-003-3">
+        <div class="choice" id="c-003-3" onclick="pick('003',3,this)">
           <span class="choice-num">④</span>
           <span>TT</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('003',1,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('003',1,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-003">
@@ -145,24 +160,25 @@ header p{font-size:0.88rem;color:#64748b;margin-bottom:10px}
     <div class="card-body">
       <div class="question-text">금속제 외함을 가진 저압의 기계기구로서 사람이 쉽게 접촉할 우려가 있는 곳에 시설하는 것에 전기를 공급하는 전로에 지락이 생겼을 때 자동적으로 차단하는 장치를 설치하여야 한다. 사용 전압이 몇 [V]를 초과하는 기계기구의 경우인가?</div>
       <div class="choices" id="choices-006">
-        <div class="choice" id="c-006-0">
+        <div class="choice" id="c-006-0" onclick="pick('006',0,this)">
           <span class="choice-num">①</span>
           <span>25</span>
         </div>
-        <div class="choice" id="c-006-1">
+        <div class="choice" id="c-006-1" onclick="pick('006',1,this)">
           <span class="choice-num">②</span>
           <span>30</span>
         </div>
-        <div class="choice" id="c-006-2">
+        <div class="choice" id="c-006-2" onclick="pick('006',2,this)">
           <span class="choice-num">③</span>
           <span>50</span>
         </div>
-        <div class="choice" id="c-006-3">
+        <div class="choice" id="c-006-3" onclick="pick('006',3,this)">
           <span class="choice-num">④</span>
           <span>60</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('006',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('006',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-006">
@@ -200,24 +216,25 @@ header p{font-size:0.88rem;color:#64748b;margin-bottom:10px}
     <div class="card-body">
       <div class="question-text">IT 계통에서 지락 사고와 같은 1차 고장에 대해서 이를 감시하고 차단할 수 있는 보호장치를 설치하여야 한다. 이때 감시 및 보호장치로 잘못된 것은?</div>
       <div class="choices" id="choices-009">
-        <div class="choice" id="c-009-0">
+        <div class="choice" id="c-009-0" onclick="pick('009',0,this)">
           <span class="choice-num">①</span>
           <span>절연감시장치</span>
         </div>
-        <div class="choice" id="c-009-1">
+        <div class="choice" id="c-009-1" onclick="pick('009',1,this)">
           <span class="choice-num">②</span>
           <span>누전차단기</span>
         </div>
-        <div class="choice" id="c-009-2">
+        <div class="choice" id="c-009-2" onclick="pick('009',2,this)">
           <span class="choice-num">③</span>
           <span>과전류보호장치</span>
         </div>
-        <div class="choice" id="c-009-3">
+        <div class="choice" id="c-009-3" onclick="pick('009',3,this)">
           <span class="choice-num">④</span>
           <span>퓨즈</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('009',3,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('009',3,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-009">
@@ -245,24 +262,25 @@ header p{font-size:0.88rem;color:#64748b;margin-bottom:10px}
     <div class="card-body">
       <div class="question-text">비도전성 장소에서 계통외도전부의 누설전류는 통상적인 사용상태에서 몇 [mA]를 초과하지 말아야 하는가?</div>
       <div class="choices" id="choices-012">
-        <div class="choice" id="c-012-0">
+        <div class="choice" id="c-012-0" onclick="pick('012',0,this)">
           <span class="choice-num">①</span>
           <span>0.1</span>
         </div>
-        <div class="choice" id="c-012-1">
+        <div class="choice" id="c-012-1" onclick="pick('012',1,this)">
           <span class="choice-num">②</span>
           <span>0.5</span>
         </div>
-        <div class="choice" id="c-012-2">
+        <div class="choice" id="c-012-2" onclick="pick('012',2,this)">
           <span class="choice-num">③</span>
           <span>1</span>
         </div>
-        <div class="choice" id="c-012-3">
+        <div class="choice" id="c-012-3" onclick="pick('012',3,this)">
           <span class="choice-num">④</span>
           <span>2</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('012',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('012',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-012">
@@ -282,24 +300,25 @@ header p{font-size:0.88rem;color:#64748b;margin-bottom:10px}
     <div class="card-body">
       <div class="question-text">비도전성 장소에서 노출도전부, 계통외도전부 전부 및 노출도전부 사이의 상대적 간격은 몇 [m] 이상으로 하여야 하는가?</div>
       <div class="choices" id="choices-013">
-        <div class="choice" id="c-013-0">
+        <div class="choice" id="c-013-0" onclick="pick('013',0,this)">
           <span class="choice-num">①</span>
           <span>1</span>
         </div>
-        <div class="choice" id="c-013-1">
+        <div class="choice" id="c-013-1" onclick="pick('013',1,this)">
           <span class="choice-num">②</span>
           <span>1.5</span>
         </div>
-        <div class="choice" id="c-013-2">
+        <div class="choice" id="c-013-2" onclick="pick('013',2,this)">
           <span class="choice-num">③</span>
           <span>2</span>
         </div>
-        <div class="choice" id="c-013-3">
+        <div class="choice" id="c-013-3" onclick="pick('013',3,this)">
           <span class="choice-num">④</span>
           <span>2.5</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('013',3,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('013',3,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-013">
@@ -319,24 +338,25 @@ header p{font-size:0.88rem;color:#64748b;margin-bottom:10px}
     <div class="card-body">
       <div class="question-text">과전류차단기로 전압전로에 사용하는 산업용 배선차단기의 부동작전류와 동작전류로 적합한 것은?</div>
       <div class="choices" id="choices-014">
-        <div class="choice" id="c-014-0">
+        <div class="choice" id="c-014-0" onclick="pick('014',0,this)">
           <span class="choice-num">①</span>
           <span>1.0배, 1.2배</span>
         </div>
-        <div class="choice" id="c-014-1">
+        <div class="choice" id="c-014-1" onclick="pick('014',1,this)">
           <span class="choice-num">②</span>
           <span>1.05배, 1.3배</span>
         </div>
-        <div class="choice" id="c-014-2">
+        <div class="choice" id="c-014-2" onclick="pick('014',2,this)">
           <span class="choice-num">③</span>
           <span>1.25배, 1.6배</span>
         </div>
-        <div class="choice" id="c-014-3">
+        <div class="choice" id="c-014-3" onclick="pick('014',3,this)">
           <span class="choice-num">④</span>
           <span>1.3배, 1.8배</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('014',1,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('014',1,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-014">
@@ -362,24 +382,25 @@ header p{font-size:0.88rem;color:#64748b;margin-bottom:10px}
     <div class="card-body">
       <div class="question-text">과부하에 대해 케이블 및 전선을 보호하는 장치의 동작전류 I₂ (보호장치가 규약시간 이내에 유효하게 동작하는 것을 보장하는 전류)는 케이블의 허용 전류의 몇 배 이내에서 동작해야 하는가?</div>
       <div class="choices" id="choices-015">
-        <div class="choice" id="c-015-0">
+        <div class="choice" id="c-015-0" onclick="pick('015',0,this)">
           <span class="choice-num">①</span>
           <span>1.1</span>
         </div>
-        <div class="choice" id="c-015-1">
+        <div class="choice" id="c-015-1" onclick="pick('015',1,this)">
           <span class="choice-num">②</span>
           <span>1.13</span>
         </div>
-        <div class="choice" id="c-015-2">
+        <div class="choice" id="c-015-2" onclick="pick('015',2,this)">
           <span class="choice-num">③</span>
           <span>1.45</span>
         </div>
-        <div class="choice" id="c-015-3">
+        <div class="choice" id="c-015-3" onclick="pick('015',3,this)">
           <span class="choice-num">④</span>
           <span>1.6</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('015',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('015',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-015">
@@ -403,24 +424,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">저압 옥내간선에서 분기하여 전기사용기계기구에 이르는 저압 옥내전로에서 저압 옥내간선과의 분기점에서 전선의 길이가 몇 [m] 이하인 곳에 개폐기 및 과전류 차단기를 설치하여야 하는가?</div>
       <div class="choices" id="choices-016">
-        <div class="choice" id="c-016-0">
+        <div class="choice" id="c-016-0" onclick="pick('016',0,this)">
           <span class="choice-num">①</span>
           <span>2</span>
         </div>
-        <div class="choice" id="c-016-1">
+        <div class="choice" id="c-016-1" onclick="pick('016',1,this)">
           <span class="choice-num">②</span>
           <span>3</span>
         </div>
-        <div class="choice" id="c-016-2">
+        <div class="choice" id="c-016-2" onclick="pick('016',2,this)">
           <span class="choice-num">③</span>
           <span>5</span>
         </div>
-        <div class="choice" id="c-016-3">
+        <div class="choice" id="c-016-3" onclick="pick('016',3,this)">
           <span class="choice-num">④</span>
           <span>6</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('016',1,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('016',1,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-016">
@@ -440,24 +462,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">옥내에 시설하는 전동기에 과부하 보호장치의 시설을 생략할 수 없는 경우는?</div>
       <div class="choices" id="choices-018">
-        <div class="choice" id="c-018-0">
+        <div class="choice" id="c-018-0" onclick="pick('018',0,this)">
           <span class="choice-num">①</span>
           <span>전동기가 단상의 것으로 전원측 전로에 시설하는 과전류차단기의 정격전류가 16 [A] 이하인 경우</span>
         </div>
-        <div class="choice" id="c-018-1">
+        <div class="choice" id="c-018-1" onclick="pick('018',1,this)">
           <span class="choice-num">②</span>
           <span>전동기가 단상의 것으로 전원측 전로에 시설하는 배선용 차단기의 정격전류가 20 [A] 이하인 경우</span>
         </div>
-        <div class="choice" id="c-018-2">
+        <div class="choice" id="c-018-2" onclick="pick('018',2,this)">
           <span class="choice-num">③</span>
           <span>타인이 출입할 수 없고 전동기 운전 중 취급자가 상시 감시할 수 있는 위치에 시설하는 경우</span>
         </div>
-        <div class="choice" id="c-018-3">
+        <div class="choice" id="c-018-3" onclick="pick('018',3,this)">
           <span class="choice-num">④</span>
           <span>전동기의 정격 출력이 0.75 [kW]인 전동기</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('018',3,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('018',3,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-018">
@@ -487,24 +510,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">옥내에 시설하는 전동기에는 과부하보호장치를 시설하여야 하는데 단상 전동기인 경우에 전원측 전로에 시설하는 과전류차단기의 정격전류가 몇 [A] 이하이면 과부하보호장치를 시설하지 않아도 되는가?</div>
       <div class="choices" id="choices-020">
-        <div class="choice" id="c-020-0">
+        <div class="choice" id="c-020-0" onclick="pick('020',0,this)">
           <span class="choice-num">①</span>
           <span>10</span>
         </div>
-        <div class="choice" id="c-020-1">
+        <div class="choice" id="c-020-1" onclick="pick('020',1,this)">
           <span class="choice-num">②</span>
           <span>16</span>
         </div>
-        <div class="choice" id="c-020-2">
+        <div class="choice" id="c-020-2" onclick="pick('020',2,this)">
           <span class="choice-num">③</span>
           <span>30</span>
         </div>
-        <div class="choice" id="c-020-3">
+        <div class="choice" id="c-020-3" onclick="pick('020',3,this)">
           <span class="choice-num">④</span>
           <span>50</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('020',1,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('020',1,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-020">
@@ -534,24 +558,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">저압 가공인입선이 그림과 같이 차량의 통행이 많은 도로를 횡단하고 있다. 노면상의 높이 (h)는 최소한 몇 [m] 이상으로 하여야 하는가?</div>
       <div class="choices" id="choices-023">
-        <div class="choice" id="c-023-0">
+        <div class="choice" id="c-023-0" onclick="pick('023',0,this)">
           <span class="choice-num">①</span>
           <span>6</span>
         </div>
-        <div class="choice" id="c-023-1">
+        <div class="choice" id="c-023-1" onclick="pick('023',1,this)">
           <span class="choice-num">②</span>
           <span>5.5</span>
         </div>
-        <div class="choice" id="c-023-2">
+        <div class="choice" id="c-023-2" onclick="pick('023',2,this)">
           <span class="choice-num">③</span>
           <span>5</span>
         </div>
-        <div class="choice" id="c-023-3">
+        <div class="choice" id="c-023-3" onclick="pick('023',3,this)">
           <span class="choice-num">④</span>
           <span>4</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('023',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('023',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-023">
@@ -579,24 +604,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">저압 연접 인입선은 인입선에서 분기하는 점으로부터 몇 [m]를 초과하는 지역에 미치지 않도록 시설해야 하는가?</div>
       <div class="choices" id="choices-024">
-        <div class="choice" id="c-024-0">
+        <div class="choice" id="c-024-0" onclick="pick('024',0,this)">
           <span class="choice-num">①</span>
           <span>60</span>
         </div>
-        <div class="choice" id="c-024-1">
+        <div class="choice" id="c-024-1" onclick="pick('024',1,this)">
           <span class="choice-num">②</span>
           <span>80</span>
         </div>
-        <div class="choice" id="c-024-2">
+        <div class="choice" id="c-024-2" onclick="pick('024',2,this)">
           <span class="choice-num">③</span>
           <span>100</span>
         </div>
-        <div class="choice" id="c-024-3">
+        <div class="choice" id="c-024-3" onclick="pick('024',3,this)">
           <span class="choice-num">④</span>
           <span>120</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('024',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('024',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-024">
@@ -624,24 +650,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">사용 전압이 400 [V] 이하인 저압 가공전선은 케이블이나 절연전선인 경우를 제외하고 인장강도가 3.43 [kN] 이상인 것 또는 지름 몇 [mm] 이상의 경동선이어야 하는가?</div>
       <div class="choices" id="choices-029">
-        <div class="choice" id="c-029-0">
+        <div class="choice" id="c-029-0" onclick="pick('029',0,this)">
           <span class="choice-num">①</span>
           <span>1.2</span>
         </div>
-        <div class="choice" id="c-029-1">
+        <div class="choice" id="c-029-1" onclick="pick('029',1,this)">
           <span class="choice-num">②</span>
           <span>2.6</span>
         </div>
-        <div class="choice" id="c-029-2">
+        <div class="choice" id="c-029-2" onclick="pick('029',2,this)">
           <span class="choice-num">③</span>
           <span>3.2</span>
         </div>
-        <div class="choice" id="c-029-3">
+        <div class="choice" id="c-029-3" onclick="pick('029',3,this)">
           <span class="choice-num">④</span>
           <span>4.0</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('029',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('029',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-029">
@@ -679,24 +706,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">시가지에서 400 [V] 이하의 저압 가공전선로에 사용하는 절연전선의 지름은 최소 몇 [mm] 이상의 것이어야 하는가?</div>
       <div class="choices" id="choices-030">
-        <div class="choice" id="c-030-0">
+        <div class="choice" id="c-030-0" onclick="pick('030',0,this)">
           <span class="choice-num">①</span>
           <span>2.0</span>
         </div>
-        <div class="choice" id="c-030-1">
+        <div class="choice" id="c-030-1" onclick="pick('030',1,this)">
           <span class="choice-num">②</span>
           <span>2.6</span>
         </div>
-        <div class="choice" id="c-030-2">
+        <div class="choice" id="c-030-2" onclick="pick('030',2,this)">
           <span class="choice-num">③</span>
           <span>3.2</span>
         </div>
-        <div class="choice" id="c-030-3">
+        <div class="choice" id="c-030-3" onclick="pick('030',3,this)">
           <span class="choice-num">④</span>
           <span>5.0</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('030',1,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('030',1,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-030">
@@ -726,24 +754,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">저압 가공전선 또는 고압 가공전선이 도로를 횡단할 때 지표상 높이는 몇 [m] 이상으로 하여야 하는가? 단, 농로 기타 교통이 번잡하지 않은 도로 및 횡단보도교는 제외한다.</div>
       <div class="choices" id="choices-032">
-        <div class="choice" id="c-032-0">
+        <div class="choice" id="c-032-0" onclick="pick('032',0,this)">
           <span class="choice-num">①</span>
           <span>4</span>
         </div>
-        <div class="choice" id="c-032-1">
+        <div class="choice" id="c-032-1" onclick="pick('032',1,this)">
           <span class="choice-num">②</span>
           <span>5</span>
         </div>
-        <div class="choice" id="c-032-2">
+        <div class="choice" id="c-032-2" onclick="pick('032',2,this)">
           <span class="choice-num">③</span>
           <span>6</span>
         </div>
-        <div class="choice" id="c-032-3">
+        <div class="choice" id="c-032-3" onclick="pick('032',3,this)">
           <span class="choice-num">④</span>
           <span>7</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('032',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('032',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-032">
@@ -781,24 +810,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">저압 가공전선과 식물이 상호 접촉되지 않도록 이격시키는 기준으로 옳은 것은?</div>
       <div class="choices" id="choices-041">
-        <div class="choice" id="c-041-0">
+        <div class="choice" id="c-041-0" onclick="pick('041',0,this)">
           <span class="choice-num">①</span>
           <span>이격 거리는 최소 50 [cm] 이상 떨어져 시설하여야 한다.</span>
         </div>
-        <div class="choice" id="c-041-1">
+        <div class="choice" id="c-041-1" onclick="pick('041',1,this)">
           <span class="choice-num">②</span>
           <span>상시 불고 있는 바람 등에 의하여 접촉하지 않도록 시설하여야 한다.</span>
         </div>
-        <div class="choice" id="c-041-2">
+        <div class="choice" id="c-041-2" onclick="pick('041',2,this)">
           <span class="choice-num">③</span>
           <span>저압 가공전선은 반드시 방호구에 넣어 시설하여야 한다.</span>
         </div>
-        <div class="choice" id="c-041-3">
+        <div class="choice" id="c-041-3" onclick="pick('041',3,this)">
           <span class="choice-num">④</span>
           <span>트리와이어 (treewire)를 사용하여 시설하여야 한다.</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('041',1,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('041',1,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-041">
@@ -818,24 +848,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">농사용 저압 가공전선로의 최대 경간은 몇 [m] 인가?</div>
       <div class="choices" id="choices-042">
-        <div class="choice" id="c-042-0">
+        <div class="choice" id="c-042-0" onclick="pick('042',0,this)">
           <span class="choice-num">①</span>
           <span>30</span>
         </div>
-        <div class="choice" id="c-042-1">
+        <div class="choice" id="c-042-1" onclick="pick('042',1,this)">
           <span class="choice-num">②</span>
           <span>60</span>
         </div>
-        <div class="choice" id="c-042-2">
+        <div class="choice" id="c-042-2" onclick="pick('042',2,this)">
           <span class="choice-num">③</span>
           <span>50</span>
         </div>
-        <div class="choice" id="c-042-3">
+        <div class="choice" id="c-042-3" onclick="pick('042',3,this)">
           <span class="choice-num">④</span>
           <span>100</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('042',0,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="0" onclick="toggle('042',0,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-042">
@@ -867,24 +898,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">방직공장의 구내 도로에 220 [V] 조명등용 가공전선로를 시설하고자 한다. 전선로의 경간은 몇 [m] 이하이어야 하는가?</div>
       <div class="choices" id="choices-044">
-        <div class="choice" id="c-044-0">
+        <div class="choice" id="c-044-0" onclick="pick('044',0,this)">
           <span class="choice-num">①</span>
           <span>20</span>
         </div>
-        <div class="choice" id="c-044-1">
+        <div class="choice" id="c-044-1" onclick="pick('044',1,this)">
           <span class="choice-num">②</span>
           <span>30</span>
         </div>
-        <div class="choice" id="c-044-2">
+        <div class="choice" id="c-044-2" onclick="pick('044',2,this)">
           <span class="choice-num">③</span>
           <span>40</span>
         </div>
-        <div class="choice" id="c-044-3">
+        <div class="choice" id="c-044-3" onclick="pick('044',3,this)">
           <span class="choice-num">④</span>
           <span>50</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('044',1,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('044',1,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-044">
@@ -908,24 +940,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">저압 옥내배선의 사용전압이 220 [V]인 전광표시장치, 기타 이와 유사한 장치 또는 제어회로 등을 금속관공사에 의하여 시공하였다. 여기에 사용되는 배선은 지름 몇 [㎜] 이상의 연동선을 사용하여야 하는가?</div>
       <div class="choices" id="choices-047">
-        <div class="choice" id="c-047-0">
+        <div class="choice" id="c-047-0" onclick="pick('047',0,this)">
           <span class="choice-num">①</span>
           <span>1.5</span>
         </div>
-        <div class="choice" id="c-047-1">
+        <div class="choice" id="c-047-1" onclick="pick('047',1,this)">
           <span class="choice-num">②</span>
           <span>2.0</span>
         </div>
-        <div class="choice" id="c-047-2">
+        <div class="choice" id="c-047-2" onclick="pick('047',2,this)">
           <span class="choice-num">③</span>
           <span>5.0</span>
         </div>
-        <div class="choice" id="c-047-3">
+        <div class="choice" id="c-047-3" onclick="pick('047',3,this)">
           <span class="choice-num">④</span>
           <span>5.5</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('047',0,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="0" onclick="toggle('047',0,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-047">
@@ -965,24 +998,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">옥내에 시설하는 저압 전선으로 나전선을 절대로 사용할 수 없는 것은?</div>
       <div class="choices" id="choices-050">
-        <div class="choice" id="c-050-0">
+        <div class="choice" id="c-050-0" onclick="pick('050',0,this)">
           <span class="choice-num">①</span>
           <span>애자사용공사의 전기로용 전선</span>
         </div>
-        <div class="choice" id="c-050-1">
+        <div class="choice" id="c-050-1" onclick="pick('050',1,this)">
           <span class="choice-num">②</span>
           <span>유희용 전차에 전기공급을 위한 접촉 전선</span>
         </div>
-        <div class="choice" id="c-050-2">
+        <div class="choice" id="c-050-2" onclick="pick('050',2,this)">
           <span class="choice-num">③</span>
           <span>제분 공장의 전선</span>
         </div>
-        <div class="choice" id="c-050-3">
+        <div class="choice" id="c-050-3" onclick="pick('050',3,this)">
           <span class="choice-num">④</span>
           <span>애자사용공사의 전선피복절연물의 부식하는 장소에 시설하는 전선</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('050',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('050',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-050">
@@ -1012,24 +1046,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">백열전등 또는 방전등에 전기를 공급하는 옥내전로의 대지전압은 몇 [V] 이하이어야 하는가</div>
       <div class="choices" id="choices-053">
-        <div class="choice" id="c-053-0">
+        <div class="choice" id="c-053-0" onclick="pick('053',0,this)">
           <span class="choice-num">①</span>
           <span>100</span>
         </div>
-        <div class="choice" id="c-053-1">
+        <div class="choice" id="c-053-1" onclick="pick('053',1,this)">
           <span class="choice-num">②</span>
           <span>150</span>
         </div>
-        <div class="choice" id="c-053-2">
+        <div class="choice" id="c-053-2" onclick="pick('053',2,this)">
           <span class="choice-num">③</span>
           <span>200</span>
         </div>
-        <div class="choice" id="c-053-3">
+        <div class="choice" id="c-053-3" onclick="pick('053',3,this)">
           <span class="choice-num">④</span>
           <span>300</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('053',3,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('053',3,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-053">
@@ -1057,24 +1092,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">수용가설비에서 저압으로 수전하는 조명설비의 전압 강하는 몇 [%] 이하이여야 하는가?</div>
       <div class="choices" id="choices-056">
-        <div class="choice" id="c-056-0">
+        <div class="choice" id="c-056-0" onclick="pick('056',0,this)">
           <span class="choice-num">①</span>
           <span>1</span>
         </div>
-        <div class="choice" id="c-056-1">
+        <div class="choice" id="c-056-1" onclick="pick('056',1,this)">
           <span class="choice-num">②</span>
           <span>3</span>
         </div>
-        <div class="choice" id="c-056-2">
+        <div class="choice" id="c-056-2" onclick="pick('056',2,this)">
           <span class="choice-num">③</span>
           <span>6</span>
         </div>
-        <div class="choice" id="c-056-3">
+        <div class="choice" id="c-056-3" onclick="pick('056',3,this)">
           <span class="choice-num">④</span>
           <span>8</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('056',1,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('056',1,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-056">
@@ -1104,24 +1140,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">저압 옥내배선을 합성수지관공사에 의하여 시설하는 경우 사용할 수 있는 연선 (동선)의 지름은 최대 몇 [㎜] 인가?</div>
       <div class="choices" id="choices-057">
-        <div class="choice" id="c-057-0">
+        <div class="choice" id="c-057-0" onclick="pick('057',0,this)">
           <span class="choice-num">①</span>
           <span>2.5</span>
         </div>
-        <div class="choice" id="c-057-1">
+        <div class="choice" id="c-057-1" onclick="pick('057',1,this)">
           <span class="choice-num">②</span>
           <span>6</span>
         </div>
-        <div class="choice" id="c-057-2">
+        <div class="choice" id="c-057-2" onclick="pick('057',2,this)">
           <span class="choice-num">③</span>
           <span>10</span>
         </div>
-        <div class="choice" id="c-057-3">
+        <div class="choice" id="c-057-3" onclick="pick('057',3,this)">
           <span class="choice-num">④</span>
           <span>16</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('057',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('057',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-057">
@@ -1157,24 +1194,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">금속관공사를 콘크리트에 매설하여 시행하는 경우 관의 두께는 몇 [mm] 이상이어야 하는가?</div>
       <div class="choices" id="choices-062">
-        <div class="choice" id="c-062-0">
+        <div class="choice" id="c-062-0" onclick="pick('062',0,this)">
           <span class="choice-num">①</span>
           <span>1.0</span>
         </div>
-        <div class="choice" id="c-062-1">
+        <div class="choice" id="c-062-1" onclick="pick('062',1,this)">
           <span class="choice-num">②</span>
           <span>1.2</span>
         </div>
-        <div class="choice" id="c-062-2">
+        <div class="choice" id="c-062-2" onclick="pick('062',2,this)">
           <span class="choice-num">③</span>
           <span>1.4</span>
         </div>
-        <div class="choice" id="c-062-3">
+        <div class="choice" id="c-062-3" onclick="pick('062',3,this)">
           <span class="choice-num">④</span>
           <span>1.6</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('062',1,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('062',1,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-062">
@@ -1212,24 +1250,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">옥내 배선의 사용 전압은 220 [V] 인 경우에 이를 금속관공사에 의하여 시설하려고 한다. 다음 중 옥내배선의 시설로서 옳은 것은?</div>
       <div class="choices" id="choices-063">
-        <div class="choice" id="c-063-0">
+        <div class="choice" id="c-063-0" onclick="pick('063',0,this)">
           <span class="choice-num">①</span>
           <span>전선으로는 단면적 6 [㎜]의 연선이이어야 한다.</span>
         </div>
-        <div class="choice" id="c-063-1">
+        <div class="choice" id="c-063-1" onclick="pick('063',1,this)">
           <span class="choice-num">②</span>
           <span>전선은 옥외용 비닐절연전선을 사용하였다.</span>
         </div>
-        <div class="choice" id="c-063-2">
+        <div class="choice" id="c-063-2" onclick="pick('063',2,this)">
           <span class="choice-num">③</span>
           <span>콘크리트에 매설하는 전선관의 두께는 1.0 [mm]를 사용하였다.</span>
         </div>
-        <div class="choice" id="c-063-3">
+        <div class="choice" id="c-063-3" onclick="pick('063',3,this)">
           <span class="choice-num">④</span>
           <span>전선은 금속관 안에서 접속점이 없도록 하였다.</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('063',3,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('063',3,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-063">
@@ -1267,24 +1306,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">금속관공사에서 절연 부싱을 사용하는 가장 주된 목적은?</div>
       <div class="choices" id="choices-065">
-        <div class="choice" id="c-065-0">
+        <div class="choice" id="c-065-0" onclick="pick('065',0,this)">
           <span class="choice-num">①</span>
           <span>관의 끝이 터지는 것을 방지.</span>
         </div>
-        <div class="choice" id="c-065-1">
+        <div class="choice" id="c-065-1" onclick="pick('065',1,this)">
           <span class="choice-num">②</span>
           <span>관의 단구에서 조영재의 접촉 방지.</span>
         </div>
-        <div class="choice" id="c-065-2">
+        <div class="choice" id="c-065-2" onclick="pick('065',2,this)">
           <span class="choice-num">③</span>
           <span>관 내 해충 및 이물질 출입 방지.</span>
         </div>
-        <div class="choice" id="c-065-3">
+        <div class="choice" id="c-065-3" onclick="pick('065',3,this)">
           <span class="choice-num">④</span>
           <span>관의 단구에서 전선 피복의 손상 방지</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('065',3,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('065',3,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-065">
@@ -1318,24 +1358,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">저압 옥내배선을 가요전선관공사에 의해 시공하고자 한다. 이 가요전선관에 설치할 전선의 단면적은 몇 [㎜] 이어야 하는가?</div>
       <div class="choices" id="choices-069">
-        <div class="choice" id="c-069-0">
+        <div class="choice" id="c-069-0" onclick="pick('069',0,this)">
           <span class="choice-num">①</span>
           <span>2</span>
         </div>
-        <div class="choice" id="c-069-1">
+        <div class="choice" id="c-069-1" onclick="pick('069',1,this)">
           <span class="choice-num">②</span>
           <span>4</span>
         </div>
-        <div class="choice" id="c-069-2">
+        <div class="choice" id="c-069-2" onclick="pick('069',2,this)">
           <span class="choice-num">③</span>
           <span>6</span>
         </div>
-        <div class="choice" id="c-069-3">
+        <div class="choice" id="c-069-3" onclick="pick('069',3,this)">
           <span class="choice-num">④</span>
           <span>10</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('069',3,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('069',3,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-069">
@@ -1367,24 +1408,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">저압 옥내배선의 간선 및 분기회로의 전선을 금속덕트공사로 하는 경우 덕트에 넣는 절연전선의 단면적의 합계는 덕트 내부 단면적의 몇 [%] 이하로 하여야 하는가?</div>
       <div class="choices" id="choices-072">
-        <div class="choice" id="c-072-0">
+        <div class="choice" id="c-072-0" onclick="pick('072',0,this)">
           <span class="choice-num">①</span>
           <span>20</span>
         </div>
-        <div class="choice" id="c-072-1">
+        <div class="choice" id="c-072-1" onclick="pick('072',1,this)">
           <span class="choice-num">②</span>
           <span>30</span>
         </div>
-        <div class="choice" id="c-072-2">
+        <div class="choice" id="c-072-2" onclick="pick('072',2,this)">
           <span class="choice-num">③</span>
           <span>40</span>
         </div>
-        <div class="choice" id="c-072-3">
+        <div class="choice" id="c-072-3" onclick="pick('072',3,this)">
           <span class="choice-num">④</span>
           <span>50</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('072',0,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="0" onclick="toggle('072',0,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-072">
@@ -1412,24 +1454,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">제어회로용 절연전선을 금속덕트공사에 의하여 시설하고자 한다. 금속덕트공사에 넣는 전선의 단면적은 덕트 내부 단면적의 몇 [%]까지 넣을 수 있는가?</div>
       <div class="choices" id="choices-073">
-        <div class="choice" id="c-073-0">
+        <div class="choice" id="c-073-0" onclick="pick('073',0,this)">
           <span class="choice-num">①</span>
           <span>20</span>
         </div>
-        <div class="choice" id="c-073-1">
+        <div class="choice" id="c-073-1" onclick="pick('073',1,this)">
           <span class="choice-num">②</span>
           <span>30</span>
         </div>
-        <div class="choice" id="c-073-2">
+        <div class="choice" id="c-073-2" onclick="pick('073',2,this)">
           <span class="choice-num">③</span>
           <span>40</span>
         </div>
-        <div class="choice" id="c-073-3">
+        <div class="choice" id="c-073-3" onclick="pick('073',3,this)">
           <span class="choice-num">④</span>
           <span>50</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('073',3,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('073',3,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-073">
@@ -1457,24 +1500,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">금속덕트공사에 의한 저압 옥내배선공사 중 시설 기준에 적합하지 않은 것은?</div>
       <div class="choices" id="choices-074">
-        <div class="choice" id="c-074-0">
+        <div class="choice" id="c-074-0" onclick="pick('074',0,this)">
           <span class="choice-num">①</span>
           <span>금속덕트에 넣은 전선의 단면적의 합계가 내부 단면적의 20 [%] 이하가 되게 하였다.</span>
         </div>
-        <div class="choice" id="c-074-1">
+        <div class="choice" id="c-074-1" onclick="pick('074',1,this)">
           <span class="choice-num">②</span>
           <span>덕트 상호 및 덕트와 금속관과는 전기적으로 완전하게 접속하였다.</span>
         </div>
-        <div class="choice" id="c-074-2">
+        <div class="choice" id="c-074-2" onclick="pick('074',2,this)">
           <span class="choice-num">③</span>
           <span>덕트를 조영재에 붙이는 경우 덕트의 지지점 간의 거리를 4 [m] 이하로 견고하게 붙였다.</span>
         </div>
-        <div class="choice" id="c-074-3">
+        <div class="choice" id="c-074-3" onclick="pick('074',3,this)">
           <span class="choice-num">④</span>
           <span>저압 옥내배선의 사용전압이 400 [V] 미만인 경우에 덕트에는 제3종 접지공사를 한다.</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('074',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('074',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-074">
@@ -1510,24 +1554,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">애자사용공사에 의한 저압 옥내배선 시 전선 상호 간의 간격은 몇 [m] 이상이어야 하는가?</div>
       <div class="choices" id="choices-080">
-        <div class="choice" id="c-080-0">
+        <div class="choice" id="c-080-0" onclick="pick('080',0,this)">
           <span class="choice-num">①</span>
           <span>0.02</span>
         </div>
-        <div class="choice" id="c-080-1">
+        <div class="choice" id="c-080-1" onclick="pick('080',1,this)">
           <span class="choice-num">②</span>
           <span>0.04</span>
         </div>
-        <div class="choice" id="c-080-2">
+        <div class="choice" id="c-080-2" onclick="pick('080',2,this)">
           <span class="choice-num">③</span>
           <span>0.06</span>
         </div>
-        <div class="choice" id="c-080-3">
+        <div class="choice" id="c-080-3" onclick="pick('080',3,this)">
           <span class="choice-num">④</span>
           <span>0.08</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('080',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('080',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-080">
@@ -1561,24 +1606,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">샤워시설이 있는 욕실 등 인체가 물에 젖어 있는 상태에서 전기를 사용하는 장소에 콘센트를 시설할 경우 인체감전보호용 누전 차단기의 감도전류는 몇 [mA] 이하인가?</div>
       <div class="choices" id="choices-093">
-        <div class="choice" id="c-093-0">
+        <div class="choice" id="c-093-0" onclick="pick('093',0,this)">
           <span class="choice-num">①</span>
           <span>5</span>
         </div>
-        <div class="choice" id="c-093-1">
+        <div class="choice" id="c-093-1" onclick="pick('093',1,this)">
           <span class="choice-num">②</span>
           <span>10</span>
         </div>
-        <div class="choice" id="c-093-2">
+        <div class="choice" id="c-093-2" onclick="pick('093',2,this)">
           <span class="choice-num">③</span>
           <span>15</span>
         </div>
-        <div class="choice" id="c-093-3">
+        <div class="choice" id="c-093-3" onclick="pick('093',3,this)">
           <span class="choice-num">④</span>
           <span>30</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('093',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('093',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-093">
@@ -1610,24 +1656,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">일반주택 및 아파트 각 호실의 현관등으로 백열전등을 설치할 때에는 타임 스위치를 설치하여 몇 분 이내에 소등되는 것이어야 하는가?</div>
       <div class="choices" id="choices-096">
-        <div class="choice" id="c-096-0">
+        <div class="choice" id="c-096-0" onclick="pick('096',0,this)">
           <span class="choice-num">①</span>
           <span>1</span>
         </div>
-        <div class="choice" id="c-096-1">
+        <div class="choice" id="c-096-1" onclick="pick('096',1,this)">
           <span class="choice-num">②</span>
           <span>3</span>
         </div>
-        <div class="choice" id="c-096-2">
+        <div class="choice" id="c-096-2" onclick="pick('096',2,this)">
           <span class="choice-num">③</span>
           <span>5</span>
         </div>
-        <div class="choice" id="c-096-3">
+        <div class="choice" id="c-096-3" onclick="pick('096',3,this)">
           <span class="choice-num">④</span>
           <span>7</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('096',1,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('096',1,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-096">
@@ -1663,24 +1710,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">호텔 또는여관의 각 객실의 입구등은 몇분 이내에 소등되는 타임스위치를 시설하여야 하는가?</div>
       <div class="choices" id="choices-097">
-        <div class="choice" id="c-097-0">
+        <div class="choice" id="c-097-0" onclick="pick('097',0,this)">
           <span class="choice-num">①</span>
           <span>1</span>
         </div>
-        <div class="choice" id="c-097-1">
+        <div class="choice" id="c-097-1" onclick="pick('097',1,this)">
           <span class="choice-num">②</span>
           <span>2</span>
         </div>
-        <div class="choice" id="c-097-2">
+        <div class="choice" id="c-097-2" onclick="pick('097',2,this)">
           <span class="choice-num">③</span>
           <span>3</span>
         </div>
-        <div class="choice" id="c-097-3">
+        <div class="choice" id="c-097-3" onclick="pick('097',3,this)">
           <span class="choice-num">④</span>
           <span>5</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('097',0,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="0" onclick="toggle('097',0,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-097">
@@ -1716,24 +1764,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">다음은 수영장용 수중조명설비 부하용 변압기에 대한 것이다 옳지 않은 것은?</div>
       <div class="choices" id="choices-101">
-        <div class="choice" id="c-101-0">
+        <div class="choice" id="c-101-0" onclick="pick('101',0,this)">
           <span class="choice-num">①</span>
           <span>2차측 전로의 사용전압이 150 [V] 이하인 절연변압기를 반드시 사용하여야 한다.</span>
         </div>
-        <div class="choice" id="c-101-1">
+        <div class="choice" id="c-101-1" onclick="pick('101',1,this)">
           <span class="choice-num">②</span>
           <span>2차측 전로의 사용전압이 150 [V]인 절연변압기는 1차와 2차 권선 사이에 금속제 혼촉 방지판이 있어야 한다.</span>
         </div>
-        <div class="choice" id="c-101-2">
+        <div class="choice" id="c-101-2" onclick="pick('101',2,this)">
           <span class="choice-num">③</span>
           <span>절연 변압기의 2차측 전로에는 반드시 제 3종 접지를 하여야 하며, 그 저항값은 5 [Ω] 이하가 되도록 하여야 한다.</span>
         </div>
-        <div class="choice" id="c-101-3">
+        <div class="choice" id="c-101-3" onclick="pick('101',3,this)">
           <span class="choice-num">④</span>
           <span>절연 변압기의 2차측 전로의 사용전압이 30 [V]가 넘는 경우에는 그 전로에 지락이 생긴 경우 자동적으로 전로를 차단하는 장치가 있어야 한다.</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('101',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('101',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-101">
@@ -1763,24 +1812,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">교통신호등 회로의 사용전압은 몇 [V] 이하이어야 하는가?</div>
       <div class="choices" id="choices-103">
-        <div class="choice" id="c-103-0">
+        <div class="choice" id="c-103-0" onclick="pick('103',0,this)">
           <span class="choice-num">①</span>
           <span>100.</span>
         </div>
-        <div class="choice" id="c-103-1">
+        <div class="choice" id="c-103-1" onclick="pick('103',1,this)">
           <span class="choice-num">②</span>
           <span>200.</span>
         </div>
-        <div class="choice" id="c-103-2">
+        <div class="choice" id="c-103-2" onclick="pick('103',2,this)">
           <span class="choice-num">③</span>
           <span>300.</span>
         </div>
-        <div class="choice" id="c-103-3">
+        <div class="choice" id="c-103-3" onclick="pick('103',3,this)">
           <span class="choice-num">④</span>
           <span>400.</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('103',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('103',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-103">
@@ -1800,24 +1850,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">전기부식방지시설을 할 때 전기부식방지용 전원장치로부터 양극 및 피방식체까지의 전로에 사용되는 전압은 직류 몇 [V] 이하이어야 하는가?</div>
       <div class="choices" id="choices-104">
-        <div class="choice" id="c-104-0">
+        <div class="choice" id="c-104-0" onclick="pick('104',0,this)">
           <span class="choice-num">①</span>
           <span>20.</span>
         </div>
-        <div class="choice" id="c-104-1">
+        <div class="choice" id="c-104-1" onclick="pick('104',1,this)">
           <span class="choice-num">②</span>
           <span>40.</span>
         </div>
-        <div class="choice" id="c-104-2">
+        <div class="choice" id="c-104-2" onclick="pick('104',2,this)">
           <span class="choice-num">③</span>
           <span>60.</span>
         </div>
-        <div class="choice" id="c-104-3">
+        <div class="choice" id="c-104-3" onclick="pick('104',3,this)">
           <span class="choice-num">④</span>
           <span>80.</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('104',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('104',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-104">
@@ -1853,24 +1904,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">전기울타리의 시설에 관한 다음 사항 중 틀린 것은?</div>
       <div class="choices" id="choices-110">
-        <div class="choice" id="c-110-0">
+        <div class="choice" id="c-110-0" onclick="pick('110',0,this)">
           <span class="choice-num">①</span>
           <span>전원장치에 전기를 공급하는 전로의 사용 전압은 600 [V] 이다</span>
         </div>
-        <div class="choice" id="c-110-1">
+        <div class="choice" id="c-110-1" onclick="pick('110',1,this)">
           <span class="choice-num">②</span>
           <span>사람이 쉽게 출입하지 아니하는 곳에 시설할 것.</span>
         </div>
-        <div class="choice" id="c-110-2">
+        <div class="choice" id="c-110-2" onclick="pick('110',2,this)">
           <span class="choice-num">③</span>
           <span>전선은 인장강도 1.38 [kN] 이상이 것 또는 지름 2 [mm] 이상의 경동선일 것.</span>
         </div>
-        <div class="choice" id="c-110-3">
+        <div class="choice" id="c-110-3" onclick="pick('110',3,this)">
           <span class="choice-num">④</span>
           <span>전선과 수목 사이의 이격거리는 30 [cm] 이상일 것.</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('110',0,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="0" onclick="toggle('110',0,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-110">
@@ -1906,24 +1958,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">욕탕의 양단에 판상의 전극을 설치하고 그 전극 상호 간에 교류 전압을 가하는 전기욕기의 전원변압기 2차 전압은 몇 [V] 이하인 것을 사용하여야 하는가?</div>
       <div class="choices" id="choices-111">
-        <div class="choice" id="c-111-0">
+        <div class="choice" id="c-111-0" onclick="pick('111',0,this)">
           <span class="choice-num">①</span>
           <span>5</span>
         </div>
-        <div class="choice" id="c-111-1">
+        <div class="choice" id="c-111-1" onclick="pick('111',1,this)">
           <span class="choice-num">②</span>
           <span>10</span>
         </div>
-        <div class="choice" id="c-111-2">
+        <div class="choice" id="c-111-2" onclick="pick('111',2,this)">
           <span class="choice-num">③</span>
           <span>12</span>
         </div>
-        <div class="choice" id="c-111-3">
+        <div class="choice" id="c-111-3" onclick="pick('111',3,this)">
           <span class="choice-num">④</span>
           <span>15</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('111',1,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('111',1,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-111">
@@ -1951,24 +2004,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">전기온상 등의 발열선의 온도는 몇 [℃]를 넘지 아니하도록 시설하여야 하는가?</div>
       <div class="choices" id="choices-114">
-        <div class="choice" id="c-114-0">
+        <div class="choice" id="c-114-0" onclick="pick('114',0,this)">
           <span class="choice-num">①</span>
           <span>70</span>
         </div>
-        <div class="choice" id="c-114-1">
+        <div class="choice" id="c-114-1" onclick="pick('114',1,this)">
           <span class="choice-num">②</span>
           <span>80</span>
         </div>
-        <div class="choice" id="c-114-2">
+        <div class="choice" id="c-114-2" onclick="pick('114',2,this)">
           <span class="choice-num">③</span>
           <span>90</span>
         </div>
-        <div class="choice" id="c-114-3">
+        <div class="choice" id="c-114-3" onclick="pick('114',3,this)">
           <span class="choice-num">④</span>
           <span>100</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('114',1,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('114',1,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-114">
@@ -2000,24 +2054,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">가변형 (이동형)의 용접전극을 사용하는 아크용접장치를 시설할 때 용접변압기의 1차측 전로의 대지전압은 몇 [V] 이하이어야 하는가?</div>
       <div class="choices" id="choices-120">
-        <div class="choice" id="c-120-0">
+        <div class="choice" id="c-120-0" onclick="pick('120',0,this)">
           <span class="choice-num">①</span>
           <span>200</span>
         </div>
-        <div class="choice" id="c-120-1">
+        <div class="choice" id="c-120-1" onclick="pick('120',1,this)">
           <span class="choice-num">②</span>
           <span>250</span>
         </div>
-        <div class="choice" id="c-120-2">
+        <div class="choice" id="c-120-2" onclick="pick('120',2,this)">
           <span class="choice-num">③</span>
           <span>300</span>
         </div>
-        <div class="choice" id="c-120-3">
+        <div class="choice" id="c-120-3" onclick="pick('120',3,this)">
           <span class="choice-num">④</span>
           <span>600</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('120',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('120',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-120">
@@ -2043,24 +2098,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">전자개폐기의 조작회로 또는 초인벨, 경보벨 등에 접속하는 전로로서, 최대사용전압이 몇 [V] 이하인 것을 소세력회로라 하는가?</div>
       <div class="choices" id="choices-124">
-        <div class="choice" id="c-124-0">
+        <div class="choice" id="c-124-0" onclick="pick('124',0,this)">
           <span class="choice-num">①</span>
           <span>60</span>
         </div>
-        <div class="choice" id="c-124-1">
+        <div class="choice" id="c-124-1" onclick="pick('124',1,this)">
           <span class="choice-num">②</span>
           <span>80</span>
         </div>
-        <div class="choice" id="c-124-2">
+        <div class="choice" id="c-124-2" onclick="pick('124',2,this)">
           <span class="choice-num">③</span>
           <span>100</span>
         </div>
-        <div class="choice" id="c-124-3">
+        <div class="choice" id="c-124-3" onclick="pick('124',3,this)">
           <span class="choice-num">④</span>
           <span>150</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('124',0,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="0" onclick="toggle('124',0,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-124">
@@ -2086,24 +2142,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">소맥분, 전분, 유황 등의 가연성 분진이 존재하는 공장에 전기설비가 발화원이 되어 폭발할 우려가 있는 곳의 저압 옥내배선에 적합하지 못한 공사는? (단, 각종 전선관공사 시 관의 두께는 모두 기준에 적합한 것을 사용한다.)</div>
       <div class="choices" id="choices-125">
-        <div class="choice" id="c-125-0">
+        <div class="choice" id="c-125-0" onclick="pick('125',0,this)">
           <span class="choice-num">①</span>
           <span>합성수지관공사</span>
         </div>
-        <div class="choice" id="c-125-1">
+        <div class="choice" id="c-125-1" onclick="pick('125',1,this)">
           <span class="choice-num">②</span>
           <span>가요전선관공사</span>
         </div>
-        <div class="choice" id="c-125-2">
+        <div class="choice" id="c-125-2" onclick="pick('125',2,this)">
           <span class="choice-num">③</span>
           <span>금속관공사</span>
         </div>
-        <div class="choice" id="c-125-3">
+        <div class="choice" id="c-125-3" onclick="pick('125',3,this)">
           <span class="choice-num">④</span>
           <span>케이블공사</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('125',1,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('125',1,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-125">
@@ -2137,24 +2194,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">석유류를 저장하는 장소의 저압 전등배선에서 사용할 수 없는 공사방법은?</div>
       <div class="choices" id="choices-128">
-        <div class="choice" id="c-128-0">
+        <div class="choice" id="c-128-0" onclick="pick('128',0,this)">
           <span class="choice-num">①</span>
           <span>합성수지관공사</span>
         </div>
-        <div class="choice" id="c-128-1">
+        <div class="choice" id="c-128-1" onclick="pick('128',1,this)">
           <span class="choice-num">②</span>
           <span>케이블공사</span>
         </div>
-        <div class="choice" id="c-128-2">
+        <div class="choice" id="c-128-2" onclick="pick('128',2,this)">
           <span class="choice-num">③</span>
           <span>금속관공사</span>
         </div>
-        <div class="choice" id="c-128-3">
+        <div class="choice" id="c-128-3" onclick="pick('128',3,this)">
           <span class="choice-num">④</span>
           <span>애자사용공사</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('128',3,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('128',3,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-128">
@@ -2176,24 +2234,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">흥행장의 저압 전기설비공사로 무대, 무대 마루 밑, 오케스트라박스, 영사실, 기타 사람이나 무대 도구가 접촉할 우려가 있는 곳에 시설하는 저압 옥내배선, 전구선 또는 이동전선은 사용저압이 몇 [V] 이하이어야 하는가?</div>
       <div class="choices" id="choices-130">
-        <div class="choice" id="c-130-0">
+        <div class="choice" id="c-130-0" onclick="pick('130',0,this)">
           <span class="choice-num">①</span>
           <span>100</span>
         </div>
-        <div class="choice" id="c-130-1">
+        <div class="choice" id="c-130-1" onclick="pick('130',1,this)">
           <span class="choice-num">②</span>
           <span>200</span>
         </div>
-        <div class="choice" id="c-130-2">
+        <div class="choice" id="c-130-2" onclick="pick('130',2,this)">
           <span class="choice-num">③</span>
           <span>300</span>
         </div>
-        <div class="choice" id="c-130-3">
+        <div class="choice" id="c-130-3" onclick="pick('130',3,this)">
           <span class="choice-num">④</span>
           <span>400</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('130',3,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="3" onclick="toggle('130',3,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-130">
@@ -2225,24 +2284,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">의료 장소별 계통 접지에서 그룹 2에 해당하는 장소에 적용하는 접지방식은? (단, 이동식 X-레이, 5 [kVA] 이상의 대형기기, 일반 의료용 전기기기는 제외)</div>
       <div class="choices" id="choices-133">
-        <div class="choice" id="c-133-0">
+        <div class="choice" id="c-133-0" onclick="pick('133',0,this)">
           <span class="choice-num">①</span>
           <span>TN</span>
         </div>
-        <div class="choice" id="c-133-1">
+        <div class="choice" id="c-133-1" onclick="pick('133',1,this)">
           <span class="choice-num">②</span>
           <span>TT</span>
         </div>
-        <div class="choice" id="c-133-2">
+        <div class="choice" id="c-133-2" onclick="pick('133',2,this)">
           <span class="choice-num">③</span>
           <span>IT</span>
         </div>
-        <div class="choice" id="c-133-3">
+        <div class="choice" id="c-133-3" onclick="pick('133',3,this)">
           <span class="choice-num">④</span>
           <span>TC</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('133',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('133',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-133">
@@ -2278,24 +2338,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">그룹 1 또는 그룹 2의 의료 장소 (수술등, 내시경, 수술실 테이블, 기타 필수 조명 등)에 상용전원 공급이 중단될 경우 몇 초 이내로 비상전원을 공급하여야 하는가?</div>
       <div class="choices" id="choices-135">
-        <div class="choice" id="c-135-0">
+        <div class="choice" id="c-135-0" onclick="pick('135',0,this)">
           <span class="choice-num">①</span>
           <span>0.1</span>
         </div>
-        <div class="choice" id="c-135-1">
+        <div class="choice" id="c-135-1" onclick="pick('135',1,this)">
           <span class="choice-num">②</span>
           <span>0.5</span>
         </div>
-        <div class="choice" id="c-135-2">
+        <div class="choice" id="c-135-2" onclick="pick('135',2,this)">
           <span class="choice-num">③</span>
           <span>15</span>
         </div>
-        <div class="choice" id="c-135-3">
+        <div class="choice" id="c-135-3" onclick="pick('135',3,this)">
           <span class="choice-num">④</span>
           <span>30</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('135',1,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="1" onclick="toggle('135',1,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-135">
@@ -2331,24 +2392,25 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
     <div class="card-body">
       <div class="question-text">저압 옥내 직류전기설비에서 축전지실의 경우 몇 [V]를 초과하는 축전지는 비접지측 도체에 쉽게 차단할 수 있는 곳에 개폐기를 시설하여야 하는가?</div>
       <div class="choices" id="choices-137">
-        <div class="choice" id="c-137-0">
+        <div class="choice" id="c-137-0" onclick="pick('137',0,this)">
           <span class="choice-num">①</span>
           <span>10</span>
         </div>
-        <div class="choice" id="c-137-1">
+        <div class="choice" id="c-137-1" onclick="pick('137',1,this)">
           <span class="choice-num">②</span>
           <span>20</span>
         </div>
-        <div class="choice" id="c-137-2">
+        <div class="choice" id="c-137-2" onclick="pick('137',2,this)">
           <span class="choice-num">③</span>
           <span>30</span>
         </div>
-        <div class="choice" id="c-137-3">
+        <div class="choice" id="c-137-3" onclick="pick('137',3,this)">
           <span class="choice-num">④</span>
           <span>40</span>
         </div>
       </div>
-      <button class="btn-toggle" onclick="toggle('137',2,this)">
+      <div class="result-msg"></div>
+      <button class="btn-toggle" data-ans="2" onclick="toggle('137',2,this)">
         <span class="btn-icon">👁</span> 정답 · 해설 보기
       </button>
       <div class="answer-section" id="ans-137">
@@ -2368,14 +2430,53 @@ IB ≤ In ≤ Iz, I₂ ≤ 1.45 X Iz
   <div class="no-result" id="no-result">검색 결과가 없습니다.</div>
 </div>
 <script>
-let openCount = 0;
-const total = 49;
-
 function shuffleCards() {
   const container = document.getElementById('cards');
   const cards = Array.from(container.querySelectorAll('.card'));
-  const shuffled = cards.sort(() => Math.random() - 0.5);
-  shuffled.forEach(c => container.appendChild(c));
+  cards.sort(() => Math.random() - 0.5).forEach(c => container.appendChild(c));
+}
+
+
+let openCount = 0;
+const total = 49;
+let sCorrect = 0, sWrong = 0, sAnswered = 0;
+
+function pick(qid, clickedIdx, el) {
+  const choicesWrap = document.getElementById('choices-' + qid);
+  const choices = choicesWrap.querySelectorAll('.choice');
+  // 이미 답한 문제면 무시
+  if (choicesWrap.dataset.answered) return;
+  choicesWrap.dataset.answered = '1';
+
+  // 정답 인덱스는 btn-toggle의 data-ans에서 읽기
+  const btn = choicesWrap.closest('.card-body').querySelector('.btn-toggle');
+  const ansIdx = parseInt(btn.getAttribute('data-ans'));
+
+  choices.forEach((c, i) => {
+    c.classList.add('answered');
+    if (i === ansIdx) {
+      c.classList.add(clickedIdx === ansIdx ? 'correct' : 'reveal-correct');
+    }
+  });
+
+  const msg = choicesWrap.closest('.card-body').querySelector('.result-msg');
+  if (clickedIdx === ansIdx) {
+    choices[clickedIdx].classList.add('correct');
+    msg.textContent = '🎉 정답입니다!';
+    msg.className = 'result-msg ok';
+    sCorrect++;
+    document.getElementById('s-correct').textContent = sCorrect;
+  } else {
+    choices[clickedIdx].classList.add('wrong');
+    msg.textContent = '❌ 오답! 초록색이 정답입니다.';
+    msg.className = 'result-msg ng';
+    sWrong++;
+    document.getElementById('s-wrong').textContent = sWrong;
+  }
+  sAnswered++;
+  const leftVal = total - sAnswered;
+  document.getElementById('s-left').textContent = leftVal < 0 ? 0 : leftVal;
+  document.getElementById('prog').style.width = (sAnswered / total * 100) + '%';
 }
 
 function toggle(num, ansIdx, btn) {
@@ -2395,7 +2496,6 @@ function toggle(num, ansIdx, btn) {
     choices.forEach(c => c.classList.remove('correct'));
     openCount = Math.max(0, openCount - 1);
   }
-  document.getElementById('prog').style.width = (openCount / total * 100) + '%';
 }
 
 let allOpen = false;
@@ -2407,18 +2507,13 @@ function toggleAll() {
     const btn = card.querySelector('.btn-toggle');
     const sec = card.querySelector('.answer-section');
     const choices = card.querySelectorAll('.choice');
-    const num = sec.id.replace('ans-', '');
-    const ansIdx = parseInt(btn.getAttribute('data-ans') || -1);
     if (allOpen) {
       sec.style.display = 'block';
       btn.classList.add('open');
       btn.innerHTML = '<span class="btn-icon">🙈</span> 해설 숨기기';
-      // find correct
-      const correctChoice = Array.from(choices).find((_, i) => {
-        const badge = sec.querySelector('.answer-badge');
-        const markers = ['①','②','③','④'];
-        return badge && badge.textContent.includes(markers[i]);
-      });
+      const badge = sec.querySelector('.answer-badge');
+      const markers = ['①','②','③','④'];
+      const correctChoice = Array.from(choices).find((_,i) => badge && badge.textContent.includes(markers[i]));
       if (correctChoice) correctChoice.classList.add('correct');
       openCount++;
     } else {
@@ -2437,12 +2532,8 @@ function filterCards() {
   let vis = 0;
   cards.forEach(card => {
     const txt = card.textContent.toLowerCase();
-    if (!q || txt.includes(q)) {
-      card.classList.remove('hidden');
-      vis++;
-    } else {
-      card.classList.add('hidden');
-    }
+    if (!q || txt.includes(q)) { card.classList.remove('hidden'); vis++; }
+    else card.classList.add('hidden');
   });
   document.getElementById('count-badge').textContent = q ? `🔍 ${vis}문제 검색됨` : '📋 전체 49문제';
   document.getElementById('no-result').style.display = vis === 0 ? 'block' : 'none';
